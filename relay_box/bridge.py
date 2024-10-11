@@ -95,10 +95,7 @@ def main():
         if count == captureTime:
             break
         count = count + 1
-        # Create file name
         fileName = folderName + str(count) + ".pcap"
-        
-        # Start tcpdump to capture traffic from interface1 and write to a pcap file
         cmdList = ["tcpdump", "-s", str(capSize), "-Z", "root", "-w", fileName, "-i", interface1, "-G", "120", "-W", "1"]
         cmd = [str(x) for x in cmdList]
         tcpDumpProcess = subprocess.Popen(cmd)  # Sets up the TCPDump command
@@ -106,7 +103,6 @@ def main():
         
         print(f"Currently dumping file number {count}.")
         
-        # After capturing the packet, relay it to interface2
         capture_and_relay()
 
 
