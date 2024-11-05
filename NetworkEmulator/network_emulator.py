@@ -36,7 +36,7 @@ class NetworkEmulator:
                                for item in data if item['id'] == fd_id), None)
                 
                 if profile is None: # no profile found
-                    return NETWORK_PROFILES["NORMAL"]
+                    return NETWORK_PROFILES["NORMAL"]["latency"]
 
                 return NETWORK_PROFILES[profile]["latency"]
         except KeyError: # field device doesnt have SLOW network profile. Use either NORMAL or GOOD profile? or pick random profile?
@@ -63,7 +63,7 @@ class NetworkEmulator:
 
             if p_i == 1: # drop package
                 print("Packet Loss!")
-                return 1105
+                return 1105 # just some random return code
         
         except KeyError:
             print(f"Field Device ({fd_id}) has no packet loss sequence associated.")
