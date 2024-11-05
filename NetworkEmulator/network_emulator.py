@@ -12,10 +12,10 @@ NETWORK_PROFILES = {
     }
 }
 
-PACKET_LOSS_SEQUENCES = {
+PACKET_LOSS_SEQUENCES = { # TODO: Define sequences for fd's with SLOW profile
     0: {
         "index": 0,
-        "p": [0,0,0,0,0,1,0,1,0]
+        "p": [0,0,1,0,0,1,0,1,0]
     },
     1: {
         "index": 0,
@@ -37,6 +37,7 @@ class NetworkEmulator:
                 
                 if profile is None: # no profile found
                     return NETWORK_PROFILES["NORMAL"]["latency"]
+
 
                 return NETWORK_PROFILES[profile]["latency"]
         except KeyError: # field device doesnt have SLOW network profile. Use either NORMAL or GOOD profile? or pick random profile?

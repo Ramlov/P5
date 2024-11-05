@@ -1,10 +1,134 @@
 [
-    {
-        "id": 0,
-        "profile": "SLOW"
-    },
-    {
-        "id": 1,
-        "profile": "SLOW"
-    }
+  {
+    "id": 0,
+    "profile": "SLOW"
+  },
+  {
+    "id": 1,
+    "profile": "SLOW"
+  },
+  {
+    "id": 2,
+    "profile": "SLOW"
+  },
+  {
+    "id": 3,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 4,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 5,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 6,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 7,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 8,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 9,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 10,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 11,
+    "profile": "GOOD"
+  },
+  {
+    "id": 12,
+    "profile": "GOOD"
+  },
+  {
+    "id": 13,
+    "profile": "SLOW"
+  },
+  {
+    "id": 14,
+    "profile": "SLOW"
+  },
+  {
+    "id": 15,
+    "profile": "SLOW"
+  },
+  {
+    "id": 16,
+    "profile": "SLOW"
+  },
+  {
+    "id": 17,
+    "profile": "SLOW"
+  },
+  {
+    "id": 18,
+    "profile": "SLOW"
+  },
+  {
+    "id": 19,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 20,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 21,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 22,
+    "profile": "GOOD"
+  },
+  {
+    "id": 23,
+    "profile": "GOOD"
+  },
+  {
+    "id": 24,
+    "profile": "GOOD"
+  },
+  {
+    "id": 25,
+    "profile": "GOOD"
+  },
+  {
+    "id": 26,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 27,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 28,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 29,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 30,
+    "profile": "NORMAL"
+  },
+  {
+    "id": 31,
+    "profile": "SLOW"
+  },
+  {
+    "id": 32,
+    "profile": "SLOW"
+  }
 ]
