@@ -1,3 +1,5 @@
+import time
+
 NETWORK_PROFILES = {
     "SLOW": {
         "latency": 1100
@@ -66,6 +68,9 @@ class NetworkEmulator:
             # apply conditions
             latency = self._get_network_profile(fd_id)
             print(f"Latency: {latency}")
+            time.sleep(latency)
+            print("Done Delaying Packet")
+            return 0
 
 
         except KeyError:
