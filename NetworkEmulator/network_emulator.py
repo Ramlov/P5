@@ -1,27 +1,16 @@
-import time
+import time, json
 
 NETWORK_PROFILES = {
     "SLOW": {
         "latency": 1100
     },
     "NORMAL": {
-        "latency": 250
+        "latency": 300
     },
     "GOOD": {
         "latency": 50
     }
 }
-
-FIELD_DEVICE_PROFILES = [ # we only define the field devices that will have SLOW network profile.
-    {
-        "id": 0,
-        "profile": "SLOW"
-    },
-    {
-        "id": 1,
-        "profile": "SLOW"
-    }
-]
 
 PACKET_LOSS_SEQUENCES = {
     0: {
@@ -30,7 +19,7 @@ PACKET_LOSS_SEQUENCES = {
     },
     1: {
         "index": 0,
-        "p": [0, 1, 0, 1, 0, 1, 0, 0, 0]
+        "p": [0,1,0,1,0,1,0,0,0]
     }
 }
 
@@ -40,11 +29,17 @@ class NetworkEmulator:
 
     def _get_network_profile(self, fd_id):
         try:
-            fd_profile = FIELD_DEVICE_PROFILES[fd_id]
+            # get profiles
+            with open('./NetworkEmulator/fd_profiles.json') as json_file:
+                data = json.load(json_file)
+                profile = next((item['profile']
+                               for item in data if item['id'] == fd_id), None)
+                
+                if profile is None: # no profile found
+                    return NETWORK_PROFILES["NORMAL"]
 
-            profile = NETWORK_PROFILES[fd_profile["profile"]]
-            return profile["latency"]
-        except KeyError: # field device doesnt have SLOW network profile. Use either NORMAL or GOOD profile?
+                return NETWORK_PROFILES[profile]["latency"]
+        except KeyError: # field device doesnt have SLOW network profile. Use either NORMAL or GOOD profile? or pick random profile?
             #
             return NETWORK_PROFILES["NORMAL"]
 
@@ -55,6 +50,11 @@ class NetworkEmulator:
             index = fd["index"]
             p = fd["p"]
 
+            # check if index is at the end
+            if index >= len(p): #reset counter
+                PACKET_LOSS_SEQUENCES[fd_id]["index"] = 0
+                index = 0
+
             # get the sequence p_i based on index
             p_i = p[index]
 
@@ -62,22 +62,20 @@ class NetworkEmulator:
             PACKET_LOSS_SEQUENCES[fd_id]["index"]+=1
 
             if p_i == 1: # drop package
+                print("Packet Loss!")
                 return 1105
-            
-            # get network profile for field device
-            # apply conditions
-            latency = self._get_network_profile(fd_id)
-            print(f"Latency: {latency}")
-            time.sleep(latency)
-            print("Done Delaying Packet")
-            return 0
-
-
+        
         except KeyError:
             print(f"Field Device ({fd_id}) has no packet loss sequence associated.")
-        pass
+        
+        # get network profile for field device
+        latency = self._get_network_profile(fd_id)
+        print(f"Latency: {latency}")
+        # apply conditions
+        time.sleep(latency / 1000)
+        return 0
 
 if __name__ == '__main__':
     ne = NetworkEmulator()
-    ne.emulate(0)
-    
+    while True:
+        ne.emulate(0)
