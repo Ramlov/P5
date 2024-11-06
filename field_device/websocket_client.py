@@ -1,23 +1,30 @@
 import asyncio
 import websockets
+import json
 
-async def websocket_client():
-    uri = "ws://localhost:8765"  # Update this URI if your server runs elsewhere
+async def connect_to_field_device():
+    uri = "ws://localhost:3000"
     try:
         async with websockets.connect(uri) as websocket:
-            print("Connected to the server. Press Enter to request data from now and the last 15 seconds.")
-            while True:
-                # Wait for user input to request data
-                input("Press Enter to receive data from now and the last 15 seconds...")
-                await websocket.send("past_data")  # Sending request for data
-                response = await websocket.recv()   # Receive response
-                print("Data (now and last 15 seconds):", response)
+            print(f"Connected to {uri}")
 
-    except websockets.exceptions.ConnectionClosedError as e:
-        print(f"Connection closed with error: {e}")
+            # Request current data from the server
+            #await websocket.send("current_data")
+            #current_data = await websocket.recv()
+            #print("Received current data:")
+            #print(current_data)
+
+            # Request past data (e.g., for the last 15 seconds)
+            await websocket.send("past_data")
+            past_data = await websocket.recv()
+            print("Received past data:")
+            print(past_data)
+
+    except websockets.exceptions.ConnectionClosedError:
+        print("Connection closed unexpectedly.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
-# Start the WebSocket client
+# Run the client
 if __name__ == "__main__":
-    asyncio.run(websocket_client())
+    asyncio.run(connect_to_field_device())
