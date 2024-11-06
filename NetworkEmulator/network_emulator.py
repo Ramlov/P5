@@ -1,14 +1,17 @@
-import time, json
+import time, json, random
 
 NETWORK_PROFILES = {
     "SLOW": {
-        "latency": 1100
+        "min": 1001,
+        "max": 2000
     },
     "NORMAL": {
-        "latency": 300
+        "min": 300,
+        "max": 500
     },
     "GOOD": {
-        "latency": 50
+        "min": 50,
+        "max": 300
     }
 }
 
@@ -20,6 +23,10 @@ PACKET_LOSS_SEQUENCES = { # TODO: Define sequences for fd's with SLOW profile
     1: {
         "index": 0,
         "p": [0,1,0,1,0,1,0,0,0]
+    },
+    2: {
+        "index": 0,
+        "p": [0, 1]
     }
 }
 
@@ -28,21 +35,27 @@ class NetworkEmulator:
         pass
 
     def _get_network_profile(self, fd_id):
+        min = 0
+        max = 0
         try:
             # get profiles
             with open('./NetworkEmulator/fd_profiles.json') as json_file:
                 data = json.load(json_file)
                 profile = next((item['profile']
                                for item in data if item['id'] == fd_id), None)
-                
                 if profile is None: # no profile found
-                    return NETWORK_PROFILES["NORMAL"]["latency"]
-
-
-                return NETWORK_PROFILES[profile]["latency"]
-        except KeyError: # field device doesnt have SLOW network profile. Use either NORMAL or GOOD profile? or pick random profile?
-            #
-            return NETWORK_PROFILES["NORMAL"]
+                    min = NETWORK_PROFILES["NORMAL"]["min"]
+                    max = NETWORK_PROFILES["NORMAL"]["max"]
+                    return random.randrange(min, max)
+                
+                print(f"Found Profile for Field Device ID {fd_id}: {profile}")
+                min = NETWORK_PROFILES[profile]["min"]
+                max = NETWORK_PROFILES[profile]["max"]
+                return random.randrange(min, max)
+        except KeyError:
+            min = NETWORK_PROFILES["NORMAL"]["min"]
+            max = NETWORK_PROFILES["NORMAL"]["max"]
+            return random.randrange(min, max)
 
     def emulate(self, fd_id: int) -> int: #fd_id = field device ID
         try:
@@ -56,7 +69,7 @@ class NetworkEmulator:
                 PACKET_LOSS_SEQUENCES[fd_id]["index"] = 0
                 index = 0
 
-            # get the sequence p_i based on index
+            # get the sequence p_i
             p_i = p[index]
 
             # increment index
@@ -79,4 +92,8 @@ class NetworkEmulator:
 if __name__ == '__main__':
     ne = NetworkEmulator()
     while True:
-        ne.emulate(0)
+        rc = ne.emulate(2)
+        if rc == 1105:
+            # dont retransmit packet
+            continue
+        
