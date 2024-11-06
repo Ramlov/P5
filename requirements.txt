@@ -1,2 +1,4 @@
 websockets
 ping3
+scapy 
+cachetools
