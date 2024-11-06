@@ -11,7 +11,7 @@ from requestreceiver import start_backend_request_server
 from activemonitor import start_active_monitoring
 from passivemonitor import start_passive_monitoring
 
-def main():
+async def main():
     # Set up logging
     logging.basicConfig(
         level=logging.INFO,
@@ -37,12 +37,9 @@ def main():
         # Add other field devices as needed
     })
 
-    # Start the event loop
-    loop = asyncio.get_event_loop()
-
     # Start the servers
-    loop.run_until_complete(start_bulk_upload_server(field_devices))
-    loop.run_until_complete(start_backend_request_server(field_devices))
+    bulk_server = await start_bulk_upload_server(field_devices)
+    backend_server = await start_backend_request_server(field_devices)
 
     # Start the monitoring modules
     # Active Monitoring
@@ -57,13 +54,17 @@ def main():
     # Run the event loop forever
     try:
         logging.info("System initialization complete. Running event loop...")
-        loop.run_forever()
+        await asyncio.Event().wait()  # Keep the main coroutine running
     except KeyboardInterrupt:
         logging.info("Shutting down...")
     finally:
         # Clean up
         passive_monitoring_process.terminate()
-        loop.close()
+        # Close servers
+        bulk_server.close()
+        backend_server.close()
+        await bulk_server.wait_closed()
+        await backend_server.wait_closed()
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
