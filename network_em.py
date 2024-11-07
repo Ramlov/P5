@@ -1,3 +1,4 @@
+import os
 import json
 import random
 import time
@@ -65,7 +66,12 @@ def start_bridge():
 # Load Configuration
 def load_configuration():
     global interface_in, interface_out, network_emulator
-    with open("config.json", "r") as file:
+    
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(script_dir, "config.json")
+    
+    with open(config_file_path, "r") as file:
         config = json.load(file)
         interface_in = config.get("NetworkInterfaces", ["eth0", "eth1"])[0]
         interface_out = config.get("NetworkInterfaces", ["eth0", "eth1"])[1]
