@@ -70,7 +70,7 @@ def relay_packet(packet):
     
     # Log packet information
     logging.info(f"Received packet on {interface_in} - Source IP: {src_ip}, Source Port: {src_port}, "
-                 f"Destination IP: {dst_ip}, Destination Port: {dst_port}")
+                 f"Destination IP: {dst_ip}, Destination Port: {dst_port}, Field device id: {get_id_from_port(src_port)}")
     
     # Apply network emulation profile and relay if appropriate
     if network_emulator.apply_profile(fd_id):
@@ -83,6 +83,15 @@ def relay_packet(packet):
 def start_bridge():
     logging.info(f"Starting packet bridge: {interface_in} -> {interface_out}")
     sniff(iface=interface_in, prn=relay_packet, store=0)
+
+def get_id_from_port(port):
+    if port > 3009:
+        return str(port % 100)
+    elif port >= 3000:
+        return str(port % 10)
+    else:
+        return -1
+
 
 # Load Configuration
 def load_configuration():
