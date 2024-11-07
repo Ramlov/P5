@@ -49,8 +49,6 @@ class NetworkEmulator:
 
 # Packet Relay Function
 def relay_packet(packet):
-    fd_id = 2  # Field device ID for demo purposes
-
     # Limit processing to packets up to 1500 bytes
     if len(packet) > 1500:
         logging.warning("Packet ignored: size exceeds 1500 bytes.")
@@ -72,6 +70,8 @@ def relay_packet(packet):
     logging.info(f"Received packet on {interface_in} - Source IP: {src_ip}, Source Port: {src_port}, "
                  f"Destination IP: {dst_ip}, Destination Port: {dst_port}, Field device id: {get_id_from_port(src_port)}")
     
+    fd_id = get_id_from_port(src_port) # Get field device ID from source port Sat her*
+
     # Apply network emulation profile and relay if appropriate
     if network_emulator.apply_profile(fd_id):
         sendp(packet, iface=interface_out, verbose=False)
