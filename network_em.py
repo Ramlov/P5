@@ -34,10 +34,9 @@ class NetworkEmulator:
         if sequence_info:
             index = sequence_info["index"]
             drop = sequence_info["sequence"][index] == 1
-            # Update index for next packet
             sequence_info["index"] = (index + 1) % len(sequence_info["sequence"])
             return drop
-        return False  # Default to no packet loss if no sequence found
+        return False
 
     def apply_profile(self, fd_id):
         if self.should_drop_packet(fd_id):
@@ -50,10 +49,15 @@ class NetworkEmulator:
 
 # Packet Relay Function
 def relay_packet(packet):
-    fd_id = 2  # Field device ID (for demo purposes; change as needed)
+    fd_id = 2  # Field device ID for demo purposes
+
+    # Limit processing to packets up to 1500 bytes
+    if len(packet) > 1500:
+        logging.warning("Packet ignored: size exceeds 1500 bytes.")
+        return
     
-    # Identify source and destination ports if present
-    src_port = dst_port = None
+    # Identify source and destination ports and IPs
+    src_ip = dst_ip = src_port = dst_port = "N/A"
     if IP in packet:
         src_ip = packet[IP].src
         dst_ip = packet[IP].dst
@@ -63,14 +67,12 @@ def relay_packet(packet):
         elif UDP in packet:
             src_port = packet[UDP].sport
             dst_port = packet[UDP].dport
-    else:
-        src_ip = dst_ip = "N/A"
     
     # Log packet information
     logging.info(f"Received packet on {interface_in} - Source IP: {src_ip}, Source Port: {src_port}, "
                  f"Destination IP: {dst_ip}, Destination Port: {dst_port}")
     
-    # Apply network emulation profile
+    # Apply network emulation profile and relay if appropriate
     if network_emulator.apply_profile(fd_id):
         sendp(packet, iface=interface_out, verbose=False)
         logging.info(f"Packet relayed to output interface {interface_out}.")
