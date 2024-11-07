@@ -102,7 +102,7 @@ def get_id_from_port(port):
     elif port >= 3000:
         return port % 10
     else:
-        return -1
+        return 0
 
 # Load Configuration
 def load_configuration():
