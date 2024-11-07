@@ -3,7 +3,7 @@ import json
 import random
 import time
 import logging
-from scapy.all import sniff, sendp, Ether
+from scapy.all import sniff, sendp, Ether, IP, TCP, UDP
 
 # Set up logging
 logging.basicConfig(filename="log.txt", level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -51,10 +51,29 @@ class NetworkEmulator:
 # Packet Relay Function
 def relay_packet(packet):
     fd_id = 2  # Field device ID (for demo purposes; change as needed)
-    logging.info(f"Received packet: {packet.summary()}")
+    
+    # Identify source and destination ports if present
+    src_port = dst_port = None
+    if IP in packet:
+        src_ip = packet[IP].src
+        dst_ip = packet[IP].dst
+        if TCP in packet:
+            src_port = packet[TCP].sport
+            dst_port = packet[TCP].dport
+        elif UDP in packet:
+            src_port = packet[UDP].sport
+            dst_port = packet[UDP].dport
+    else:
+        src_ip = dst_ip = "N/A"
+    
+    # Log packet information
+    logging.info(f"Received packet on {interface_in} - Source IP: {src_ip}, Source Port: {src_port}, "
+                 f"Destination IP: {dst_ip}, Destination Port: {dst_port}")
+    
+    # Apply network emulation profile
     if network_emulator.apply_profile(fd_id):
         sendp(packet, iface=interface_out, verbose=False)
-        logging.info("Packet relayed to output interface.")
+        logging.info(f"Packet relayed to output interface {interface_out}.")
     else:
         logging.info("Packet was dropped.")
 
