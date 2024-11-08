@@ -92,7 +92,7 @@ def relay_packet(packet):
         return
 
     # Filter packets based on source and destination ports (3000-4000 range)
-    src_port = dst_port = None
+    src_port = dst_port = 0
     if IP in packet:
         if TCP in packet:
             src_port = packet[TCP].sport
