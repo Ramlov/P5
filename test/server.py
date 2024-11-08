@@ -4,7 +4,7 @@ import websockets
 from datetime import datetime
 
 SERVER_HOST = "0.0.0.0"
-SERVER_PORT = 8762
+SERVER_PORT = 3455
 
 async def handle_client(websocket, path):
     print("Client connected")

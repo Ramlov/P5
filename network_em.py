@@ -24,6 +24,11 @@ PACKET_LOSS_SEQUENCES = {
 
 FD_PROFILES = {}  # Loaded from fd_profiles.json
 
+# Helper function to log and print messages
+def log_and_print(message):
+    logging.info(message)
+    print(message)
+
 # Network Emulator Class
 class NetworkEmulator:
     def __init__(self, profile="NORMAL"):
@@ -43,10 +48,10 @@ class NetworkEmulator:
 
     def apply_profile(self, fd_id):
         if self.should_drop_packet(fd_id):
-            logging.info(f"Packet dropped due to packet loss sequence for FD ID {fd_id}.")
+            log_and_print(f"Packet dropped due to packet loss sequence for FD ID {fd_id}.")
             return False
         latency = self.get_latency()
-        logging.info(f"Applying latency of {latency * 1000:.2f} ms for FD ID {fd_id}")
+        log_and_print(f"Applying latency of {latency * 1000:.2f} ms for FD ID {fd_id}")
         time.sleep(latency)
         return True
 
@@ -67,23 +72,23 @@ def handle_packet(packet):
     profile = FD_PROFILES.get(fd_id, "NORMAL")  # Get profile for FD ID, default to NORMAL
     network_emulator = NetworkEmulator(profile=profile)  # Create emulator instance for FD
 
-    logging.info(f"Received packet on {interface_in} - Source IP: {src_ip}, Source Port: {src_port}, "
-                 f"Destination IP: {dst_ip}, Destination Port: {dst_port}, Field device id: {fd_id}, Profile: {profile}")
+    log_and_print(f"Received packet on {interface_in} - Source IP: {src_ip}, Source Port: {src_port}, "
+                  f"Destination IP: {dst_ip}, Destination Port: {dst_port}, Field device id: {fd_id}, Profile: {profile}")
 
     # Apply profile-specific modifications
     if network_emulator.apply_profile(fd_id):
         sendp(packet, iface=interface_out, verbose=False)
-        logging.info(f"Packet relayed to output interface {interface_out}.")
+        log_and_print(f"Packet relayed to output interface {interface_out}.")
     else:
-        logging.info("Packet was dropped.")
+        log_and_print("Packet was dropped.")
     
     # Log total number of active threads
-    logging.info(f"Total active threads: {threading.active_count() - 1}")  # Subtract 1 for the main thread
+    log_and_print(f"Total active threads: {threading.active_count() - 1}")  # Subtract 1 for the main thread
 
 # Packet Relay Function (spawns threads for each packet)
 def relay_packet(packet):
     if len(packet) > 1500:
-        logging.warning("Packet ignored: size exceeds 1500 bytes.")
+        log_and_print("Packet ignored: size exceeds 1500 bytes.")
         return
 
     # Filter packets based on source and destination ports (3000-4000 range)
@@ -98,16 +103,19 @@ def relay_packet(packet):
 
     # Check if both ports are within the specified range
     if not (3000 <= src_port <= 4000) or not (3000 <= dst_port <= 4000):
-        logging.info("Packet ignored: source or destination port outside the 3000-4000 range.")
+        # Relay packet directly to output interface without processing
+        sendp(packet, iface=interface_out, verbose=False)
+        log_and_print("Packet relayed directly (outside 3000-4000 port range).")
         return
 
-    # Spawn a new thread for each packet
+    # Spawn a new thread for each packet that is within range
     packet_thread = threading.Thread(target=handle_packet, args=(packet,))
     packet_thread.start()
 
+
 # Main Capture and Relay Loop
 def start_bridge():
-    logging.info(f"Starting packet bridge: {interface_in} -> {interface_out}")
+    log_and_print(f"Starting packet bridge: {interface_in} -> {interface_out}")
     sniff(iface=interface_in, prn=relay_packet, store=0)
 
 # Map FD ID based on port
@@ -131,14 +139,14 @@ def load_configuration():
         config = json.load(file)
         interface_in = config.get("NetworkInterfaces", ["eth0", "eth1"])[0]
         interface_out = config.get("NetworkInterfaces", ["eth0", "eth1"])[1]
-        logging.info(f"Loaded network configuration: {config}")
+        log_and_print(f"Loaded network configuration: {config}")
     
     # Load field device profiles
     fd_profiles_path = os.path.join(script_dir, "fd_profiles.json")
     with open(fd_profiles_path, "r") as file:
         fd_profiles = json.load(file)
         FD_PROFILES = {item["id"]: item["profile"] for item in fd_profiles}
-        logging.info(f"Loaded field device profiles: {FD_PROFILES}")
+        log_and_print(f"Loaded field device profiles: {FD_PROFILES}")
 
 if __name__ == "__main__":
     load_configuration()
