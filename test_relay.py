@@ -1,44 +1,48 @@
-from scapy.all import sniff, sendp
-from scapy.layers.inet import IP, TCP, UDP
+import socket
+import os
 
 # Define the two interfaces to monitor
 INTERFACE_INBOUND = "eth0"
 INTERFACE_OUTBOUND = "eth1"
 
-def print_packet_info(packet):
+def create_socket(interface):
     """
-    Prints the IP and port information of the packet if it's IP-based.
+    Creates a raw socket for the specified interface.
     """
-    if IP in packet:
-        ip_layer = packet[IP]
-        src_ip = ip_layer.src
-        dst_ip = ip_layer.dst
-        protocol = "TCP" if TCP in packet else "UDP" if UDP in packet else "Other"
+    raw_sock = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
+    raw_sock.bind((interface, 0))
+    return raw_sock
+
+def relay_packets(sock_in, sock_out, buffer_size=65535):
+    """
+    Continuously reads packets from the input socket and forwards them to the output socket.
+    """
+    while True:
+        # Receive a packet from the input socket
+        packet, _ = sock_in.recvfrom(buffer_size)
         
-        # Get ports if TCP/UDP
-        if TCP in packet or UDP in packet:
-            src_port = packet[TCP].sport if TCP in packet else packet[UDP].sport
-            dst_port = packet[TCP].dport if TCP in packet else packet[UDP].dport
-        else:
-            src_port = dst_port = "N/A"
-        
-        print(f"Packet Info: Src IP: {src_ip}, Dst IP: {dst_ip}, Protocol: {protocol}, "
-              f"Src Port: {src_port}, Dst Port: {dst_port}")
-    else:
-        print("Non-IP Packet")
+        # Extract IP information for logging
+        src_ip, dst_ip = packet[26:30], packet[30:34]  # Extract IP addresses from packet (for IPv4)
+        src_ip = '.'.join(map(str, src_ip))
+        dst_ip = '.'.join(map(str, dst_ip))
+        print(f"Relaying Packet - Src IP: {src_ip}, Dst IP: {dst_ip}")
 
-def relay_packet(packet):
-    """
-    Forwards the packet to the opposite interface.
-    """
-    # Print packet information
-    print_packet_info(packet)
+        # Send the packet out via the output socket
+        sock_out.send(packet)
 
-    # Determine which interface to send the packet to
-    outgoing_iface = INTERFACE_OUTBOUND if packet.sniffed_on == INTERFACE_INBOUND else INTERFACE_INBOUND
+# Set up raw sockets for both interfaces
+sock_inbound = create_socket(INTERFACE_INBOUND)
+sock_outbound = create_socket(INTERFACE_OUTBOUND)
 
-    # Send the packet to the opposite interface
-    sendp(packet, iface=outgoing_iface, verbose=False)
-
-# Start sniffing on both interfaces
-sniff(iface=[INTERFACE_INBOUND, INTERFACE_OUTBOUND], prn=relay_packet, store=0)
+try:
+    print(f"Starting packet relay between {INTERFACE_INBOUND} and {INTERFACE_OUTBOUND}...")
+    # Run relay from inbound to outbound and vice versa
+    while True:
+        # Relay packets from eth0 to eth1 and vice versa
+        relay_packets(sock_inbound, sock_outbound)
+        relay_packets(sock_outbound, sock_inbound)
+except KeyboardInterrupt:
+    print("Stopping packet relay.")
+finally:
+    sock_inbound.close()
+    sock_outbound.close()
