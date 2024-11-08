@@ -24,11 +24,11 @@ class FieldDevice:
         }
 
     def assign_region(self):
-        if 0 <= self.device_id <= 10:
+        if 0 <= self.device_id <= 9:
             return "A1"
-        elif 11 <= self.device_id <= 22:
+        elif 10 <= self.device_id <= 19:
             return "A2"
-        elif 23 <= self.device_id <= 32:
+        elif 20 <= self.device_id <= 29:
             return "A3"
         return "Unknown"
     
