@@ -1,0 +1,1 @@
+wget https://raw.githubusercontent.com/nathanwiens/merakiwanemulator/master/meraki_wan_emulator_install.sh && chmod a+x meraki_wan_emulator_install.sh && sudo ./meraki_wan_emulator_install.sh
