@@ -87,7 +87,14 @@ def handle_packet(packet):
 
 # Packet Relay Function (spawns threads for each packet)
 def relay_packet(packet):
-    log_and_print(f"Received packet on {interface_in} - Size: {len(packet)} bytes")
+    src_ip = dst_ip = "Unknown"
+    if IP in packet:
+        src_ip = packet[IP].src
+        dst_ip = packet[IP].dst
+
+    # Log and print the interface, packet size, and IP addresses
+    log_and_print(f"Received packet on {interface_in} - Size: {len(packet)} bytes, Source IP: {src_ip}, Destination IP: {dst_ip}")
+
     if len(packet) > 1500:
         log_and_print("Packet ignored: size exceeds 1500 bytes.")
         sendp(packet, iface=interface_out, verbose=False)
