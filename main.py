@@ -1,70 +1,99 @@
 # main.py
 
-import asyncio
-import logging
-from multiprocessing import Manager
 import threading
+import time
+from datetime import datetime
+import sqlite3
+import asyncio
+import websockets
 
-# Import the modules
-from bulkreceiver import start_bulk_upload_server
-from requestreceiver import start_backend_request_server
-from activemonitor import start_active_monitoring
-from passivemonitor import start_passive_monitoring
+from multiprocessing import Manager
 
-async def main():
-    # Set up logging
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s'
-    )
+from active_monitoring import ActiveMonitoring
+from passive_monitoring import PassiveMonitoring
+from adaptive_data_access import AdaptiveDataAccess
 
-    # Initialize the shared data structure using a Manager for cross-process sharing
+def load_field_devices():
+    conn = sqlite3.connect('field_devices.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT FD_ID, IP, Region, Port, Last_Data_Received FROM field_devices')
+    rows = cursor.fetchall()
+    conn.close()
+
     manager = Manager()
     field_devices = manager.dict()
+    fd_locks = {}
 
-    # Example field devices (populate as needed)
-    field_devices.update({
-        '192.168.1.100': {
-            'latency': None,
-            'packet_loss': None,
-            'throughput': None,
-            'status': 'Unknown',
-            'last_active': None,
-            'region': 'RegionA',
-            'connection_stability': 0,
-            # 'priority': 'normal',  # Optional field for priority
-        },
-        # Add other field devices as needed
-    })
+    for fd_id, ip_address, region, port, last_data_received in rows:
+        fd_id = str(fd_id)  # Ensure FD_ID is a string
+        field_devices[fd_id] = manager.dict({
+            'ip_address': ip_address,
+            'port': port,
+            'region': region,
+            'last_data_received': last_data_received,  # This can be None
+            'active_metrics': manager.dict(),
+            'passive_metrics': manager.dict(),  # Placeholder for now
+            # Additional fields as needed
+        })
+        fd_locks[fd_id] = threading.Lock()
 
-    # Start the servers
-    bulk_server = await start_bulk_upload_server(field_devices)
-    backend_server = await start_backend_request_server(field_devices)
+    print(f"{len(field_devices)}")
 
-    # Start the monitoring modules
-    # Active Monitoring
-    active_monitoring_thread = threading.Thread(
-        target=start_active_monitoring, args=(field_devices,), daemon=True
-    )
-    active_monitoring_thread.start()
+    return field_devices, fd_locks
 
-    # Passive Monitoring
-    passive_monitoring_process = start_passive_monitoring(field_devices)
+def backend_listener(adaptive_data_access):
+    async def handler(websocket, path):
+        async for message in websocket:
+            message = message.strip()
+            if message.lower() == 'stop':
+                print("Received 'stop' command from backend.")
+                adaptive_data_access.stop_backend_focus()
+            else:
+                # Process the backend request
+                # Assuming the message is a comma-separated list of FD IDs, e.g., "1,2,3"
+                requested_fd_ids = message.split(',')
+                requested_fd_ids = [fd_id.strip() for fd_id in requested_fd_ids]
+                print(f"Received backend request to focus on FDs: {requested_fd_ids}")
+                adaptive_data_access.focus_on_fds(requested_fd_ids)
 
-    # Run the event loop forever
+    async def server():
+        async with websockets.serve(handler, 'localhost', 8765):
+            await asyncio.Future()  # Run forever
+
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(server())
+
+def main():
+    # Load field devices from SQLite database
+    field_devices, fd_locks = load_field_devices()
+
+    print(f"\nField devices: {field_devices}\n")
+
+    # Initialize the Passive Monitoring module (placeholder)
+    passive_monitor = PassiveMonitoring(field_devices)
+    passive_monitor.start()
+
+    # Initialize the Adaptive Data Access module
+    adaptive_data_access = AdaptiveDataAccess(field_devices, fd_locks)
+    adaptive_data_access_thread = threading.Thread(target=adaptive_data_access.run, daemon=True)
+    adaptive_data_access_thread.start()
+
+    # Start the backend listener in a separate thread
+    backend_listener_thread = threading.Thread(target=backend_listener, args=(adaptive_data_access,), daemon=True)
+    backend_listener_thread.start()
+
+    # Initialize and start Active Monitoring
+    num_active_threads = 5  # Adjust as needed
+    active_monitor = ActiveMonitoring(field_devices, fd_locks, num_active_threads)
+    active_monitor.start()
+
+    # Keep the main thread alive
     try:
-        logging.info("System initialization complete. Running event loop...")
-        await asyncio.Event().wait()  # Keep the main coroutine running
+        while True:
+            time.sleep(1)
     except KeyboardInterrupt:
-        logging.info("Shutting down...")
-    finally:
-        # Clean up
-        passive_monitoring_process.terminate()
-        # Close servers
-        bulk_server.close()
-        backend_server.close()
-        await bulk_server.wait_closed()
-        await backend_server.wait_closed()
+        print("Shutting down...")
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    main()
