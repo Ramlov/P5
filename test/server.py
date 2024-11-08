@@ -1,3 +1,4 @@
+#!/bin/env python
 import asyncio
 import websockets
 from datetime import datetime
