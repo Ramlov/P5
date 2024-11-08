@@ -87,8 +87,10 @@ def handle_packet(packet):
 
 # Packet Relay Function (spawns threads for each packet)
 def relay_packet(packet):
+    log_and_print(f"Received packet on {interface_in} - Size: {len(packet)} bytes")
     if len(packet) > 1500:
         log_and_print("Packet ignored: size exceeds 1500 bytes.")
+        sendp(packet, iface=interface_out, verbose=False)
         return
 
     # Filter packets based on source and destination ports (3000-4000 range)
