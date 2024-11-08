@@ -4,7 +4,7 @@ import websockets
 from datetime import datetime
 
 SERVER_HOST = "192.168.1.6"
-SERVER_PORT = 8768
+SERVER_PORT = 8769
 
 async def send_messages():
     uri = f"ws://{SERVER_HOST}:{SERVER_PORT}"

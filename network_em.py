@@ -52,7 +52,7 @@ class NetworkEmulator:
 
 # Packet Handler
 def handle_packet(packet):
-    src_ip = dst_ip = src_port = dst_port = "N/A"
+    src_ip = dst_ip = src_port = dst_port = "0"
     if IP in packet:
         src_ip = packet[IP].src
         dst_ip = packet[IP].dst
