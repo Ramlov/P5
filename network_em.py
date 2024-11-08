@@ -86,6 +86,21 @@ def relay_packet(packet):
         logging.warning("Packet ignored: size exceeds 1500 bytes.")
         return
 
+    # Filter packets based on source and destination ports (3000-4000 range)
+    src_port = dst_port = None
+    if IP in packet:
+        if TCP in packet:
+            src_port = packet[TCP].sport
+            dst_port = packet[TCP].dport
+        elif UDP in packet:
+            src_port = packet[UDP].sport
+            dst_port = packet[UDP].dport
+
+    # Check if both ports are within the specified range
+    if not (3000 <= src_port <= 4000) or not (3000 <= dst_port <= 4000):
+        logging.info("Packet ignored: source or destination port outside the 3000-4000 range.")
+        return
+
     # Spawn a new thread for each packet
     packet_thread = threading.Thread(target=handle_packet, args=(packet,))
     packet_thread.start()
