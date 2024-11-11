@@ -86,11 +86,11 @@ def parse_packet(packet):
                 # pass
                 prin("Packet outside port range 3000-4000, ignoring.")
         else:
-            # pass
-            print("Non-TCP packet received")
+            pass
+            #print("Non-TCP packet received")
     else:
-        # pass
-        print("Non-IPv4 packet received")
+        pass
+        #print("Non-IPv4 packet received")
 
 
 def sniff_packets():
