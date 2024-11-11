@@ -52,9 +52,11 @@ def print_port(pkt):
             else:
                 print(f"No network profile found for ID {device_id}")
         else:
-            print("Packet outside port range 3000-4000, ignoring.")
+            pass
+            #print("Packet outside port range 3000-4000, ignoring.")
     else:
-        print("Non-TCP packet received")
+        pass
+        #print("Non-TCP packet received")
 
 def packet_callback(delay):
     requests.post('http://localhost/api/disciplines/packet_delay', data=json.dumps({'milliseconds': delay}))
