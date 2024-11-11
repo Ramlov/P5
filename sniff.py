@@ -19,7 +19,7 @@ PACKET_LOSS_SEQUENCES = {
 }
 
 packet_counter = 0
-whitelist_ips = {"192.168.1.7"}  # Add the IPs you want to whitelist
+whitelist_ips = {"192.168.1.12"}  # Add the IPs you want to whitelist
 
 def sniff_packets():
     # Specify the bridge interface (e.g., "br0")
