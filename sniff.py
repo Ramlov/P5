@@ -35,7 +35,7 @@ def print_port(pkt):
             print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             
             packet_counter += 1
-            print(f"Total packets within port range 3000-4000: {packet_counter}")
+            print(f"Total packets within port range 3000-4000: {packet_counter/2}")
             
             device_id = get_id_from_port(tcp_dport)
             if device_id in fd_profiles:
