@@ -11,6 +11,7 @@ websockets = "^13.1"
 ping3 = "^4.0.8"
 scapy = "^2.6.1"
 cachetools = "^5.5.0"
+colorama = "^0.4.6"
 
 
 [build-system]
