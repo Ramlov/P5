@@ -2,6 +2,7 @@ import requests
 import json
 import random
 from scapy.all import sniff, TCP, IP
+from time import sleep
 
 # Load the JSON data from the file
 with open('fd_profiles.json', 'r') as file:
@@ -23,7 +24,7 @@ whitelist_ips = {"192.168.1.7"}  # Add the IPs you want to whitelist
 
 def sniff_packets():
     # Specify the bridge interface (e.g., "br0")
-    sniff(prn=print_port, count=1, store=0)
+    sniff(prn=print_port, count=0, store=0)
 
 def print_port(pkt):
     global packet_counter
@@ -65,6 +66,7 @@ def print_port(pkt):
     else:
         pass
         #print("Non-TCP packet received")
+    sleep(0.1)
 
 def packet_callback(delay):
     requests.post('http://localhost/api/disciplines/packet_delay', data=json.dumps({'milliseconds': delay}))
