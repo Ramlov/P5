@@ -31,18 +31,22 @@ def packet_callback(delay):
 
 def parse_packet(packet):
     global packet_counter
-    # Unpack Ethernet frame
     eth_length = 14
+
+    # Unpack Ethernet frame
     eth_header = packet[:eth_length]
+    eth = struct.unpack('!6s6sH', eth_header)
+    eth_protocol = socket.ntohs(eth[2])
 
-    # Get IP protocol
-    ip_header = packet[eth_length:eth_length+20]
-    iph = struct.unpack('!BBHHHBBH4s4s', ip_header)
-    version_ihl = iph[0]
-    version = version_ihl >> 4
-
-    if version == 4:
-        iph_length = (version_ihl & 0xF) * 4
+    # Check if EtherType is IPv4 (0x0800)
+    if eth_protocol == 0x0800:
+        # Get IP header
+        ip_header = packet[eth_length:eth_length+20]
+        iph = struct.unpack('!BBHHHBBH4s4s', ip_header)
+        version_ihl = iph[0]
+        version = version_ihl >> 4
+        ihl = version_ihl & 0xF  # Internet Header Length
+        iph_length = ihl * 4
         protocol = iph[6]
         src_ip = socket.inet_ntoa(iph[8])
         dst_ip = socket.inet_ntoa(iph[9])
