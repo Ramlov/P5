@@ -63,7 +63,7 @@ def print_port(pkt):
         else:
             pass
             #print("Packet outside port range 3000-4000, ignoring.")
-        sleep(0.1)
+        sleep(0.5)
     else:
         pass
         #print("Non-TCP packet received")
