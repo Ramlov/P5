@@ -83,17 +83,15 @@ def parse_packet(packet):
                 else:
                     print(f"No network profile found for ID {device_id}")
             else:
-                pass
-                # Packet outside port range 3000-4000, ignoring.
+                # pass
+                prin("Packet outside port range 3000-4000, ignoring.")
         else:
-            pass
-            # Non-TCP packet received
+            # pass
+            print("Non-TCP packet received")
     else:
-        pass
-        # Non-IPv4 packet received
+        # pass
+        print("Non-IPv4 packet received")
 
-    # Add a delay of 10 milliseconds before processing the next packet
-    sleep(0.01)
 
 def sniff_packets():
     try:
