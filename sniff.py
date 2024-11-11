@@ -40,7 +40,7 @@ def print_port(pkt):
         
         # Only process packets with destination ports within the range 3000-4000
         if 3000 <= tcp_dport <= 4000:
-            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
+            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}, dest_ip: {dst_ip}, src_ip: {src_ip}")
             
             packet_counter += 1
             print(f"Total packets within port range 3000-4000: {packet_counter}")
