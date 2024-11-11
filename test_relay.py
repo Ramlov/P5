@@ -1,57 +1,49 @@
-# Disable route autoloading before importing Scapy
-from scapy.config import conf
-conf.route_autoload = False
-conf.route6_autoload = False
+import os
+import time
+import subprocess
 
-# Import Scapy modules
-from scapy.all import sniff, sendp, Ether, IP, TCP, UDP
-from scapy.layers.inet import ICMP
+# Configuration
+BRIDGE_NAME = "br0"
+INTERFACE1 = "eth0"
+INTERFACE2 = "eth1"
+CONFIG_FILE = "/etc/network_latency_config.txt"
+latency = 50  # Default latency in ms
 
-# Define the two interfaces to monitor
-INTERFACE_INBOUND = "eth0"
-INTERFACE_OUTBOUND = "eth1"
+def setup_bridge():
+    # Bring up the interfaces
+    os.system(f"ifconfig {INTERFACE1} up")
+    os.system(f"ifconfig {INTERFACE2} up")
+    
+    # Create and set up the bridge
+    os.system(f"ip link add {BRIDGE_NAME} type bridge")
+    os.system(f"ip link set {BRIDGE_NAME} up")
+    
+    # Add interfaces to the bridge
+    os.system(f"ip link set dev {INTERFACE1} master {BRIDGE_NAME}")
+    os.system(f"ip link set dev {INTERFACE2} master {BRIDGE_NAME}")
+    
+    # Remove any IP assigned to INTERFACE1
+    os.system(f"ifconfig {INTERFACE1} 0.0.0.0")
+    
+    # Assign an IP to the bridge using DHCP
+    os.system(f"dhclient {BRIDGE_NAME}")
 
-# Limit the layers to Ether, IP, TCP, UDP, and ICMP to speed up processing
-conf.layers.filter([Ether, IP, TCP, UDP, ICMP])
+def set_latency(latency_ms):
+    # Clear any existing latency settings
+    os.system(f"tc qdisc del dev {INTERFACE1} root")
+    os.system(f"tc qdisc del dev {INTERFACE2} root")
 
-# Define a BPF filter for IP, TCP, and UDP packets only
-BPF_FILTER = "ip or tcp or udp"
+    # Set the latency
+    os.system(f"tc qdisc add dev {INTERFACE1} root netem delay {latency_ms}ms")
+    os.system(f"tc qdisc add dev {INTERFACE2} root netem delay {latency_ms}ms")
+    print(f"Latency of {latency_ms}ms applied to both {INTERFACE1} and {INTERFACE2}")
 
-def print_packet_info(packet):
-    """
-    Prints the IP and port information of the packet if it's IP-based.
-    """
-    if IP in packet:
-        ip_layer = packet[IP]
-        src_ip = ip_layer.src
-        dst_ip = ip_layer.dst
-        protocol = "TCP" if TCP in packet else "UDP" if UDP in packet else "Other"
-        
-        # Get ports if TCP/UDP
-        if TCP in packet or UDP in packet:
-            src_port = packet[TCP].sport if TCP in packet else packet[UDP].sport
-            dst_port = packet[TCP].dport if TCP in packet else packet[UDP].dport
-        else:
-            src_port = dst_port = "N/A"
-        
-        print(f"Packet Info: Src IP: {src_ip}, Dst IP: {dst_ip}, Protocol: {protocol}, "
-              f"Src Port: {src_port}, Dst Port: {dst_port}")
-    else:
-        print("Non-IP Packet")
+def main():
+    # Setup network bridge
+    setup_bridge()
+    
+    # Apply latency
+    set_latency(latency)
 
-def relay_packet(packet):
-    """
-    Forwards the packet to the opposite interface.
-    """
-    # Print packet information
-    print_packet_info(packet)
-
-    # Determine which interface to send the packet to
-    outgoing_iface = INTERFACE_OUTBOUND if packet.sniffed_on == INTERFACE_INBOUND else INTERFACE_INBOUND
-
-    # Send the packet to the opposite interface
-    sendp(packet, iface=outgoing_iface, verbose=False)
-
-# Run the sniffing loop indefinitely with BPF filter
-while True:
-    sniff(iface=[INTERFACE_INBOUND, INTERFACE_OUTBOUND], prn=relay_packet, store=0, filter=BPF_FILTER)
+if __name__ == "__main__":
+    main()
