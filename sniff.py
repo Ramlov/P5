@@ -22,7 +22,7 @@ packet_counter = 0
 
 def sniff_packets():
     # Specify the bridge interface (e.g., "br0")
-    sniff(iface="br0", prn=print_port, count=0, store=0)
+    sniff(iface="eth0", prn=print_port, count=0, store=0)
 
 def print_port(pkt):
     global packet_counter
