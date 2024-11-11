@@ -1,0 +1,10 @@
+[Unit]
+Description=Network Bridge Setup with Latency
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/setup_network_bridge.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
