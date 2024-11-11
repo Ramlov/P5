@@ -29,9 +29,9 @@ def setup_bridge():
     os.system(f"dhclient {BRIDGE_NAME}")
 
 def set_latency(latency_ms):
-    # Clear any existing latency settings
-    os.system(f"tc qdisc del dev {INTERFACE1} root")
-    os.system(f"tc qdisc del dev {INTERFACE2} root")
+    # Clear any existing latency settings, ignoring errors if qdisc does not exist
+    os.system(f"tc qdisc del dev {INTERFACE1} root 2>/dev/null")
+    os.system(f"tc qdisc del dev {INTERFACE2} root 2>/dev/null")
 
     # Set the latency
     os.system(f"tc qdisc add dev {INTERFACE1} root netem delay {latency_ms}ms")
