@@ -1,1 +1,0 @@
-WARNING: Socket <scapy.arch.linux.L2ListenSocket object at 0x7fb0d1ecd0> failed with '[Errno 90] Message too long'. It was closed.

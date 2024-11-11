@@ -1,4 +1,0 @@
-{
-    "NetworkInterfaces": ["eth0", "eth1"],
-    "NetworkProfile": "NORMAL"
-}
