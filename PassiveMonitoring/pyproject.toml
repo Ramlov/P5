@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "p5"
+version = "0.1.0"
+description = "p5 headend"
+authors = ["mhenr <mhenr@student.aau.dk>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+websockets = "^13.1"
+ping3 = "^4.0.8"
+scapy = "^2.6.1"
+cachetools = "^5.5.0"
+colorama = "^0.4.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
