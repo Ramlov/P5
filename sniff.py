@@ -32,7 +32,7 @@ def print_port(pkt):
         dst_ip = pkt[IP].dst
         
         # Skip packets from whitelisted IPs
-        if src_ip in whitelist_ips or dst_ip in whitelist_ips:
+        if src_ip in whitelist_ips:
             return
         
         tcp_sport = pkt[TCP].sport
