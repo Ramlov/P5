@@ -29,11 +29,11 @@ def print_port(pkt):
         tcp_dport = pkt[TCP].dport
         print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
         
-        if 3000 <= tcp_dport <= 4000:
+        if 3000 <= tcp_sport <= 4000:
             packet_counter += 1
             print(f"Total packets within port range 3000-4000: {packet_counter}")
         
-        device_id = get_id_from_port(tcp_dport)
+        device_id = get_id_from_port(tcp_sport)
         if device_id in fd_profiles:
             profile = fd_profiles[device_id]
             print(f"Network Profile for ID {device_id}: {profile}")
