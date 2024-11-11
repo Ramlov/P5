@@ -63,10 +63,11 @@ def print_port(pkt):
         else:
             pass
             #print("Packet outside port range 3000-4000, ignoring.")
+        sleep(0.1)
     else:
         pass
         #print("Non-TCP packet received")
-    sleep(0.1)
+
 
 def packet_callback(delay):
     requests.post('http://localhost/api/disciplines/packet_delay', data=json.dumps({'milliseconds': delay}))
