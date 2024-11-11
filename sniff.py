@@ -3,6 +3,7 @@ import json
 import random
 from scapy.all import sniff, TCP
 
+# Load the JSON data from the file
 with open('fd_profiles.json', 'r') as file:
     fd_profiles = json.load(file)
 
@@ -20,8 +21,8 @@ PACKET_LOSS_SEQUENCES = {
 packet_counter = 0
 
 def sniff_packets():
-    while True:
-        sniff(prn=print_port, count=1)
+    # Specify the bridge interface (e.g., "br0")
+    sniff(iface="br0", prn=print_port, count=0, store=0)
 
 def print_port(pkt):
     global packet_counter
@@ -51,11 +52,9 @@ def print_port(pkt):
             else:
                 print(f"No network profile found for ID {device_id}")
         else:
-            #print("Packet outside port range 3000-4000, ignoring.")
-            pass
+            print("Packet outside port range 3000-4000, ignoring.")
     else:
-        #print("Non-TCP packet received")
-        pass
+        print("Non-TCP packet received")
 
 def packet_callback(delay):
     requests.post('http://localhost/api/disciplines/packet_delay', data=json.dumps({'milliseconds': delay}))
