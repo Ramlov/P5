@@ -23,7 +23,7 @@ class PassiveMonitoring:
             writer = csv.writer(file)
             if file.tell() == 0:
                 writer.writerow([
-                    "Device ID", "Session ID", "Received Time", "Measurement Time", "Measurement Latency (ms)", "Send Time", "Send Latency (ms)", "Data"
+                    "Device ID", "Session ID", "Received Time", "Measurement Time", "Measurement Latency (ms)", "Send Time", "Send Latency (ms)", "Send_Throughput", "Data"
                 ])
         with open(self.session_log_file, mode='a', newline='') as file:
             writer = csv.writer(file)
@@ -87,10 +87,10 @@ class PassiveMonitoring:
             # Reset session for next round
             del self.sessions[session_id]
 
-    def calculate_throughput(self, rtt, data_size):
+    def calculate_throughput(self, latency, data_size):
         data_size_bits = data_size * 8  # Convert bytes to bits
-        rtt_seconds = rtt / 1000  # Convert ms to seconds
-        return data_size_bits / rtt_seconds  # Throughput in bps
+        latency_seconds = latency / 1000  # Convert ms to seconds
+        return data_size_bits / latency_seconds  # Throughput in bps
 
     def log_session(self, session_id, start_time, end_time, rtt, total_data, throughput):
         """Log session details to the session CSV file."""
@@ -103,18 +103,19 @@ class PassiveMonitoring:
                 round(rtt, 2), total_data, round(throughput, 2)
             ])
 
-    def log_bulk_upload(self, device_id, session_id, received_time, measurement_time, measurement_latency, send_time, send_latency, data):
+    def log_bulk_upload(self, device_id, session_id, received_time, measurement_time, measurement_latency, send_time, send_latency, throughput, data):
         """Log bulk upload details to the bulk upload CSV file."""
         with open(self.bulk_log_file, mode='a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow([
                 f"{device_id:<5}",  # Align device ID
-                f"{session_id:<20}",  # Align session ID
-                f"{received_time.isoformat():<30}",  # Align received time
-                f"{measurement_time.isoformat():<30}",  # Align measurement time
-                f"{round(measurement_latency, 2):<15}",  # Align measurement latency
-                f"{send_time.isoformat():<30}",  # Align send time
-                f"{round(send_latency, 2):<15}",  # Align send latency
+                f"{session_id:<15}",  # Align session ID
+                f"{received_time.isoformat():<20}",  # Align received time
+                f"{measurement_time.isoformat():<20}",  # Align measurement time
+                f"{round(measurement_latency, 2):<10}",  # Align measurement latency
+                f"{send_time.isoformat():<20}",  # Align send time
+                f"{round(send_latency, 2):<10}",  # Align send latency
+                f"{round(throughput, 2):<15}",  # Align throughput
                 json.dumps(data)  # Data
             ])
 
@@ -131,6 +132,10 @@ async def websocket_handler(websocket, path):
             src_ip, src_port = websocket.remote_address
             session_web_id = (src_ip, src_port)
             print(f"WebSocket connection from {session_web_id}")  # Print session ID            
+            
+
+            packet_size = len(message)
+            print(f"Packet size: {packet_size} bytes")
 
             # Parse the received message
             data = json.loads(message)
@@ -141,8 +146,11 @@ async def websocket_handler(websocket, path):
                     measurement_latency = (received_time - measurement_time).total_seconds() * 1000  # Convert to milliseconds
                     send_latency = (received_time - send_time).total_seconds() * 1000  # Convert to milliseconds
 
+                    # Calculate throughput from the latency between when the message from the device was sent to when it was received by the server
+                    send_throughput = packet_size * 8 / (send_latency / 1000) # bps
+
                     # Log the bulk upload
-                    monitor.log_bulk_upload(measurement["device_id"], str(session_web_id), received_time, measurement_time, measurement_latency, send_time, send_latency, measurement)
+                    monitor.log_bulk_upload(measurement["device_id"], str(session_web_id), received_time, measurement_time, measurement_latency, send_time, send_latency, send_throughput, measurement)
                     
                     # Compare session IDs
                     if session_web_id in monitor.sessions:
