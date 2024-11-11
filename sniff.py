@@ -23,7 +23,7 @@ whitelist_ips = {"192.168.1.7"}  # Add the IPs you want to whitelist
 
 def sniff_packets():
     # Specify the bridge interface (e.g., "br0")
-    sniff(prn=print_port, count=0, store=0, interface="eth0")
+    sniff(prn=print_port, count=0, store=0)
 
 def print_port(pkt):
     global packet_counter
