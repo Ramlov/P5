@@ -2,7 +2,9 @@
 
 import threading
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
+import asyncio
+import websockets
 
 class AdaptiveDataAccess:
     """Adjusts data access strategies based on network metrics and backend requests."""
@@ -22,34 +24,112 @@ class AdaptiveDataAccess:
             if current_focus:
                 # Focus on the requested FDs
                 for fd_id in current_focus:
-                    self.process_fd(fd_id)
                     if self.stop_event.is_set():
                         break
+                    self.process_fd(fd_id)
             else:
-                # Process FDs starting from the oldest last_data_received
-                sorted_fds = sorted(
-                    self.field_devices.items(),
-                    key=lambda item: item[1].get('last_data_received') or datetime.min
-                )
-                for fd_id, fd_info in sorted_fds:
-                    self.process_fd(fd_id)
-                    if self.stop_event.is_set():
-                        break
+                # Process FDs based on twhe adaptive data access logic
+                fd_list = self.get_fds_to_fetch()
+                print(f"Field Device Sorted list: {fd_list}")
+                if fd_list:
+                    for fd_id in fd_list:
+                        if self.stop_event.is_set():
+                            break
+                        self.process_fd(fd_id)
+                else:
+                    # No FDs need fetching at this time
+                    time.sleep(10)  # Wait before checking again
             time.sleep(1)  # Adjust as needed
 
+    def get_fds_to_fetch(self):
+        """Identify FDs that are 'available' and need data fetching."""
+        available_fds = []
+        current_time = datetime.now()
+
+        for fd_id, fd_info in self.field_devices.items(): #Key is fd_id and fd_info is the value is manager.dict
+            with self.fd_locks[fd_id]:
+                # Determine overall availability
+                is_available =self.is_fd_available(fd_id, fd_info)
+
+                # Get 'last_fetched' timestamp
+                last_fetched_str = fd_info.get('last_fetched')
+                if last_fetched_str:
+                    last_fetched = datetime.fromisoformat(last_fetched_str)
+                else:
+                    last_fetched = datetime.min  # Treat as if never fetched
+
+                time_since_last_fetched = current_time - last_fetched
+
+                if is_available and time_since_last_fetched >= timedelta(minutes=15):
+                    available_fds.append((fd_id, fd_info, is_available, last_fetched))
+
+        if not available_fds:
+            return []
+
+        # Sort the list by last_fetched (oldest first) and sub-classification
+        # Sub-classification priority: 'Good' > 'Acceptable' > 'Poor'
+        classification_priority = {'Good': 1, 'Acceptable': 2, 'Poor': 3, None: 4}
+
+        available_fds.sort(key=lambda x: (x[3], classification_priority.get(x[2], 4)))
+
+        # Return the list of FD IDs in order
+        return [fd_id for fd_id, _, _, _ in available_fds]
+
     def process_fd(self, fd_id):
+        """Process a single FD by attempting to fetch data."""
         fd_info = self.field_devices.get(fd_id)
         if not fd_info:
             print(f"FD {fd_id} not found in field_devices.")
             return
 
-        # Implement data access logic here
-        # For example, initiate data retrieval from the FD
+        success = asyncio.run(self.fetch_data_from_fd(fd_id, fd_info))
         with self.fd_locks[fd_id]:
-            print(f"Adaptive Data Access processing FD {fd_id}")
-            # Update 'last_data_received' timestamp
-            fd_info['last_data_received'] = datetime.now().isoformat()
-            # Additional processing as needed
+            if success:
+                # Update 'last_fetched' timestamp
+                fd_info['last_fetched'] = datetime.now().isoformat()
+            else:
+                # Label the FD as 'Unavailable' in active metrics
+                if 'active_metrics' not in fd_info:
+                    fd_info['active_metrics'] = {}
+                fd_info['active_metrics']['status'] = 'Unavailable'
+
+    def is_fd_available(self, fd_id, fd_info):
+        # Determine if FD is available based on active and passive status
+        # For now, only active status is considered
+        # Available if status is 'Good', 'Acceptable', 'Poor', or None
+
+        # Get classification from active monitoring (and make space for passive monitoring)
+        active_status = fd_info.get('active_metrics', {}).get('status')
+        # Placeholder for passive status
+        passive_status = fd_info.get('passive_metrics', {}).get('status')
+
+        available_statuses = ['Good', 'Acceptable', 'Poor', None]
+        return active_status in available_statuses
+
+    async def fetch_data_from_fd(self, fd_id, fd_info):
+        """Fetch data from the FD using WebSockets."""
+        # This function can be used both in backend focus and general cycle
+        ip_address = fd_info['ip_address']
+        port = fd_info.get('port', 80)
+        uri = f"ws://{ip_address}:{port}"
+
+        try:
+            async with websockets.connect(uri, timeout=5) as websocket:
+                # Send a request to fetch data
+                request_message = 'FETCH_DATA'
+                await websocket.send(request_message)
+
+                # Wait for a response
+                response = await websocket.recv()
+                # Process the response as needed
+                # For now, we assume any response means success
+
+                print(f"Successfully fetched data from FD {fd_id}")
+                return True
+
+        except Exception as e:
+            print(f"Failed to fetch data from FD {fd_id} - {e}")
+            return False
 
     def focus_on_fds(self, fd_ids):
         # Start focusing on the specified FDs

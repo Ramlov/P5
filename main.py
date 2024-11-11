@@ -37,7 +37,7 @@ def load_field_devices():
         })
         fd_locks[fd_id] = threading.Lock()
 
-    print(f"{len(field_devices)}")
+    print(f"{field_devices}\n \n \n {field_devices.items}")
 
     return field_devices, fd_locks
 
