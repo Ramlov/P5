@@ -26,6 +26,7 @@ def sniff_packets():
     sniff(prn=print_port, count=0, store=0)
 
 def print_port(pkt):
+    sleep(0.5)
     global packet_counter
     if TCP in pkt and IP in pkt:
         src_ip = pkt[IP].src
