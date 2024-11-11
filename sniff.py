@@ -24,7 +24,7 @@ whitelist_ips = {"192.168.1.7"}  # Add the IPs you want to whitelist
 
 def sniff_packets():
     # Specify the bridge interface (e.g., "br0")
-    sniff(iface="br0", prn=print_port, count=0, store=0)
+    sniff(prn=print_port, count=0, store=0)
 
 def print_port(pkt):
     global packet_counter
@@ -32,17 +32,16 @@ def print_port(pkt):
         src_ip = pkt[IP].src
         dst_ip = pkt[IP].dst
         
-        # Skip packets from whitelisted IPs
-        if src_ip in whitelist_ips or dst_ip in whitelist_ips:
-            return
+        # # Skip packets from whitelisted IPs
+        # if dst_ip in whitelist_ips:
+        #     return
         
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
-        tcp_seq = pkt[TCP].seq
         
         # Only process packets with destination ports within the range 3000-4000
         if 3000 <= tcp_dport <= 4000:
-            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}, Sequence Number: {tcp_seq}, dest_ip: {dst_ip}, src_ip: {src_ip}")
+            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}, dest_ip: {dst_ip}, src_ip: {src_ip}")
             
             packet_counter += 1
             print(f"Total packets within port range 3000-4000: {packet_counter}")
@@ -67,9 +66,7 @@ def print_port(pkt):
     else:
         pass
         #print("Non-TCP packet received")
-    
-    # Add a delay of 10 milliseconds before processing the next packet
-    sleep(0.01)
+
 
 def packet_callback(delay):
     requests.post('http://localhost/api/disciplines/packet_delay', data=json.dumps({'milliseconds': delay}))

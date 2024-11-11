@@ -2,6 +2,7 @@
 import asyncio
 import websockets
 from datetime import datetime
+import re
 
 SERVER_HOST = "192.168.1.7"
 SERVER_PORT = 3455
@@ -12,6 +13,12 @@ async def handle_client(websocket, path):
         async for message in websocket:
             received_time = datetime.utcnow()
             print(f"Received from client at {received_time}: {message}")
+
+            # Extract the sequence number from the message
+            seq_match = re.search(r"Seq (\d+)", message)
+            if seq_match:
+                seq_number = seq_match.group(1)
+                print(f"Sequence Number: {seq_number}")
 
             ack_message = f"Acknowledged: {message} | Received at {received_time}"
             await websocket.send(ack_message)
