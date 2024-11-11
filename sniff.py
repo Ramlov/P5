@@ -1,7 +1,7 @@
 import requests
 import json
 import random
-from scapy.all import sniff, TCP
+from scapy.all import sniff, TCP, IP
 
 # Load the JSON data from the file
 with open('fd_profiles.json', 'r') as file:
@@ -19,14 +19,22 @@ PACKET_LOSS_SEQUENCES = {
 }
 
 packet_counter = 0
+whitelist_ips = {"192.168.1.7"}  # Add the IPs you want to whitelist
 
 def sniff_packets():
     # Specify the bridge interface (e.g., "br0")
-    sniff(iface="eth1", prn=print_port, count=0, store=0)
+    sniff(iface="br0", prn=print_port, count=0, store=0)
 
 def print_port(pkt):
     global packet_counter
-    if TCP in pkt:
+    if TCP in pkt and IP in pkt:
+        src_ip = pkt[IP].src
+        dst_ip = pkt[IP].dst
+        
+        # Skip packets from whitelisted IPs
+        if src_ip in whitelist_ips or dst_ip in whitelist_ips:
+            return
+        
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
         
@@ -35,7 +43,7 @@ def print_port(pkt):
             print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             
             packet_counter += 1
-            print(f"Total packets within port range 3000-4000: {packet_counter/2}")
+            print(f"Total packets within port range 3000-4000: {packet_counter}")
             
             device_id = get_id_from_port(tcp_dport)
             if device_id in fd_profiles:
