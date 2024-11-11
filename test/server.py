@@ -3,8 +3,8 @@ import asyncio
 import websockets
 from datetime import datetime
 
-SERVER_HOST = "192.168.1.10"
-SERVER_PORT = 3456
+SERVER_HOST = "192.168.1.7"
+SERVER_PORT = 3455
 
 async def handle_client(websocket, path):
     print("Client connected")
