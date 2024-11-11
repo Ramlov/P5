@@ -10,6 +10,10 @@ CONFIG_FILE = "/etc/network_latency_config.txt"
 latency = 50  # Default latency in ms
 
 def setup_bridge():
+    # Remove any existing bridge if necessary
+    os.system(f"ip link set {BRIDGE_NAME} down 2>/dev/null")
+    os.system(f"ip link del {BRIDGE_NAME} type bridge 2>/dev/null")
+
     # Bring up the interfaces
     os.system(f"ifconfig {INTERFACE1} up")
     os.system(f"ifconfig {INTERFACE2} up")
@@ -37,6 +41,7 @@ def set_latency(latency_ms):
     os.system(f"tc qdisc add dev {INTERFACE1} root netem delay {latency_ms}ms")
     os.system(f"tc qdisc add dev {INTERFACE2} root netem delay {latency_ms}ms")
     print(f"Latency of {latency_ms}ms applied to both {INTERFACE1} and {INTERFACE2}")
+
 
 def main():
     # Setup network bridge
