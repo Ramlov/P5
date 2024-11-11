@@ -48,8 +48,8 @@ def parse_packet(packet):
         dst_ip = socket.inet_ntoa(iph[9])
 
         # Skip packets from whitelisted IPs
-        if src_ip in whitelist_ips or dst_ip in whitelist_ips:
-            return
+        # if src_ip in whitelist_ips or dst_ip in whitelist_ips:
+            # return
 
         # TCP protocol
         if protocol == 6:
