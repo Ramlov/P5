@@ -2,7 +2,6 @@ import requests
 import json
 import random
 from scapy.all import sniff, TCP, IP
-from time import sleep
 
 # Load the JSON data from the file
 with open('fd_profiles.json', 'r') as file:
@@ -24,10 +23,9 @@ whitelist_ips = {"192.168.1.7"}  # Add the IPs you want to whitelist
 
 def sniff_packets():
     # Specify the bridge interface (e.g., "br0")
-    sniff(prn=print_port, count=0, store=0)
+    sniff(prn=print_port, count=0, store=0, interface="eth0")
 
 def print_port(pkt):
-    sleep(0.5)
     global packet_counter
     if TCP in pkt and IP in pkt:
         src_ip = pkt[IP].src
