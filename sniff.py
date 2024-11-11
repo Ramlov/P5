@@ -1,7 +1,6 @@
 import requests
 import json
-from scapy import sniff, TCP
-from scapy.all import *
+from scapy.all import sniff, TCP
 
 def sniff_packets():
     while True:
