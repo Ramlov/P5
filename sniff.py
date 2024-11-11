@@ -19,7 +19,7 @@ PACKET_LOSS_SEQUENCES = {
 }
 
 packet_counter = 0
-whitelist_ips = {"192.168.1.12"}  # Add the IPs you want to whitelist
+whitelist_ips = {"192.168.1.7"}  # Add the IPs you want to whitelist
 
 def sniff_packets():
     # Specify the bridge interface (e.g., "br0")
@@ -32,7 +32,7 @@ def print_port(pkt):
         dst_ip = pkt[IP].dst
         
         # Skip packets from whitelisted IPs
-        if src_ip in whitelist_ips:
+        if dst_ip in whitelist_ips:
             return
         
         tcp_sport = pkt[TCP].sport
