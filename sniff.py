@@ -21,7 +21,7 @@ packet_counter = 0
 
 def sniff_packets():
     while True:
-        sniff(prn=print_port, count=1)
+        sniff(prn=print_port, count=0)
 
 def print_port(pkt):
     global packet_counter
@@ -49,8 +49,10 @@ def print_port(pkt):
                 else:
                     print(f"No network profile type found for {profile_type}")
             else:
+                pass
                 print(f"No network profile found for ID {device_id}")
         else:
+            pass
             print("Packet outside port range 3000-4000, ignoring.")
     else:
         print("Non-TCP packet received")
