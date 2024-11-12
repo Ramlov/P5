@@ -51,9 +51,12 @@ def print_port(pkt):
                 print(f"No network profile type found for {profile_type}")
 
 def packet_callback(delay):
-    response = requests.post('http://localhost/api/disciplines/packet_delay', data=json.dumps({'milliseconds': delay}))
+    response = requests.post(
+        'http://192.168.1.8/api/disciplines/packet_delay',
+        data=json.dumps({'milliseconds': delay})
+    )
     print(f"Response: {response.text}")
-    
+
 def get_id_from_port(port):
     if port > 3009:
         return port % 100
