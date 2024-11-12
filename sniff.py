@@ -68,7 +68,7 @@ def print_port(pkt):
 def packet_callback(delay, packet_loss=False):
     if packet_loss:
         # Set packet loss to 100%
-        payload_loss = {'disconnect': true}
+        payload_loss = {'disconnect': True}
         response_loss = requests.post(
             'http://192.168.1.8/api/disconnect',
             json=payload_loss
