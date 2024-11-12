@@ -13,7 +13,7 @@ NETWORK_PROFILES = {
 }
 
 PACKET_LOSS_SEQUENCES = {
-    0: {"index": 0, "sequence": [0, 0, 1, 0, 0, 1, 0, 1, 0]},
+    0: {"index": 0, "sequence": [0, 0, 0, 0, 0, 1, 0, 1, 0]},
     1: {"index": 0, "sequence": [0, 1, 0, 1, 0, 1, 0, 0, 0]},
     2: {"index": 0, "sequence": [0, 1]}
 }
