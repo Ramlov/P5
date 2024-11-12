@@ -21,7 +21,7 @@ packet_counter = 0
 
 def sniff_packets():
     while True:
-        sniff(prn=print_port, count=0)
+        sniff(prn=print_port, count=1)
 
 def print_port(pkt):
     global packet_counter
