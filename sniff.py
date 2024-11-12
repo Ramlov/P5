@@ -77,7 +77,7 @@ def packet_callback(delay, packet_loss=False):
         )
         print(f"Response from packet_loss: {response_loss.text}")
 
-        time.sleep(0.5)
+        sleep(2)
         response_clear = requests.post(
             'http://192.168.1.8/api/disconnect/clear'
         )
