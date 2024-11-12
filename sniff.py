@@ -39,6 +39,21 @@ def print_port(pkt):
                 print("No Device ID Found")
                 return
 
+            # Check for packet loss
+            index = PACKET_LOSS_SEQUENCES[device_id]["index"]
+            print(f"Packet loss Sequence Index: {index}")
+            seq = PACKET_LOSS_SEQUENCES[device_id]["sequence"]
+            print(f"Current Sequence Index: {seq[index]}")
+
+            if seq[index] == 1:
+                print(f"Packet Loss!!")
+                packet_callback(1, True)
+                return
+
+            PACKET_LOSS_SEQUENCES[device_id]["index"] = PACKET_LOSS_SEQUENCES[device_id]["index"] + 1
+            
+            
+
             profile = fd_profiles[device_id]
             print(f"Network Profile for ID {device_id}: {profile}")
             profile_type = profile.get("profile")
@@ -49,13 +64,23 @@ def print_port(pkt):
                 packet_callback(delay)
             else:
                 print(f"No network profile type found for {profile_type}")
-def packet_callback(delay):
+
+def packet_callback(delay, packet_loss=False):
+    if packet_loss:
+        payload_loss = {'percentage': 100}
+        response_loss = requests.post(
+            'http://192.168.1.8/api/disciplines/packet_loss',
+            json=payload_loss
+        )
+        print(f"Response from packet_loss: {response_loss.text}")
+        return
     payload = {'milliseconds': delay}
-    response = requests.post(
+    requests.post(
         'http://192.168.1.8/api/disciplines/packet_delay',
         json=payload
     )
-    print(f"Response: {response.text}")
+
+
 
 def get_id_from_port(port):
     if port > 3009:
