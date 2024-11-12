@@ -11,6 +11,7 @@ NETWORK_PROFILES = {
     "NORMAL": {"min": 300, "max": 500},
     "GOOD": {"min": 50, "max": 300}
 }
+
 PACKET_LOSS_SEQUENCES = {
     0: {"index": 0, "sequence": [0, 0, 1, 0, 0, 1, 0, 1, 0]},
     1: {"index": 0, "sequence": [0, 1, 0, 1, 0, 1, 0, 0, 0]},
@@ -36,18 +37,18 @@ def print_port(pkt):
             packet_counter += 1
             print(f"Total packets within port range 3000-4000: {packet_counter}")
             
-            device_id = get_id_from_port(tcp_dport)
-            if device_id in fd_profiles:
-                profile = fd_profiles[device_id]
-                print(f"Network Profile for ID {device_id}: {profile}")
-                profile_type = profile.get("profile_type")
-                if profile_type in NETWORK_PROFILES:
-                    delay_range = NETWORK_PROFILES[profile_type]
-                    delay = random.randint(delay_range["min"], delay_range["max"])
-                    print(f"Chosen delay for profile {profile_type}: {delay} ms")
-                    packet_callback(delay)
-                else:
-                    print(f"No network profile type found for {profile_type}")
+            device_id = get_id_from_port(tcp_dport)            
+            # if device_id in fd_profiles
+            profile = fd_profiles[device_id]
+            print(f"Network Profile for ID {device_id}: {profile}")
+            profile_type = profile.get("profile")
+            if profile_type in NETWORK_PROFILES:
+                delay_range = NETWORK_PROFILES[profile_type]
+                delay = random.randint(delay_range["min"], delay_range["max"])
+                print(f"Chosen delay for profile {profile_type}: {delay} ms")
+                packet_callback(delay)
+                # else:
+                #     print(f"No network profile type found for {profile_type}")
             else:
                 print(f"No network profile found for ID {device_id}")
         else:
