@@ -67,12 +67,19 @@ def print_port(pkt):
 
 def packet_callback(delay, packet_loss=False):
     if packet_loss:
-        payload_loss = {'percent': 100}
+        # Set packet loss to 100%
+        payload_loss = {'disconnect': true}
         response_loss = requests.post(
-            'http://192.168.1.8/api/disciplines/packet_loss',
+            'http://192.168.1.8/api/disconnect',
             json=payload_loss
         )
         print(f"Response from packet_loss: {response_loss.text}")
+
+        time.sleep(0.5)
+        response_clear = requests.post(
+            'http://192.168.1.8/api/disconnect/clear'
+        )
+        print(f"Response from packet_loss clear: {response_clear.text}")
         return
     payload = {'milliseconds': delay}
     requests.post(
