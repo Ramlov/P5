@@ -23,7 +23,7 @@ packet_counter = 0
 whitelist_ips = {}
 
 def sniff_packets():
-    sniff(iface="br0", prn=print_port, count=0, store=0)
+    sniff(iface="br0", prn=print_port, count=1, store=0)
 
 def print_port(pkt):
     global packet_counter
