@@ -41,22 +41,27 @@ def print_port(pkt):
                 print("No Device ID Found")
                 return
 
-            # Check for packet loss
-            index = PACKET_LOSS_SEQUENCES[device_id]["index"]
-            print(f"Packet loss Sequence Index: {index}")
-            seq = PACKET_LOSS_SEQUENCES[device_id]["sequence"]
-            print(f"Current Sequence Index: {seq[index]}")
+            fd = PACKET_LOSS_SEQUENCES[device_id]
 
-            PACKET_LOSS_SEQUENCES[device_id]["index"] = PACKET_LOSS_SEQUENCES[device_id]["index"] + 1
+            index = fd["index"]
+            p = fd["sequence"]
 
-            if PACKET_LOSS_SEQUENCES[device_id]["index"] > len(seq):
-                print("Reset Sequence")
-                PACKET_LOSS_SEQUENCES[device_id]["index"] = -1
+            # check if index is at the end
+            if index >= len(p): #reset counter
+                PACKET_LOSS_SEQUENCES[device_id]["index"] = 0
+                index = 0
 
-            if seq[index] == 1:
-                print(f"Packet Loss!!")
+            # get the sequence p_i
+            p_i = p[index]
+
+            # increment index
+            PACKET_LOSS_SEQUENCES[device_id]["index"]+=1
+
+            if p_i == 1: # drop package
+                print("Packet Loss!")
                 packet_callback(1, True, src_ip, tcp_dport)
                 return
+
                 
             profile = fd_profiles[device_id]
             print(f"Network Profile for ID {device_id}: {profile}")
@@ -75,7 +80,7 @@ def packet_callback(delay, packet_loss=False, ip=None, port=None):
             {
                 "ip": str(ip),
                 "port": port,
-                "destination_ip": "127.0.0.1",
+                "destination_ip": "192.168.10.11",
                 "destination_port": 10,
                 "protocol": "tcp"
             }
