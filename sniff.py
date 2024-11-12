@@ -26,7 +26,6 @@ def sniff_packets():
         sniff(prn=print_port, count=1)
 
 def print_port(pkt):
-    global packet_counter
     if TCP in pkt:
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
@@ -52,7 +51,9 @@ def print_port(pkt):
                 return
 
             PACKET_LOSS_SEQUENCES[device_id]["index"] = PACKET_LOSS_SEQUENCES[device_id]["index"] + 1
-            
+            if index >= len(PACKET_LOSS_SEQUENCES[device_id]["sequence"]):
+                PACKET_LOSS_SEQUENCES[device_id]["index"] = 0
+                index = 0
             
 
             profile = fd_profiles[device_id]
