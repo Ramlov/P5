@@ -34,7 +34,7 @@ def print_port(pkt):
         
         # Only process packets with destination ports within the range 3000-4000
         if tcp_dport in PORT_RANGE:
-            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_sport}")
+            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
 
             device_id = get_id_from_port(tcp_dport)
             if device_id < 0:
@@ -55,13 +55,9 @@ def print_port(pkt):
 
             if seq[index] == 1:
                 print(f"Packet Loss!!")
-                packet_callback(1, True, src_ip, tcp_sport)
+                packet_callback(1, True, src_ip, tcp_dport)
                 return
-
-            
-        
-            
-
+                
             profile = fd_profiles[device_id]
             print(f"Network Profile for ID {device_id}: {profile}")
             profile_type = profile.get("profile")
