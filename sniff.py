@@ -67,7 +67,7 @@ def print_port(pkt):
 
 def packet_callback(delay, packet_loss=False):
     if packet_loss:
-        payload_loss = {'percentage': 100}
+        payload_loss = {'percent': 100}
         response_loss = requests.post(
             'http://192.168.1.8/api/disciplines/packet_loss',
             json=payload_loss
