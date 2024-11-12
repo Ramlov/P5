@@ -51,9 +51,12 @@ def print_port(pkt):
                 print(f"No network profile type found for {profile_type}")
 
 def packet_callback(delay):
+    print(type(delay))
+    print(delay)
+    delay = int(100)
     response = requests.post(
         'http://192.168.1.8/api/disciplines/packet_delay',
-        data=json.dumps({'milliseconds': delay})
+        data={'milliseconds': delay}
     )
     print(f"Response: {response.text}")
 
