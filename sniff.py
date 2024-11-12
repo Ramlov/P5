@@ -49,11 +49,11 @@ def print_port(pkt):
                 packet_callback(delay)
             else:
                 print(f"No network profile type found for {profile_type}")
-
 def packet_callback(delay):
+    payload = {'milliseconds': delay}
     response = requests.post(
-        'http://192.168.1.8/packet_delay',
-        data={'milliseconds': delay}
+        'http://192.168.1.8/api/disciplines/packet_delay',
+        json=payload
     )
     print(f"Response: {response.text}")
 
