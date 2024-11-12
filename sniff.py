@@ -1,7 +1,7 @@
 import requests
 import json
 import random
-from scapy.all import sniff, TCP
+from scapy.all import sniff, TCP, IP
 from time import sleep
 
 with open('fd_profiles.json', 'r') as file:
@@ -14,9 +14,9 @@ NETWORK_PROFILES = {
 }
 
 PACKET_LOSS_SEQUENCES = {
-    0: {"index": 0, "sequence": [0, 0, 0, 0, 0, 1, 0, 1, 0]},
-    1: {"index": 0, "sequence": [0, 1, 0, 1, 0, 1, 0, 0, 0]},
-    2: {"index": 0, "sequence": [0, 1]}
+    0: {"index": -1, "sequence": [0, 0, 0, 0, 0, 1, 0, 1, 0]},
+    1: {"index": -1, "sequence": [0, 1, 0, 1, 0, 1, 0, 0, 0]},
+    2: {"index": -1, "sequence": [0, 1]}
 }
 
 PORT_RANGE = range(3000, 3029)
@@ -26,7 +26,9 @@ def sniff_packets():
         sniff(prn=print_port, count=1)
 
 def print_port(pkt):
-    if TCP in pkt:
+    if IP in pkt and TCP in pkt:
+        src_ip = pkt[IP].src
+        dst_ip = pkt[IP].dst
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
         
@@ -45,15 +47,19 @@ def print_port(pkt):
             seq = PACKET_LOSS_SEQUENCES[device_id]["sequence"]
             print(f"Current Sequence Index: {seq[index]}")
 
+            PACKET_LOSS_SEQUENCES[device_id]["index"] = PACKET_LOSS_SEQUENCES[device_id]["index"] + 1
+
+            if PACKET_LOSS_SEQUENCES[device_id]["index"] > len(seq):
+                print("Reset Sequence")
+                PACKET_LOSS_SEQUENCES[device_id]["index"] = -1
+
             if seq[index] == 1:
                 print(f"Packet Loss!!")
-                packet_callback(1, True)
+                packet_callback(1, True, src_ip, tcp_sport)
                 return
 
-            PACKET_LOSS_SEQUENCES[device_id]["index"] = PACKET_LOSS_SEQUENCES[device_id]["index"] + 1
-            if index >= len(PACKET_LOSS_SEQUENCES[device_id]["sequence"]):
-                PACKET_LOSS_SEQUENCES[device_id]["index"] = 0
-                index = 0
+            
+        
             
 
             profile = fd_profiles[device_id]
@@ -67,19 +73,26 @@ def print_port(pkt):
             else:
                 print(f"No network profile type found for {profile_type}")
 
-def packet_callback(delay, packet_loss=False):
+def packet_callback(delay, packet_loss=False, ip=None, port=None):
     if packet_loss:
-        # Set packet loss to 100%
-        payload_loss = {'disconnect': True}
+        payload_loss = [
+                        {
+                            "ip": str(ip),
+                            "port": port,
+                            "destination_ip": "127.0.0.1",
+                            "destination_port": 10,
+                            "protocol": "tcp"
+                        }
+                        ]
         response_loss = requests.post(
-            'http://192.168.1.8/api/disconnect',
+            'http://192.168.1.8/api/ipredirect',
             json=payload_loss
         )
         print(f"Response from packet_loss: {response_loss.text}")
 
         sleep(2)
         response_clear = requests.post(
-            'http://192.168.1.8/api/disconnect/clear'
+            'http://192.168.1.8/api/ipredirect/clear'
         )
         print(f"Response from packet_loss clear: {response_clear.text}")
         return
