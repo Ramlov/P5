@@ -5,7 +5,7 @@ import re
 from datetime import datetime
 
 SERVER_HOST = '192.168.1.4'
-SERVER_PORT = 3456
+SERVER_PORT = 3455
 
 def handle_client(client_socket, client_address):
     print(f"Client connected from {client_address}")
