@@ -45,7 +45,7 @@ class FieldDevice:
                         data = self.get_past_data(20)
                         self.last_collected_data = time.time()
                     case 'bulk_upload':
-                        data = self.bulk_upload()  # This may need further adjustments
+                        data = await self.bulk_upload()  # This may need further adjustments
                     case 'all_data':
                         data = self.get_all_data()
 
@@ -75,7 +75,7 @@ class FieldDevice:
             self.data["status"] = "online"
 
             if time.time() - self.last_collected_data >= 360: # 6 minutes
-                self.bulk_upload()
+                await self.bulk_upload()
                 self.last_collected_data = time.time()
             
             # Write updated data to the file
@@ -123,6 +123,7 @@ class FieldDevice:
                     if timestamp >= cutoff_time:
                         bulk_data.append(data)
         print(f"Bulk uploading all data for device {self.device_id} from the last 6 minutes...")
+        return json.dumps(bulk_data)
         
         uri = "ws://localhost:3000" # IP to headend
         try:

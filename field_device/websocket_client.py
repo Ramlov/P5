@@ -25,6 +25,11 @@ async def connect_to_field_device():
             print("Received all data:")
             print(all_data)
 
+            await websocket.send("bulk_upload")
+            bulk_data = await websocket.recv()
+            print("Received bulk data:")
+            print(bulk_data)
+
 
     except websockets.exceptions.ConnectionClosedError:
         print("Connection closed unexpectedly.")
