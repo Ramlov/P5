@@ -44,6 +44,10 @@ class FieldDevice:
                     case 'past_data':
                         data = self.get_past_data(20)
                         self.last_collected_data = time.time()
+                    case 'bulk_upload':
+                        data = self.bulk_upload()  # This may need further adjustments
+                    case 'all_data':
+                        data = self.get_all_data()
 
                 await websocket.send(f"{data}")
         except websockets.exceptions.ConnectionClosedError:
@@ -97,6 +101,16 @@ class FieldDevice:
                     if current_time - timestamp <= seconds:
                         past_data.append(data)
         return past_data
+
+    def get_all_data(self):
+        all_data = []
+        with open("./field_device/field_devices_data.json", "r") as file:
+            for line in file:
+                data = json.loads(line)
+                if data["device_id"] == self.device_id:
+                    all_data.append(data)
+        return all_data
+
 
     async def bulk_upload(self):
         cutoff_time = datetime.now() - timedelta(minutes=6)

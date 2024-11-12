@@ -20,6 +20,12 @@ async def connect_to_field_device():
             print("Received past data:")
             print(past_data)
 
+            await websocket.send("all_data")
+            all_data = await websocket.recv()
+            print("Received all data:")
+            print(all_data)
+
+
     except websockets.exceptions.ConnectionClosedError:
         print("Connection closed unexpectedly.")
     except Exception as e:
