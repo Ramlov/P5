@@ -46,14 +46,14 @@ def backend_listener(adaptive_data_access):
         async for message in websocket:
             message = message.strip()
             if message.lower() == 'stop':
-                print("Received 'stop' command from backend.")
+                print("Received 'stop' command from backend.\n")
                 adaptive_data_access.stop_backend_focus()
             else:
                 # Process the backend request
                 # Assuming the message is a comma-separated list of FD IDs, e.g., "1,2,3"
                 requested_fd_ids = message.split(',')
                 requested_fd_ids = [fd_id.strip() for fd_id in requested_fd_ids]
-                print(f"Received backend request to focus on FDs: {requested_fd_ids}")
+                print(f"Received backend request to focus on FDs: {requested_fd_ids}\n")
                 adaptive_data_access.focus_on_fds(requested_fd_ids)
 
     async def server():
@@ -84,7 +84,7 @@ def main():
     backend_listener_thread.start()
 
     # Initialize and start Active Monitoring
-    num_active_threads = 5  # Adjust as needed
+    num_active_threads = 10  # Adjust as needed
     active_monitor = ActiveMonitoring(field_devices, fd_locks, num_active_threads)
     active_monitor.start()
 

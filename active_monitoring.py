@@ -43,7 +43,7 @@ class ActiveMonitoring:
             t = threading.Thread(target=self.monitor_fds_subset, args=(fd_ids_subset,), daemon=True)
             t.start()
             self.active_threads.append(t)
-            print(f"Thread {t} is monitoring field device {start} - {end}")
+            print(f"Thread {t} is monitoring field device {start} - {end}\n")
 
     def monitor_fds_subset(self, fd_ids_subset):
         while not self.stop_event.is_set():
@@ -124,7 +124,7 @@ class ActiveMonitoring:
                 throughput = None
             return throughput
         except Exception as e:
-            print(f"Throughput test failed for FD {ip_address}:{port} - {e}")
+            #print(f"Throughput test failed for FD {ip_address}:{port} - {e}")
             return None
 
     def classify_connection(self, latency, packet_loss, throughput):
@@ -156,7 +156,7 @@ class ActiveMonitoring:
 
         # Logging for verification
         ip_address = fd_info['ip_address']
-        print(f"[{timestamp}] FD: {fd_id} (IP: {ip_address}) | Latency: {latency if latency is not None else 'N/A'} ms | Packet Loss: {packet_loss}% | Throughput: {throughput if throughput is not None else 'N/A'} kbps | Status: {status}")
+        print(f"[{timestamp}] FD: {fd_id} (IP: {ip_address}) | Latency: {latency if latency is not None else 'N/A'} ms | Packet Loss: {packet_loss}% | Throughput: {throughput if throughput is not None else 'N/A'} kbps | Status: {status}\n")
 
     def stop(self):
         """Stops the active monitoring threads."""
