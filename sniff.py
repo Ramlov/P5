@@ -34,7 +34,7 @@ def print_port(pkt):
         
         # Only process packets with destination ports within the range 3000-4000
         if tcp_dport in PORT_RANGE:
-            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
+            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_sport}")
 
             device_id = get_id_from_port(tcp_dport)
             if device_id < 0:
