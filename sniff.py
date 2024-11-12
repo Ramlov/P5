@@ -1,10 +1,8 @@
 import requests
 import json
 import random
-from scapy.all import sniff, TCP, IP
-from time import sleep
+from scapy.all import sniff, TCP
 
-# Load the JSON data from the file
 with open('fd_profiles.json', 'r') as file:
     fd_profiles = json.load(file)
 
@@ -20,28 +18,20 @@ PACKET_LOSS_SEQUENCES = {
 }
 
 packet_counter = 0
-whitelist_ips = {}
 
 def sniff_packets():
-    sniff(iface="br0", prn=print_port, count=1, store=1)
+    while True:
+        sniff(prn=print_port, count=1)
 
 def print_port(pkt):
     global packet_counter
-    if TCP in pkt and IP in pkt:
-        src_ip = pkt[IP].src
-        dst_ip = pkt[IP].dst
-        
-        # Skip packets from whitelisted IPs
-        if src_ip in whitelist_ips or dst_ip in whitelist_ips:
-            return
-        
+    if TCP in pkt:
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
-        tcp_seq = pkt[TCP].seq
         
         # Only process packets with destination ports within the range 3000-4000
         if 3000 <= tcp_dport <= 4000:
-            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}, Sequence Number: {tcp_seq}, dest_ip: {dst_ip}, src_ip: {src_ip}")
+            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             
             packet_counter += 1
             print(f"Total packets within port range 3000-4000: {packet_counter}")
@@ -61,14 +51,9 @@ def print_port(pkt):
             else:
                 print(f"No network profile found for ID {device_id}")
         else:
-            pass
-            #print("Packet outside port range 3000-4000, ignoring.")
+            print("Packet outside port range 3000-4000, ignoring.")
     else:
-        pass
-        #print("Non-TCP packet received")
-    
-    # Add a delay of 10 milliseconds before processing the next packet
-    sleep(0.01)
+        print("Non-TCP packet received")
 
 def packet_callback(delay):
     requests.post('http://localhost/api/disciplines/packet_delay', data=json.dumps({'milliseconds': delay}))
