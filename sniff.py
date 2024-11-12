@@ -18,7 +18,7 @@ PACKET_LOSS_SEQUENCES = {
     2: {"index": 0, "sequence": [0, 1]}
 }
 
-packet_counter = 0
+PORT_RANGE = range(3000, 3029)
 
 def sniff_packets():
     while True:
@@ -31,14 +31,14 @@ def print_port(pkt):
         tcp_dport = pkt[TCP].dport
         
         # Only process packets with destination ports within the range 3000-4000
-        if 3000 <= tcp_dport <= 4000:
+        if tcp_dport in PORT_RANGE:
             print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
-            
-            packet_counter += 1
-            print(f"Total packets within port range 3000-4000: {packet_counter}")
-            
-            device_id = get_id_from_port(tcp_dport)            
-            # if device_id in fd_profiles
+
+            device_id = get_id_from_port(tcp_dport)
+            if device_id < 0:
+                print("No Device ID Found")
+                return
+
             profile = fd_profiles[device_id]
             print(f"Network Profile for ID {device_id}: {profile}")
             profile_type = profile.get("profile")
@@ -47,20 +47,13 @@ def print_port(pkt):
                 delay = random.randint(delay_range["min"], delay_range["max"])
                 print(f"Chosen delay for profile {profile_type}: {delay} ms")
                 packet_callback(delay)
-                # else:
-                #     print(f"No network profile type found for {profile_type}")
             else:
-                print(f"No network profile found for ID {device_id}")
-        else:
-            pass
-            #print("Packet outside port range 3000-4000, ignoring.")
-    else:
-        pass
-        #print("Non-TCP packet received")
+                print(f"No network profile type found for {profile_type}")
 
 def packet_callback(delay):
-    requests.post('http://localhost/api/disciplines/packet_delay', data=json.dumps({'milliseconds': delay}))
-
+    response = requests.post('http://localhost/api/disciplines/packet_delay', data=json.dumps({'milliseconds': delay}))
+    print(f"Response: {response.text}")
+    
 def get_id_from_port(port):
     if port > 3009:
         return port % 100
