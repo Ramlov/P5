@@ -59,7 +59,7 @@ def print_port(pkt):
 
             if p_i == 1: # drop package
                 print("Packet Loss!")
-                packet_callback(1, True, src_ip, tcp_dport)
+                packet_callback(1, True, dst_ip, tcp_dport)
                 return
 
                 
