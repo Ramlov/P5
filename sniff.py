@@ -2,6 +2,7 @@ import requests
 import json
 import random
 from scapy.all import sniff, TCP
+from time import sleep
 
 with open('fd_profiles.json', 'r') as file:
     fd_profiles = json.load(file)
