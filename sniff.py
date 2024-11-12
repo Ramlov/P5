@@ -56,7 +56,7 @@ def print_port(pkt):
 
             # increment index
             PACKET_LOSS_SEQUENCES[device_id]["index"]+=1
-
+            print(PACKET_LOSS_SEQUENCES[device_id]["index"])
             if p_i == 1: # drop package
                 print("Packet Loss!")
                 packet_callback(1, True, dst_ip, tcp_dport)
