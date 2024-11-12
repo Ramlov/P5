@@ -81,7 +81,7 @@ def packet_callback(delay, packet_loss=False, ip=None, port=None):
                 "ip": str(ip),
                 "port": port,
                 "destination_ip": "192.168.10.11",
-                "destination_port": 10,
+                "destination_port": 80,
                 "protocol": "tcp"
             }
         ]
