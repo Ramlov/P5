@@ -76,25 +76,35 @@ def print_port(pkt):
 def packet_callback(delay, packet_loss=False, ip=None, port=None):
     if packet_loss:
         payload_loss = [
-                        {
-                            "ip": str(ip),
-                            "port": port,
-                            "destination_ip": "127.0.0.1",
-                            "destination_port": 10,
-                            "protocol": "tcp"
-                        }
-                        ]
+            {
+                "ip": str(ip),
+                "port": port,
+                "destination_ip": "127.0.0.1",
+                "destination_port": 10,
+                "protocol": "tcp"
+            }
+        ]
         response_loss = requests.post(
             'http://192.168.1.8/api/ipredirect',
             json=payload_loss
         )
-        print(f"Response from packet_loss: {response_loss.text}")
+        print(f"Response from redirect: {response_loss.text}")
 
         sleep(2)
+        payload_remove_loss = [
+            {
+                "remove_ip_redirect": "1",
+                "ip": str(ip),
+                "port": port,
+                "destination_ip": "127.0.0.1",
+                "destination_port": 10,
+                "protocol": "tcp"
+            }
+        ]
         response_clear = requests.post(
-            'http://192.168.1.8/api/ipredirect/clear'
+            'http://192.168.1.8/api/ipredirect', json=payload_remove_loss
         )
-        print(f"Response from packet_loss clear: {response_clear.text}")
+        print(f"Response from clear: {response_clear.text}")
         return
     payload = {'milliseconds': delay}
     requests.post(
