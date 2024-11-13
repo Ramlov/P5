@@ -7,32 +7,48 @@ import time
 import datetime
 import csv
 import sqlite3
+from queue import Queue
 
 class PassiveMonitoring:
-    def __init__(self, interface='lo', target_ip="127.0.0.1", target_port=8088, bulk_log_file="bulk_upload_log_for_websocket.csv", session_log_file="session_log_for_websocket.csv"):
+    def __init__(self, interface='lo', target_ip="127.0.0.1", target_port=8088, db_file="monitoring_data.db"):
         self.interface = interface
         self.target_ip = target_ip
         self.target_port = target_port
-        self.process_packet_count = 0
         self.sessions = {}  # Track data per session (source IP and port)
-        self.bulk_log_file = bulk_log_file
-        self.session_log_file = session_log_file
-        self.prepare_log_files()
+        self.db_file = db_file
+        self.queue = Queue()  # Queue to pass data between threads
+        self.prepare_database()
 
-    def prepare_log_files(self):
-        """Initialize the CSV files with headers if they don’t already exist."""
-        with open(self.bulk_log_file, mode='a', newline='') as file:
-            writer = csv.writer(file)
-            if file.tell() == 0:
-                writer.writerow([
-                    "Device ID", "Session ID", "Received Time", "Measurement Time", "Measurement Latency (ms)", "Send Time", "Send Latency (ms)", "Send_Throughput", "Data"
-                ])
-        with open(self.session_log_file, mode='a', newline='') as file:
-            writer = csv.writer(file)
-            if file.tell() == 0:
-                writer.writerow([
-                    "Session ID", "Session Start", "Session End", "RTT (ms)", "Total Data (bytes)", "Throughput (bps)"
-                ])
+    def prepare_database(self):
+        """Initialize the SQLite database with tables if they don’t already exist."""
+        self.conn = sqlite3.connect(self.db_file)
+        self.cursor = self.conn.cursor()
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS bulk_upload_log (
+                device_id TEXT,
+                session_id TEXT,
+                received_time TEXT,
+                packet_size INTEGER,
+                measurement_time TEXT,
+                measurement_latency REAL,
+                send_time TEXT,
+                send_latency REAL,
+                send_throughput REAL,
+                classification TEXT,
+                data TEXT
+            )
+        ''')
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS session_log (
+                session_id TEXT,
+                session_start TEXT,
+                session_end TEXT,
+                rtt REAL,
+                total_data INTEGER,
+                throughput REAL
+            )
+        ''')
+        self.conn.commit()
 
     def start_monitoring(self):
         self.capture_packets()
@@ -48,13 +64,12 @@ class PassiveMonitoring:
 
     def process_packet_tcp(self, packet):
         tcp_flags = packet[TCP].flags
-        self.process_packet_count += 1
-        print(f"Count: {self.process_packet_count}, TCP Flags: {tcp_flags}")
+
         # Generate a unique session ID using source IP and port
         src_ip = packet[IP].src
         src_port = packet[TCP].sport
         session_id = (src_ip, src_port)
-        print(f"Processing packet with session ID: {session_id}")  # Print session ID
+        #print(f"Processing packet with session ID: {session_id}")  # Print session ID
 
         # Fetch or initialize session data for this TCP session
         session = self.sessions.setdefault(session_id, {
@@ -78,14 +93,14 @@ class PassiveMonitoring:
             throughput = self.calculate_throughput(session_rtt, session["data_transferred"])
 
             # Log the session details with associated device_id
-            self.log_session(
+            self.queue.put((
                 session_id,
                 session["session_start_time"],
                 session["session_end_time"],
                 session_rtt,
                 session["data_transferred"],
                 throughput
-            )
+            ))
 
             # Reset session for next round
             del self.sessions[session_id]
@@ -95,32 +110,25 @@ class PassiveMonitoring:
         latency_seconds = latency / 1000  # Convert ms to seconds
         return data_size_bits / latency_seconds  # Throughput in bps
 
-    def log_session(self, session_id, start_time, end_time, rtt, total_data, throughput):
-        """Log session details to the session CSV file."""
-        with open(self.session_log_file, mode='a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([
-                session_id,
-                time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(start_time)),
-                time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(end_time)),
-                round(rtt, 2), total_data, round(throughput, 2)
-            ])
-
-    def log_bulk_upload(self, device_id, session_id, received_time, measurement_time, measurement_latency, send_time, send_latency, throughput, data):
-        """Log bulk upload details to the bulk upload CSV file."""
-        with open(self.bulk_log_file, mode='a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([
-                f"{device_id:<5}",  # Align device ID
-                f"{session_id:<15}",  # Align session ID
-                f"{received_time.isoformat():<20}",  # Align received time
-                f"{measurement_time.isoformat():<20}",  # Align measurement time
-                f"{round(measurement_latency, 2):<10}",  # Align measurement latency
-                f"{send_time.isoformat():<20}",  # Align send time
-                f"{round(send_latency, 2):<10}",  # Align send latency
-                f"{round(throughput, 2):<15}",  # Align throughput
-                json.dumps(data)  # Data
-            ])
+    def log_bulk_upload(self, device_id, session_id, received_time, packet_size, measurement_time, measurement_latency, send_time, send_latency, throughput, classification, data):
+        """Log bulk upload details to the bulk upload SQLite database."""
+        self.cursor.execute('''
+            INSERT INTO bulk_upload_log (device_id, session_id, received_time, packet_size, measurement_time, measurement_latency, send_time, send_latency, send_throughput, classification, data)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            device_id,
+            str(session_id),
+            received_time.isoformat(),
+            packet_size,
+            measurement_time.isoformat(),
+            round(measurement_latency, 2),
+            send_time.isoformat(),
+            round(send_latency, 2),
+            round(throughput, 2),
+            classification,
+            json.dumps(data)
+        ))
+        self.conn.commit()
 
     def classify_connection(self, latency, throughput):
         """Classify the connection based on latency, and throughput."""
@@ -136,8 +144,34 @@ class PassiveMonitoring:
         else:
             return 'Poor'  # Default to 'Poor' if none of the above conditions match
 
+    def process_queue(self):
+        """Process the queue and log sessions to the database."""
+        conn = sqlite3.connect(self.db_file)
+        cursor = conn.cursor()
+        while True:
+            session_data = self.queue.get()
+            if session_data is None:
+                break
+            self.log_session_with_connection(cursor, *session_data)
+        conn.close()
+
+    def log_session_with_connection(self, cursor, session_id, start_time, end_time, rtt, total_data, throughput):
+        """Log session details to the session SQLite database using a specific cursor."""
+        cursor.execute('''
+            INSERT INTO session_log (session_id, session_start, session_end, rtt, total_data, throughput)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (
+            str(session_id),
+            time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(start_time)),
+            time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(end_time)),
+            round(rtt, 2),
+            total_data,
+            round(throughput, 2)
+        ))
+        cursor.connection.commit()
+
 # WebSocket server function
-async def websocket_handler_a(websocket):
+async def websocket_handler(websocket):
     print("WebSocket connection established.")
     try:
 
@@ -167,23 +201,18 @@ async def websocket_handler_a(websocket):
                     send_throughput = packet_size * 8 / (send_latency / 1000) # bps
 
                     # classify the connection based on latency and throughput
-                    
+                    connection_classification = monitor.classify_connection(send_latency, send_throughput)
 
                     # Log the bulk upload
-                    monitor.log_bulk_upload(measurement["device_id"], str(session_web_id), received_time, measurement_time, measurement_latency, send_time, send_latency, send_throughput, measurement)
-                    
-                    # Compare session IDs
-                    if session_web_id in monitor.sessions:
-                        print(f"Session ID {session_web_id} found in sessions")
-                    else:
-                        print(f"Session ID {session_web_id} not found in sessions")
+                    monitor.log_bulk_upload(measurement["device_id"], str(session_web_id), received_time, packet_size, measurement_time, measurement_latency, send_time, send_latency, send_throughput, connection_classification, measurement)
+
 
             await websocket.send("Message received by the server.")
     except websockets.ConnectionClosed:
         print("WebSocket connection closed.")
 
 async def start_websocket_server():
-    server = await websockets.serve(websocket_handler_a, "127.0.0.1", 8088)
+    server = await websockets.serve(websocket_handler, "127.0.0.1", 8088)
     print("WebSocket server running on ws://127.0.0.1:8088")
     await server.wait_closed()
 
@@ -194,7 +223,14 @@ def run_monitoring_with_websocket():
     monitoring_thread = threading.Thread(target=monitor.start_monitoring)
     monitoring_thread.start()
 
+    queue_thread = threading.Thread(target=monitor.process_queue)
+    queue_thread.start()
+
     asyncio.run(start_websocket_server())
+
+    # Stop the queue processing thread when the server stops
+    monitor.queue.put(None)
+    queue_thread.join()
 
 if __name__ == "__main__":
     run_monitoring_with_websocket()
