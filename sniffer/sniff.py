@@ -15,9 +15,13 @@ NETWORK_PROFILES = {
 
 PORT_RANGE = range(3000, 3029)
 
+def write_to_file(log):
+    with open("log.txt", "a") as file:
+        file.write(log + "\n")
+
 def sniff_packets():
     while True:
-        yield from sniff(lambda: (yield from print_port), count=1)
+        yield from sniff(prn=lambda: (yield from print_port), count=1)
 
 def print_port(pkt):
     if IP in pkt and TCP in pkt:
