@@ -5,9 +5,6 @@ import threading
 import json
 import time
 import datetime
-import csv
-import sqlite3
-from queue import Queue
 
 class PassiveMonitoring:
     def __init__(self, interface='lo', target_ip="127.0.0.1", target_port=8088):
@@ -16,7 +13,6 @@ class PassiveMonitoring:
         self.target_port = target_port
         self.sessions = {}  # Track data per session (source IP and port)
         self.passive_metrics = {}  # Store session data in a dictionary
-        self.queue = Queue()  # Queue to pass data between threads
 
     def start_monitoring(self):
         self.capture_packets()
@@ -61,14 +57,14 @@ class PassiveMonitoring:
             throughput = self.calculate_throughput(session_rtt, session["data_transferred"])
 
             # Log the session details with associated device_id
-            self.queue.put((
+            self.analyze_and_store_results(
                 session_id,
                 session["session_start_time"],
                 session["session_end_time"],
                 session_rtt,
                 session["data_transferred"],
                 throughput
-            ))
+            )
 
             # Reset session for next round
             del self.sessions[session_id]
@@ -90,13 +86,6 @@ class PassiveMonitoring:
         self.passive_metrics[session_id] = session_info
 
         print(f"[{timestamp}] Session: {session_id} | Start: {start_time} | End: {end_time} | RTT: {rtt} ms | Data: {total_data} bytes | Throughput: {throughput} bps")
-
-    def process_queue(self):
-        while True:
-            session_data = self.queue.get()
-            if session_data is None:
-                break
-            self.analyze_and_store_results(*session_data)
 
     def classify_connection(self, latency, throughput):
         """Classify the connection based on latency, and throughput."""
@@ -170,14 +159,7 @@ def run_monitoring_with_websocket():
     monitoring_thread = threading.Thread(target=monitor.start_monitoring)
     monitoring_thread.start()
 
-    queue_thread = threading.Thread(target=monitor.process_queue)
-    queue_thread.start()
-
     asyncio.run(start_websocket_server())
-
-    # Stop the queue processing thread when the server stops
-    monitor.queue.put(None)
-    queue_thread.join()
 
 if __name__ == "__main__":
     run_monitoring_with_websocket()
