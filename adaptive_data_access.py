@@ -15,6 +15,7 @@ class AdaptiveDataAccess:
         self.focused_fd_ids = None  # None means no specific focus
         self.stop_event = threading.Event()
         self.lock = threading.Lock()  # Lock to protect access to focused_fd_ids
+        self.ada_wait_time = 5 #Time to wait in seconds until a fd has generated a new data point
 
     def run(self):
         while not self.stop_event.is_set():
@@ -60,9 +61,9 @@ class AdaptiveDataAccess:
                     last_fetched = datetime.min  # Treat as if never fetched
 
                 time_since_last_fetched = current_time - last_fetched
-                print(f"Time Since Field Device {fd_id} fetch: {time_since_last_fetched}\n")
+                #print(f"Time Since Field Device {fd_id} fetch: {time_since_last_fetched}\n")
 
-                if is_available and time_since_last_fetched >= timedelta(minutes=15):
+                if is_available and time_since_last_fetched >= timedelta(seconds=self.ada_wait_time):
                     available_fds.append((fd_id, fd_info, is_available, last_fetched))
 
         if not available_fds:
@@ -115,7 +116,7 @@ class AdaptiveDataAccess:
         # Placeholder for passive status
         passive_status = fd_info.get('passive_metrics', {}).get('status')
 
-        available_statuses = ['Good', 'Acceptable', 'Poor', None]
+        available_statuses = ['Good', 'Acceptable', 'Poor'] #Tilføj none til listen hvis ADA skal køre uden nm ranking
         return active_status in available_statuses
 
     async def fetch_data_from_fd(self, fd_id, fd_info):

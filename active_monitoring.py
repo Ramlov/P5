@@ -17,6 +17,7 @@ class ActiveMonitoring:
         self.active_threads = []
         self.stop_event = threading.Event()
         self.field_device_ids = list(self.field_devices.keys())
+        self.time_monitoring_cycle = 10 #Time in seconds between cycles
 
     def start(self):
         # Calculate the number of field devices per thread
@@ -31,11 +32,11 @@ class ActiveMonitoring:
         for i in range(self.num_threads):
             if i == self.num_threads - 1:
                 # Last thread gets the rest
-                end_index = start_index + (fd_range_general - 1) + fd_range_rest
+                end_index = start_index + fd_range_general + fd_range_rest
             else:
-                end_index = start_index + (fd_range_general - 1)
+                end_index = start_index + fd_range_general
             fd_ranges.append((start_index, end_index))
-            start_index = (end_index + 1)
+            start_index = end_index  # Update start_index without adding 1
 
         # Start threads with their assigned FDs
         for i, (start, end) in enumerate(fd_ranges):
@@ -43,18 +44,21 @@ class ActiveMonitoring:
             t = threading.Thread(target=self.monitor_fds_subset, args=(fd_ids_subset,), daemon=True)
             t.start()
             self.active_threads.append(t)
-            print(f"Thread {t} is monitoring field device {start} - {end}\n")
+            print(f"Thread {i+1} is monitoring field devices {start} to {end - 1}\n")
+
 
     def monitor_fds_subset(self, fd_ids_subset):
+        print(f"Monitoring subset for {fd_ids_subset}")
         while not self.stop_event.is_set():
             for fd_id in fd_ids_subset:
                 self.active_monitoring_cycle(fd_id)
                 # Optionally sleep between FDs
                 time.sleep(1)
             # Sleep before starting the next monitoring cycle
-            time.sleep(1)
+            time.sleep(self.time_monitoring_cycle)
 
     def active_monitoring_cycle(self, fd_id):
+        #print(f"Started Monitoring on Field Device {fd_id}\n")
         fd_info = self.field_devices.get(fd_id)
         if not fd_info:
             print(f"FD {fd_id} not found in field_devices.")
@@ -85,10 +89,13 @@ class ActiveMonitoring:
         successful_pings = 0
 
         for _ in range(count):
-            latency = ping(ip_address, timeout=timeout, unit='ms')
-            if latency is not None:
-                latencies.append(latency)  # Latency is already in milliseconds
-                successful_pings += 1
+            try:
+                latency = ping(ip_address, timeout=timeout, unit='ms')
+                if latency is not None:
+                    latencies.append(latency)  # Latency is already in milliseconds
+                    successful_pings += 1
+            except Exception as e:
+                print(f"Ping to {ip_address} failed: {e}")
 
         if successful_pings > 0:
             avg_latency = sum(latencies) / successful_pings
@@ -98,6 +105,7 @@ class ActiveMonitoring:
             packet_loss = 100.0
 
         return avg_latency, packet_loss
+
 
     async def throughput_test(self, ip_address, port=80, data_size=1024 * 100):
         """Estimate throughput by sending and receiving data over WebSocket."""
@@ -132,14 +140,14 @@ class ActiveMonitoring:
         if latency is None or packet_loss == 100.0:
             return 'Unavailable'
 
-        if latency < 200 and packet_loss < 1 and throughput is not None and throughput >= 500:
+        if latency < 200 and packet_loss < 1 and throughput >= 500:
             return 'Good'
-        elif 200 <= latency <= 500 and 1 <= packet_loss <= 5 and throughput is not None and throughput >= 100:
+        elif 200 <= latency <= 500 and 1 <= packet_loss <= 5 and throughput >= 100:
             return 'Acceptable'
-        elif latency > 500 or packet_loss > 5 or throughput is None or throughput < 100:
+        elif (latency > 500 or packet_loss > 5) and throughput > 0:
             return 'Poor'
         else:
-            return 'Poor'  # Default to 'Poor' if none of the above conditions match
+            return 'Unavailable'  # Default to 'Poor' if none of the above conditions match
 
     def analyze_and_store_results(self, fd_info, fd_id, latency, packet_loss, throughput, status):
         """Store results in the fd_info."""
