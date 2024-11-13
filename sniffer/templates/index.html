@@ -1,32 +1,26 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Live Output</title>
+    <title>Log Viewer</title>
     <style>
-        #output {
-            font-family: monospace;
-            white-space: pre;
-            background-color: #f0f0f0;
-            padding: 10px;
-            height: 300px;
-            overflow-y: auto;
-            border: 1px solid #ccc;
+        pre {
+            white-space: pre-wrap;       /* CSS 3 */
+            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
         }
     </style>
 </head>
 <body>
-    <h1>Live Output</h1>
-    <div id="output">Waiting for data...</div>
-
+    <h1>Log Viewer</h1>
+    <pre id="log"></pre>
     <script>
-        const outputDiv = document.getElementById('output');
-
+        const logElement = document.getElementById('log');
         const eventSource = new EventSource('/stream');
         eventSource.onmessage = function(event) {
-            outputDiv.innerText += event.data + "\n";
-            outputDiv.scrollTop = outputDiv.scrollHeight;  // Auto-scroll to the bottom
+            logElement.textContent = event.data;
         };
     </script>
 </body>
