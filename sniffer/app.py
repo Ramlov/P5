@@ -32,4 +32,4 @@ def stream_packets():
     return Response(generate_log(), content_type='text/plain')
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True)
+    app.run(debug=True, threaded=True, port=5002, host='0.0.0.0')
