@@ -21,7 +21,7 @@ def write_to_file(log):
 
 def sniff_packets():
     while True:
-        yield from sniff(prn=lambda print_port: (yield from print_port), count=1)
+        sniff(prn=print_port, count=1)
 
 def print_port(pkt):
     if IP in pkt and TCP in pkt:
@@ -32,25 +32,25 @@ def print_port(pkt):
         
         # Only process packets with destination ports within the range 3000-4000
         if tcp_dport in PORT_RANGE:
-            yield(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
+            write_to_file(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
 
             device_id = get_id_from_port(tcp_dport)
             if device_id < 0:
-                yield("No Device ID Found")
+                write_to_file("No Device ID Found")
                 return
                 
             profile = fd_profiles[device_id]
-            yield(f"Network Profile for ID {device_id}: {profile}")
+            write_to_file(f"Network Profile for ID {device_id}: {profile}")
             profile_type = profile.get("profile")
             if profile_type in NETWORK_PROFILES:
                 packet_loss = {"GOOD": 2, "NORMAL": 5, "SLOW": 10}.get(profile_type, 0)
-                yield(f"Packet loss for profile {profile_type}: {packet_loss}%")
+                write_to_file(f"Packet loss for profile {profile_type}: {packet_loss}%")
                 delay_range = NETWORK_PROFILES[profile_type]
                 delay = random.randint(delay_range["min"], delay_range["max"])
-                yield(f"Chosen delay for profile {profile_type}: {delay} ms")
-                yield from packet_callback(delay, packet_loss)
+                write_to_file(f"Chosen delay for profile {profile_type}: {delay} ms")
+                packet_callback(delay, packet_loss)
             else:
-                yield(f"No network profile type found for {profile_type}")
+                write_to_file(f"No network profile type found for {profile_type}")
 
 def packet_callback(delay, packet_loss):
     payload_loss = {
@@ -60,12 +60,13 @@ def packet_callback(delay, packet_loss):
         'http://192.168.1.8/api/disciplines/packet_loss',
         json=payload_loss
     )
-    yield(f"Response from redirect: {response_loss.text}")
+    write_to_file(f"Response from packetloss: {response_loss.text}")
     payload = {'milliseconds': delay}
-    requests.post(
+    response_delay = requests.post(
         'http://192.168.1.8/api/disciplines/packet_delay',
         json=payload
     )
+    write_to_file(f"Response from packetdelay: {response_delay.text}")
 
 def get_id_from_port(port):
     return port - 3000
