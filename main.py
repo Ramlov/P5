@@ -37,7 +37,7 @@ def load_field_devices():
         })
         fd_locks[fd_id] = threading.Lock()
 
-    print(f"{field_devices}\n \n \n {field_devices.items}")
+    #print(f"{field_devices}\n \n \n {field_devices.items}")
 
     return field_devices, fd_locks
 
@@ -57,7 +57,7 @@ def backend_listener(adaptive_data_access):
                 adaptive_data_access.focus_on_fds(requested_fd_ids)
 
     async def server():
-        async with websockets.serve(handler, 'localhost', 8765):
+        async with websockets.serve(handler, '192.168.1.14', 8765):
             await asyncio.Future()  # Run forever
 
     loop = asyncio.new_event_loop()
@@ -67,8 +67,6 @@ def backend_listener(adaptive_data_access):
 def main():
     # Load field devices from SQLite database
     field_devices, fd_locks = load_field_devices()
-
-    print(f"\nField devices: {field_devices}\n")
 
     # Initialize the Passive Monitoring module (placeholder)
     passive_monitor = PassiveMonitoring(field_devices)
@@ -84,7 +82,7 @@ def main():
     backend_listener_thread.start()
 
     # Initialize and start Active Monitoring
-    num_active_threads = 10  # Adjust as needed
+    num_active_threads = 5  # Adjust as needed
     active_monitor = ActiveMonitoring(field_devices, fd_locks, num_active_threads)
     active_monitor.start()
 
