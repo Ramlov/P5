@@ -40,6 +40,7 @@ def print_port(pkt):
             profile_type = profile.get("profile")
             if profile_type in NETWORK_PROFILES:
                 packet_loss = {"GOOD": 2, "NORMAL": 5, "SLOW": 10}.get(profile_type, 0)
+                print(f"Packet loss for profile {profile_type}: {packet_loss}%")
                 delay_range = NETWORK_PROFILES[profile_type]
                 delay = random.randint(delay_range["min"], delay_range["max"])
                 print(f"Chosen delay for profile {profile_type}: {delay} ms")
