@@ -14,12 +14,15 @@ init(autoreset=True)
 # Global print lock to ensure thread-safe printing
 print_lock = threading.Lock()
 
+# Global packet count to track total packets sent by all devices
+total_packet_count = 0
+
 class FieldDevice:
     def __init__(self, device_id, file_lock):
-        self.uri = "ws://localhost:8080"  # WebSocket server IP and port 
-        self.bulk_upload_interval = 30  # Bulk upload interval in seconds (Can change to any value)
+        self.uri = "ws://localhost:8088"  # WebSocket server IP and port 
+        self.bulk_upload_interval = 15  # Bulk upload interval in seconds (Can change to any value)
         self.data_generation_interval = 5  # Data points are generated every 5 seconds (Can change to any value)
-
+        self.packet_count = 0  # Initialize packet count
         self.device_id = device_id
         self.file_lock = file_lock
         self.last_bulk_upload_time = 0
@@ -101,6 +104,9 @@ class FieldDevice:
                               f"{Style.BRIGHT}Device {self.device_id}: Connected to server at {self.uri}", flush=True)
                     
                     await websocket.send(json.dumps(bulk_data))
+                    global total_packet_count
+                    total_packet_count += 1  # Increment global packet count
+                    print(f"Total Packet Count: {total_packet_count}")
 
                     with print_lock:
                         print(f"{Fore.GREEN}[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] "
@@ -125,7 +131,7 @@ class FieldDevice:
 if __name__ == '__main__':
     file_lock = threading.Lock()
     threads = []
-    for id in range(10):  # Simulate 10 devices
+    for id in range(1):  # Simulate 10 devices
         device = FieldDevice(id, file_lock)
         thread = threading.Thread(target=device.run)
         threads.append(thread)

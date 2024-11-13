@@ -6,12 +6,14 @@ import json
 import time
 import datetime
 import csv
+import sqlite3
 
 class PassiveMonitoring:
-    def __init__(self, interface='lo', target_ip="127.0.0.1", target_port=8080, bulk_log_file="bulk_upload_log_for_websocket.csv", session_log_file="session_log_for_websocket.csv"):
+    def __init__(self, interface='lo', target_ip="127.0.0.1", target_port=8088, bulk_log_file="bulk_upload_log_for_websocket.csv", session_log_file="session_log_for_websocket.csv"):
         self.interface = interface
         self.target_ip = target_ip
         self.target_port = target_port
+        self.process_packet_count = 0
         self.sessions = {}  # Track data per session (source IP and port)
         self.bulk_log_file = bulk_log_file
         self.session_log_file = session_log_file
@@ -46,7 +48,8 @@ class PassiveMonitoring:
 
     def process_packet_tcp(self, packet):
         tcp_flags = packet[TCP].flags
-
+        self.process_packet_count += 1
+        print(f"Count: {self.process_packet_count}, TCP Flags: {tcp_flags}")
         # Generate a unique session ID using source IP and port
         src_ip = packet[IP].src
         src_port = packet[TCP].sport
@@ -119,8 +122,22 @@ class PassiveMonitoring:
                 json.dumps(data)  # Data
             ])
 
+    def classify_connection(self, latency, throughput):
+        """Classify the connection based on latency, and throughput."""
+        if latency is None:
+            return 'Unavailable'
+
+        if latency < 200 and throughput is not None and throughput >= 500:
+            return 'Good'
+        elif 200 <= latency <= 500  and throughput is not None and throughput >= 100:
+            return 'Acceptable'
+        elif latency > 500 or throughput is None or throughput < 100:
+            return 'Poor'
+        else:
+            return 'Poor'  # Default to 'Poor' if none of the above conditions match
+
 # WebSocket server function
-async def websocket_handler(websocket, path):
+async def websocket_handler_a(websocket):
     print("WebSocket connection established.")
     try:
 
@@ -149,6 +166,9 @@ async def websocket_handler(websocket, path):
                     # Calculate throughput from the latency between when the message from the device was sent to when it was received by the server
                     send_throughput = packet_size * 8 / (send_latency / 1000) # bps
 
+                    # classify the connection based on latency and throughput
+                    
+
                     # Log the bulk upload
                     monitor.log_bulk_upload(measurement["device_id"], str(session_web_id), received_time, measurement_time, measurement_latency, send_time, send_latency, send_throughput, measurement)
                     
@@ -163,13 +183,13 @@ async def websocket_handler(websocket, path):
         print("WebSocket connection closed.")
 
 async def start_websocket_server():
-    server = await websockets.serve(websocket_handler, "127.0.0.1", 8080)
-    print("WebSocket server running on ws://127.0.0.1:8080")
+    server = await websockets.serve(websocket_handler_a, "127.0.0.1", 8088)
+    print("WebSocket server running on ws://127.0.0.1:8088")
     await server.wait_closed()
 
 def run_monitoring_with_websocket():
     global monitor
-    monitor = PassiveMonitoring(interface="lo", target_ip="127.0.0.1", target_port=8080)
+    monitor = PassiveMonitoring(interface="lo", target_ip="127.0.0.1", target_port=8088)
 
     monitoring_thread = threading.Thread(target=monitor.start_monitoring)
     monitoring_thread.start()
