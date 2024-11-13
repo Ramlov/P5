@@ -26,7 +26,8 @@ def get_id_from_port(port):
 def sniff_packets():
     """Generator function to sniff packets and yield data for streaming."""
     def print_port(pkt):
-        """Process a packet and yield information as a stream of text."""
+        """Process a packet and return information as a single string."""
+        output = []
         if IP in pkt and TCP in pkt:
             src_ip = pkt[IP].src
             dst_ip = pkt[IP].dst
@@ -35,44 +36,53 @@ def sniff_packets():
             
             # Only process packets within the specified port range
             if tcp_dport in PORT_RANGE:
-                yield f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}\n"
+                output.append(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}\n")
                 
                 device_id = get_id_from_port(tcp_dport)
                 if device_id < 0 or device_id >= len(fd_profiles):
-                    yield "No Device ID Found\n"
-                    return
+                    output.append("No Device ID Found\n")
+                    return ''.join(output)
                 
                 profile = fd_profiles[device_id]
-                yield f"Network Profile for ID {device_id}: {profile}\n"
+                output.append(f"Network Profile for ID {device_id}: {profile}\n")
                 profile_type = profile.get("profile")
                 if profile_type in NETWORK_PROFILES:
                     packet_loss = {"GOOD": 2, "NORMAL": 5, "SLOW": 10}.get(profile_type, 0)
-                    yield f"Packet loss for profile {profile_type}: {packet_loss}%\n"
+                    output.append(f"Packet loss for profile {profile_type}: {packet_loss}%\n")
                     delay_range = NETWORK_PROFILES[profile_type]
                     delay = random.randint(delay_range["min"], delay_range["max"])
-                    yield f"Chosen delay for profile {profile_type}: {delay} ms\n"
-                    yield from packet_callback(delay, packet_loss)
+                    output.append(f"Chosen delay for profile {profile_type}: {delay} ms\n")
+                    output.append(packet_callback(delay, packet_loss))
                 else:
-                    yield f"No network profile type found for {profile_type}\n"
+                    output.append(f"No network profile type found for {profile_type}\n")
+        return ''.join(output)
 
     def packet_callback(delay, packet_loss):
-        """Send packet loss and delay data to the external API and yield the response."""
+        """Send packet loss and delay data to the external API and return the response as a string."""
+        responses = []
         payload_loss = {"percent": packet_loss}
         response_loss = requests.post(
             'http://192.168.1.8/api/disciplines/packet_loss',
             json=payload_loss
         )
-        yield f"Response from packet loss API: {response_loss.text}\n"
+        responses.append(f"Response from packet loss API: {response_loss.text}\n")
         
         payload_delay = {'milliseconds': delay}
         response_delay = requests.post(
             'http://192.168.1.8/api/disciplines/packet_delay',
             json=payload_delay
         )
-        yield f"Response from packet delay API: {response_delay.text}\n"
-    
-    # Use Scapy's sniff and yield packets processed by print_port
-    sniff(prn=lambda pkt: (yield from print_port(pkt)), store=0, count=0)
+        responses.append(f"Response from packet delay API: {response_delay.text}\n")
+        return ''.join(responses)
+
+    # Use Scapy's sniff to process each packet and yield processed output
+    def packet_handler(pkt):
+        result = print_port(pkt)
+        if result:
+            yield result
+
+    for pkt in sniff(prn=packet_handler, store=0):
+        yield pkt
 
 @app.route('/')
 def index():
