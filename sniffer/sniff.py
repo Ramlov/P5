@@ -16,8 +16,12 @@ NETWORK_PROFILES = {
 PORT_RANGE = range(3000, 3029)
 
 def write_to_file(log):
-    with open("log.txt", "a") as file:
-        file.write(log + "\n")
+    try:
+        with open("log.txt", "a") as file:
+            file.write(log + "\n")
+        print(f"Logged: {log}")  # Debugging print statement
+    except Exception as e:
+        print(f"Error writing to file: {e}")
 
 def sniff_packets():
     while True:
@@ -30,9 +34,9 @@ def print_port(pkt):
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
         
-        # Only process packets with destination ports within the range 3000-4000
+        # Only process packets with destination ports within the range 3000-3029
         if tcp_dport in PORT_RANGE:
-            write_to_file(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
+            write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
 
             device_id = get_id_from_port(tcp_dport)
             if device_id < 0:
@@ -53,20 +57,25 @@ def print_port(pkt):
                 write_to_file(f"No network profile type found for {profile_type}")
 
 def packet_callback(delay, packet_loss):
-    payload_loss = {
-                    "percent": packet_loss
-                    }
-    response_loss = requests.post(
-        'http://192.168.1.8/api/disciplines/packet_loss',
-        json=payload_loss
-    )
-    write_to_file(f"Response from packetloss: {response_loss.text}")
+    payload_loss = {"percent": packet_loss}
+    try:
+        response_loss = requests.post(
+            'http://192.168.1.8/api/disciplines/packet_loss',
+            json=payload_loss
+        )
+        write_to_file(f"Response from packet_loss: {response_loss.text}")
+    except Exception as e:
+        write_to_file(f"Error in packet_loss request: {e}")
+
     payload = {'milliseconds': delay}
-    response_delay = requests.post(
-        'http://192.168.1.8/api/disciplines/packet_delay',
-        json=payload
-    )
-    write_to_file(f"Response from packetdelay: {response_delay.text}")
+    try:
+        response_delay = requests.post(
+            'http://192.168.1.8/api/disciplines/packet_delay',
+            json=payload
+        )
+        write_to_file(f"Response from packet_delay: {response_delay.text}")
+    except Exception as e:
+        write_to_file(f"Error in packet_delay request: {e}")
 
 def get_id_from_port(port):
     return port - 3000
