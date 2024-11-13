@@ -44,7 +44,7 @@ def print_port(pkt):
                 delay_range = NETWORK_PROFILES[profile_type]
                 delay = random.randint(delay_range["min"], delay_range["max"])
                 yield(f"Chosen delay for profile {profile_type}: {delay} ms")
-                packet_callback(delay, packet_loss)
+                yield from packet_callback(delay, packet_loss)
             else:
                 yield(f"No network profile type found for {profile_type}")
 
