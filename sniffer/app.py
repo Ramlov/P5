@@ -99,12 +99,8 @@ def stream():
 
     return Response(generate(), mimetype='text/plain')
 
-if __name__ == "__main__":
-    # Start the sniffing in a background thread
-    threading.Thread(target=start_sniffing, daemon=True).start()
-    # Run the Flask app
-    app.run(debug=True)
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=7000)
+  threading.Thread(target=start_sniffing, daemon=True).start()
+  app.run(debug=True, host='0.0.0.0', port=7000)
