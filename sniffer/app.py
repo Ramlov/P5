@@ -3,33 +3,33 @@ import time
 
 app = Flask(__name__)
 
-log_lines = []
-
+# Function to stream log file content, keeping only the last 20 lines
 def generate_log():
-    global log_lines
-    with open('log.txt', 'r') as log_file:
-        while True:
-            line = log_file.readline()
-            if not line:
-                # If no new lines, wait and continue
-                time.sleep(0.1)
-                continue
-            # Append the new line to the list
-            log_lines.append(line.strip())
-            # Keep only the last 5 lines
-            if len(log_lines) > 20:
-                log_lines.pop(0)
-            # Yield the current lines as HTML
-            yield render_log_as_html()
+    while True:
+        with open('log.txt', 'r+') as log_file:
+            # Read all lines from the file
+            lines = log_file.readlines()
 
-def render_log_as_html():
-    # Format the log lines as HTML
-    return '<h1>Stream Packets</h1>' + ''.join(f"<p>{line}</p>" for line in log_lines)
+            # Keep only the last 20 lines
+            if len(lines) > 20:
+                lines = lines[-20:]
+
+            # Rewind the file and truncate it to remove old content
+            log_file.seek(0)
+            log_file.truncate()
+
+            # Write the latest 20 lines back to the file
+            log_file.writelines(lines)
+
+            # Join the lines into a plain text string to return
+            yield ''.join(lines)
+
+            time.sleep(0.1)
 
 # Route to display the streamed log content
 @app.route('/stream-packets')
 def stream_packets():
-    return Response(generate_log(), content_type='text/html')
+    return Response(generate_log(), content_type='text/plain')
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True, host='0.0.0.0', port=5124)
+    app.run(debug=True, threaded=True)
