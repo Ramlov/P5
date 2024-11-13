@@ -28,25 +28,25 @@ def print_port(pkt):
         
         # Only process packets with destination ports within the range 3000-4000
         if tcp_dport in PORT_RANGE:
-            print(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
+            yield(f"Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
 
             device_id = get_id_from_port(tcp_dport)
             if device_id < 0:
-                print("No Device ID Found")
+                yield("No Device ID Found")
                 return
                 
             profile = fd_profiles[device_id]
-            print(f"Network Profile for ID {device_id}: {profile}")
+            yield(f"Network Profile for ID {device_id}: {profile}")
             profile_type = profile.get("profile")
             if profile_type in NETWORK_PROFILES:
                 packet_loss = {"GOOD": 2, "NORMAL": 5, "SLOW": 10}.get(profile_type, 0)
-                print(f"Packet loss for profile {profile_type}: {packet_loss}%")
+                yield(f"Packet loss for profile {profile_type}: {packet_loss}%")
                 delay_range = NETWORK_PROFILES[profile_type]
                 delay = random.randint(delay_range["min"], delay_range["max"])
-                print(f"Chosen delay for profile {profile_type}: {delay} ms")
+                yield(f"Chosen delay for profile {profile_type}: {delay} ms")
                 packet_callback(delay, packet_loss)
             else:
-                print(f"No network profile type found for {profile_type}")
+                yield(f"No network profile type found for {profile_type}")
 
 def packet_callback(delay, packet_loss):
     payload_loss = {
@@ -56,7 +56,7 @@ def packet_callback(delay, packet_loss):
         'http://192.168.1.8/api/disciplines/packet_loss',
         json=payload_loss
     )
-    print(f"Response from redirect: {response_loss.text}")
+    yield(f"Response from redirect: {response_loss.text}")
     payload = {'milliseconds': delay}
     requests.post(
         'http://192.168.1.8/api/disciplines/packet_delay',

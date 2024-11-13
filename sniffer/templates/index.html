@@ -1,0 +1,32 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packet Sniffing Output</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #output { white-space: pre-wrap; background-color: #f0f0f0; padding: 15px; border-radius: 5px; height: 500px; overflow-y: scroll; }
+    </style>
+</head>
+<body>
+    <h1>Real-Time Packet Sniffing Output</h1>
+    <div id="output">Connecting to the packet sniffing stream...</div>
+
+    <script>
+        const outputDiv = document.getElementById('output');
+        const eventSource = new EventSource('/stream');
+
+        eventSource.onmessage = function(event) {
+            outputDiv.textContent += event.data + "\n";
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        };
+
+        eventSource.onerror = function() {
+            outputDiv.textContent += "\nConnection lost. Retrying...\n";
+        };
+    </script>
+</body>
+</html>
