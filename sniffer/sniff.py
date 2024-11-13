@@ -21,7 +21,7 @@ def write_to_file(log):
 
 def sniff_packets():
     while True:
-        yield from sniff(prn=lambda packet: (yield from print_port(packet)), count=1)
+        yield from sniff(prn=lambda print_port: (yield from print_port), count=1)
 
 def print_port(pkt):
     if IP in pkt and TCP in pkt:
