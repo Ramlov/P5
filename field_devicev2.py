@@ -11,15 +11,18 @@ class FieldDevice:
         self.device_id = device_id
         self.port = port
         self.data_storage = []
-        self.headend_ip = "192.168.152.147:8765"
+        self.headend_ip = "192.168.152.1.14"
         self.last_collected_data = time.time()
-    
-    async def websocket_handler(self, websocket, path):
+        self.datapoint_time = 5  # 5 seconds
+        self.bulkupload_time = 120
+
+
+    async def websocket_handler(self, websocket):
         print(f"Device on port {self.port} connected")
         try:
             async for message in websocket:
                 response_data = ''
-                print(f"Received from {self.port}: {message}")
+                print(f"Received from {self.port}: ")
 
                 if message == 'all_data':
                     response_data = json.dumps(self.data_storage)
@@ -31,7 +34,7 @@ class FieldDevice:
 
     async def start_server(self):
         print(f"Starting WebSocket server on port {self.port}")
-        async with websockets.serve(self.websocket_handler, "localhost", self.port):
+        async with websockets.serve(self.websocket_handler, "192.168.1.2", self.port):
             await asyncio.Future()  # Run forever
 
     def run(self):
@@ -54,13 +57,13 @@ class FieldDevice:
             self.data_storage.append(new_data)
             print(f"Data added to field device {self.device_id}\n")
 
-            if time.time() - self.last_collected_data >= 300:  # 5 minutes
+            if time.time() - self.last_collected_data >= self.bulkupload_time:  # 5 minutes
                 if self.data_storage:
                     await self.bulk_upload()
                     self.data_storage.clear()
                 self.last_collected_data = time.time()
 
-            await asyncio.sleep(5)
+            await asyncio.sleep(self.datapoint_time)
 
     async def bulk_upload(self):
         uri = "ws://{self.headend_ip}"
