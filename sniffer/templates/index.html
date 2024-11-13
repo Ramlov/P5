@@ -2,26 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Log Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Log Viewer</title>
     <style>
-        pre {
-            white-space: pre-wrap;       /* CSS 3 */
-            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-            white-space: -pre-wrap;      /* Opera 4-6 */
-            white-space: -o-pre-wrap;    /* Opera 7 */
-            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+        #log {
+            width: 100%;
+            height: 80vh;
+            border: 1px solid #ddd;
+            overflow-y: scroll;
+            background-color: #f9f9f9;
+            padding: 10px;
+            font-family: monospace;
         }
     </style>
 </head>
 <body>
-    <h1>Log Viewer</h1>
-    <pre id="log"></pre>
+    <h1>Live Log Viewer</h1>
+    <div id="log"></div>
+
+    <!-- Socket.IO script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
     <script>
-        const logElement = document.getElementById('log');
-        const eventSource = new EventSource('/stream');
-        eventSource.onmessage = function(event) {
-            logElement.textContent = event.data;
-        };
+        const logDiv = document.getElementById('log');
+        const socket = io();
+
+        // Listen for 'log_update' events from the server
+        socket.on('log_update', (data) => {
+            // Append new log line to the log div
+            const line = document.createElement('div');
+            line.textContent = data.data;
+            logDiv.appendChild(line);
+            
+            // Scroll to the bottom
+            logDiv.scrollTop = logDiv.scrollHeight;
+        });
     </script>
 </body>
 </html>
