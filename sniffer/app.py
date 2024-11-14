@@ -14,11 +14,18 @@ def generate_log():
             time.sleep(0.1)
             continue
 
-        # Stream each line, then remove it from the file
+        # Stream each line, then keep only the last 6 lines in the file
         with open('log.txt', 'w') as log_file:
-            for line in lines:
-                yield f"{line}<br>"
-            # Write only unread lines back (in this case, nothing is written back to the file)
+            # Retain only the last 6 lines in log.txt
+            lines_to_keep = lines[-6:] if len(lines) > 6 else lines
+            log_file.writelines(lines_to_keep)
+
+        # Stream the new lines (all lines in this example)
+        for line in lines_to_keep:
+            yield f"{line}<br>"
+
+        # Brief pause before the next check to avoid excessive CPU usage
+        time.sleep(0.1)
 
 # Route to display the streamed log content
 @app.route('/')
