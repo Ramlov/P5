@@ -59,21 +59,23 @@ def print_port(pkt):
 def packet_callback(delay, packet_loss):
     payload_loss = {"percent": packet_loss}
     try:
-        response_loss = requests.post(
-            'http://192.168.1.8/api/disciplines/packet_loss',
-            json=payload_loss
-        )
-        write_to_file(f"Response from packet_loss: {response_loss.text}")
+        # response_loss = requests.post(
+        #     'http://192.168.1.8/api/disciplines/packet_loss',
+        #     json=payload_loss
+        # )
+        # write_to_file(f"Response from packet_loss: {response_loss.text}")
+        pass
     except Exception as e:
         write_to_file(f"Error in packet_loss request: {e}")
 
     payload = {'milliseconds': delay}
     try:
-        response_delay = requests.post(
-            'http://192.168.1.8/api/disciplines/packet_delay',
-            json=payload
-        )
-        write_to_file(f"Response from packet_delay: {response_delay.text}")
+        # response_delay = requests.post(
+        #     'http://192.168.1.8/api/disciplines/packet_delay',
+        #     json=payload
+        # )
+        # write_to_file(f"Response from packet_delay: {response_delay.text}")
+        pass
     except Exception as e:
         write_to_file(f"Error in packet_delay request: {e}")
 
