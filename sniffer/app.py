@@ -21,7 +21,7 @@ def generate_log():
             # Write only unread lines back (in this case, nothing is written back to the file)
 
 # Route to display the streamed log content
-@app.route('/stream-packets')
+@app.route('/')
 def stream_packets():
     return Response(generate_log(), content_type='text/html')
 
