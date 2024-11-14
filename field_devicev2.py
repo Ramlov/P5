@@ -25,10 +25,10 @@ class FieldDevice:
                 print(f"Received from {self.port}: ")
 
                 if message == 'all_data':
-                    response_data = json.dumps(self.data_points)
+                    response_data = json.dumps(self.data_storage)
                     await websocket.send(response_data)
                     print(f"Data sent to server from device {self.device_id}")
-                    self.data_points.clear()  # Clear data after sending
+                    self.data_storage.clear()  # Clear data after sending
         except websockets.exceptions.ConnectionClosedError:
             print(f"Device on port {self.port} disconnected")
 
@@ -73,7 +73,7 @@ class FieldDevice:
         """Uploads all stored data points to the headend server."""
         if self.data_storage:
             send_timestamp = datetime.now().isoformat()  # Timestamp for bulk upload initiation
-            for data_point in self.data_points:
+            for data_point in self.data_storage:
                 data_point["send_timestamp"] = send_timestamp  # Add send timestamp to each data point
 
             bulk_data = {"data_points": self.data_storage}
