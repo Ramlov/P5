@@ -34,7 +34,7 @@ class FieldDevice:
 
     async def start_server(self):
         print(f"Starting WebSocket server on port {self.port}")
-        async with websockets.serve(self.websocket_handler, "192.168.1.2", self.port):
+        async with websockets.serve(self.websocket_handler, "192.168.1.14", self.port):
             await asyncio.Future()  # Run forever
 
     def run(self):
@@ -59,25 +59,24 @@ class FieldDevice:
             }
 
             # Add the data point to the list
-            self.data_points.append(new_data)
+            self.data_storage.append(new_data)
             print(f"Data added to field device {self.device_id}\n")
 
             if time.time() - self.last_collected_data >= self.bulkupload_time:  # 5 minutes
                 if self.data_storage:
                     await self.bulk_upload()
-                    self.data_storage.clear()
                 self.last_collected_data = time.time()
 
             await asyncio.sleep(self.datapoint_time)
 
     async def bulk_upload(self):
         """Uploads all stored data points to the headend server."""
-        if self.data_points:
+        if self.data_storage:
             send_timestamp = datetime.now().isoformat()  # Timestamp for bulk upload initiation
             for data_point in self.data_points:
                 data_point["send_timestamp"] = send_timestamp  # Add send timestamp to each data point
 
-            bulk_data = {"data_points": self.data_points}
+            bulk_data = {"data_points": self.data_storage}
 
             print(f"Device {self.device_id}: Preparing to upload bulk data at {send_timestamp}")
 
@@ -90,14 +89,14 @@ class FieldDevice:
                     print(f"Device {self.device_id}: Successfully sent bulk data at {send_timestamp}")
 
                     # Clear the data points after successful upload
-                    self.data_points.clear()
+                    self.data_storage.clear()
             except websockets.exceptions.ConnectionClosedError:
                 print(f"Device {self.device_id}: Connection closed unexpectedly.")
             except Exception as e:
                 print(f"Device {self.device_id}: An error occurred during bulk upload: {e}")
 
 if __name__ == '__main__':
-    FD_AMOUNT = 10
+    FD_AMOUNT = 1
     threads = []
     for id in range(FD_AMOUNT):
         port = 3000 + id
