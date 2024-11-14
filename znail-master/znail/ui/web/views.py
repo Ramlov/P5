@@ -117,18 +117,10 @@ def index():
         [
             ("Packet Delay", _get_status("/disciplines/packet_delay", "milliseconds")),
             ("Packet Loss", _get_status("/disciplines/packet_loss", "percent")),
-            ("Packet Duplication", _get_status("/disciplines/packet_duplication", "percent")),
-            ("Packet Reordering", _get_status("/disciplines/packet_reordering", "percent")),
-            ("Packet Corruption", _get_status("/disciplines/packet_corruption", "percent")),
-            ("Packet Rate Control", _get_status("/disciplines/packet_rate_control", "kbit")),
-        ]
-    )
-    network_control_summary = OrderedDict(
-        [
-            ("Disconnect", _get_status("/disconnect", "disconnect")),
-            ("Whitelist", _get_status("/whitelist")),
-            ("DNS Override", _get_status("/dnsoverride")),
-            ("IP Redirect", _get_status("/ipredirect")),
+            # ("Packet Duplication", _get_status("/disciplines/packet_duplication", "percent")),
+            # ("Packet Reordering", _get_status("/disciplines/packet_reordering", "percent")),
+            # ("Packet Corruption", _get_status("/disciplines/packet_corruption", "percent")),
+            # ("Packet Rate Control", _get_status("/disciplines/packet_rate_control", "kbit")),
         ]
     )
 
@@ -136,7 +128,6 @@ def index():
         "index.html",
         current_page="overview",
         packet_control_summary=packet_control_summary,
-        network_control_summary=network_control_summary,
     )
 
 
