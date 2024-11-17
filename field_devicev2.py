@@ -4,38 +4,42 @@ import json
 import asyncio
 import websockets
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
 import ntplib  # Added for NTP synchronization
+
 
 class FieldDevice:
     def __init__(self, device_id, port):
         self.device_id = device_id
         self.port = port
         self.data_storage = []
-        self.headend_url = f"ws://192.168.1.14:8000"
+        self.headend_url = "ws://192.168.0.59:8765"
         self.last_collected_data = time.time()
-        self.datapoint_time = 5  # 5 seconds
-        self.bulkupload_time = 20
+        self.datapoint_time = 5  # Interval between data generation (seconds)
+        self.bulkupload_time = 10  # Interval between bulk uploads (seconds)
         self.ntp_client = ntplib.NTPClient()  # Initialize the NTP client
-        self.ntp_server = 'pool.ntp.org'  # Use a public NTP server
+        self.ntp_server = "pool.ntp.org"  # Public NTP server
+        self.ntp_offset = self.get_ntp_offset()
 
-    def get_ntp_time(self):
-        """Get current time from an NTP server."""
+    def get_ntp_offset(self):
+        """Get the offset between the local clock and NTP time."""
         try:
             response = self.ntp_client.request(self.ntp_server)
-            return datetime.fromtimestamp(response.tx_time).isoformat()  # Synchronized timestamp
+            return response.offset  # Offset in seconds
         except Exception as e:
-            print(f"Failed to get NTP time: {e}")
-            return datetime.now().isoformat()  # Fallback to local time if NTP fails
+            print(f"Failed to get NTP offset: {e}")
+            return 0  # Fallback to no offset if NTP fails
+
+    def get_ntp_timestamp(self):
+        """Get the current synchronized timestamp as a UNIX timestamp."""
+        return time.time() + self.ntp_offset
 
     async def websocket_handler(self, websocket):
         print(f"Device on port {self.port} connected")
         try:
             async for message in websocket:
-                response_data = ''
-                print(f"Received from {self.port}: ")
-
-                if message == 'all_data':
+                print(f"Received from {self.port}: {message}")
+                if message == "all_data":
                     response_data = json.dumps(self.data_storage)
                     await websocket.send(response_data)
                     print(f"Data sent to server from device {self.device_id}")
@@ -45,16 +49,16 @@ class FieldDevice:
 
     async def start_server(self):
         print(f"Starting WebSocket server on port {self.port}")
-        async with websockets.serve(self.websocket_handler, "192.168.1.2", self.port):
+        async with websockets.serve(self.websocket_handler, "192.168.0.151", self.port):
             await asyncio.Future()  # Run forever
 
     def run(self):
-        # Run event loop for asynchronous tasks
+        """Run the field device asynchronously."""
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         loop.run_until_complete(asyncio.gather(
             self.start_server(),
-            self.periodic_data_update()
+            self.periodic_data_update(),
         ))
 
     async def periodic_data_update(self):
@@ -68,8 +72,9 @@ class FieldDevice:
 
             # Add the data point to the list
             self.data_storage.append(new_data)
-            print(f"Data added to field device {self.device_id}\n")
+            print(f"Data added to field device {self.device_id}: {new_data}")
 
+            # Perform a bulk upload if the interval is reached
             if time.time() - self.last_collected_data >= self.bulkupload_time:
                 if self.data_storage:
                     await self.bulk_upload()
@@ -80,15 +85,13 @@ class FieldDevice:
     async def bulk_upload(self):
         """Uploads all stored data points to the headend server."""
         if self.data_storage:
-            send_timestamp = self.get_ntp_time()  # Synchronized timestamp for bulk upload initiation
+            send_timestamp = self.get_ntp_timestamp()  # Use synchronized UNIX timestamp
 
             bulk_data = {
-                "send_timestamp": send_timestamp,
+                "send_timestamp": send_timestamp,  # Send the UNIX timestamp
                 "device_id": self.device_id,
-                "data": self.data_storage
+                "data": self.data_storage,
             }
-
-            print(f"Device {self.device_id}: Preparing to upload bulk data at {send_timestamp}")
 
             try:
                 async with websockets.connect(self.headend_url) as websocket:
@@ -105,8 +108,9 @@ class FieldDevice:
             except Exception as e:
                 print(f"Device {self.device_id}: An error occurred during bulk upload: {e}")
 
-if __name__ == '__main__':
-    FD_AMOUNT = 1
+
+if __name__ == "__main__":
+    FD_AMOUNT = 1  # Number of field devices to simulate
     threads = []
     for id in range(FD_AMOUNT):
         port = 3000 + id
