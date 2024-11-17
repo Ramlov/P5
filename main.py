@@ -10,7 +10,7 @@ import websockets
 from multiprocessing import Manager
 
 from active_monitoring import ActiveMonitoring
-from passive_monitoring2 import PassiveMonitoring
+from passive_monitoring import PassiveMonitoring
 from adaptive_data_access import AdaptiveDataAccess
 
 def load_field_devices():
@@ -42,7 +42,7 @@ def load_field_devices():
     return field_devices, fd_locks
 
 def backend_listener(adaptive_data_access):
-    async def handler(websocket, path):
+    async def handler(websocket):
         async for message in websocket:
             message = message.strip()
             if message.lower() == 'stop':
@@ -76,7 +76,6 @@ def main():
     passive_monitor = PassiveMonitoring(field_devices=field_devices, fd_locks=fd_locks, target_ip=server_ip, target_port=passive_server_port)
     passive_monitor.start()
 
-    """
     # Initialize the Adaptive Data Access module
     adaptive_data_access = AdaptiveDataAccess(field_devices, fd_locks)
     adaptive_data_access_thread = threading.Thread(target=adaptive_data_access.run, daemon=True)
@@ -90,7 +89,7 @@ def main():
     num_active_threads = 5  # Adjust as needed
     active_monitor = ActiveMonitoring(field_devices, fd_locks, num_active_threads)
     active_monitor.start()
-    """
+
 
     # Keep the main thread alive
     try:

@@ -1,147 +1,204 @@
 import asyncio
 import websockets
-import json
 from scapy.all import sniff
-from scapy.layers.inet import TCP
-import ntplib
+from datetime import datetime, timedelta
 import threading
-import time
+import json
+import ntplib
 
-class PassiveNetworkMonitor:
-    def __init__(self, host='localhost', port=8765):
+
+class PassiveMonitoring:
+    def __init__(self, host="0.0.0.0", port=8765, interface="Ethernet"):
         """
-        Initialize the Passive Network Monitoring Module.
+        Initialize Passive Network Monitoring.
+        :param host: Host IP for the WebSocket server.
+        :param port: Port for the WebSocket server.
+        :param interface: Network interface for packet sniffing.
         """
         self.host = host
         self.port = port
+        self.interface = interface
+        self.packet_data = {}  # Store packet data per connection (keyed by (src_ip, src_port))
+        self.capture_thread = None # Will be the sniffer later. Can be used to restart etc
+        self.shutdown_event = threading.Event()  # Event to signal shutdown
         self.ntp_offset = self.get_ntp_offset()
-        print(f"NTP offset: {self.ntp_offset} seconds")
-    
+
     def get_ntp_offset(self):
         """
-        Get NTP offset to synchronize time with NTP server.
-        """
-        c = ntplib.NTPClient()
-        response = c.request('pool.ntp.org')
-        return response.offset
-
-    async def start_server(self):
-        """
-        Start the WebSocket server to receive data from field devices.
-        """
-        server = await websockets.serve(self.process_upload, self.host, self.port)
-        print(f"Server started on {self.host}:{self.port}")
-        await asyncio.Future()  # Run forever
-
-    async def process_upload(self, websocket, path):
-        """
-        Process incoming data uploads from field devices.
+        Fetch NTP time offset to synchronize timing.
         """
         try:
-            async for message in websocket:
-                data = json.loads(message)
-                device_id = data['device_id']
-                send_timestamp = float(data['send_timestamp']) + self.ntp_offset
-                print(f"Received upload from Device ID: {device_id}")
-                # Start packet capture
-                packets = []
-                stop_sniff_event = threading.Event()
-                sniff_thread = threading.Thread(target=self.capture_packets, args=(packets, stop_sniff_event))
-                sniff_thread.start()
-                # Simulate processing time (assuming data is being received)
-                await asyncio.sleep(0.1)  # Adjust as necessary
-                # Processing is done, stop packet capture
-                stop_sniff_event.set()
-                sniff_thread.join()
-                # Calculate metrics
-                metrics = self.calculate_metrics(packets, send_timestamp)
-                # Classify connection
-                classification = self.classify_connection(metrics['average_latency'], metrics['throughput'])
-                # Print summary
-                self.print_summary(device_id, metrics, classification)
-        except websockets.exceptions.ConnectionClosed:
-            pass
+            client = ntplib.NTPClient()
+            response = client.request("pool.ntp.org")
+            return response.offset
+        except Exception as e:
+            print(f"Failed to fetch NTP time: {e}")
+            return 0
 
-    def capture_packets(self, packets, stop_event):
+    def get_ntp_time(self):
         """
-        Capture TCP packets using Scapy.
+        Get current time synchronized with NTP (as a datetime object).
         """
-        def packet_handler(pkt):
-            if pkt.haslayer(TCP) and pkt[TCP].dport == self.port:
-                packets.append(pkt)
-        def stop_filter(pkt):
-            return stop_event.is_set()
-        sniff(filter=f"tcp port {self.port}", prn=packet_handler, stop_filter=stop_filter)
+        return datetime.now() + timedelta(seconds=self.ntp_offset)
 
-    def calculate_metrics(self, packets, send_timestamp):
+
+    def start_packet_capture(self):
         """
-        Calculate metrics based on captured packets.
+        Start packet sniffing to capture Layer 3 packets (IP/TCP).
+        """
+        try:
+            sniff(
+                iface=self.interface,
+                filter=f"tcp port {self.port}",
+                prn=self.process_packet,
+                store=False,
+                stop_filter=lambda _: self.shutdown_event.is_set(),
+            )
+        except Exception as e:
+            print(f"Error in packet sniffing: {e}")
+        finally:
+            print("Packet capture stopped.")
+
+
+    def process_packet(self, packet):
+        """
+        Process captured packets and store them for analysis.
+        """
+        if packet.haslayer("IP") and packet.haslayer("TCP"):
+            src_ip = packet["IP"].src
+            src_port = packet["TCP"].sport
+            timestamp = self.get_ntp_time()  # Use NTP-synced time as datetime
+
+            # Unique key for the field device connection
+            key = (src_ip, src_port)
+
+            # Store packet details
+            packet_info = {
+                "timestamp": timestamp,
+                "size": len(packet),
+            }
+
+            # Initialize packet storage for this connection if not present
+            if key not in self.packet_data:
+                self.packet_data[key] = []
+
+            self.packet_data[key].append(packet_info)
+
+    def analyze_packets(self, send_time, packets):
+        """
+        Analyze captured packets to calculate metrics (latency and throughput).
         """
         packet_count = len(packets)
         if packet_count == 0:
+            print(f"No Packets found in list despite having received message\n")
+
             return {
-                'packet_count': 0,
-                'total_data_size': 0,
-                'total_time': 0,
-                'average_latency': 0,
-                'throughput': 0
+                "packet_count": 0,
+                "total_data_size": 0,
+                "total_time": 0,
+                "avg_latency_ms": 0,
+                "throughput_kbps": 0,
             }
-        arrival_times = [pkt.time for pkt in packets]
-        packet_sizes = [len(pkt) for pkt in packets]
-        total_data_size = sum(packet_sizes)
-        total_time = max(arrival_times) - min(arrival_times)
-        average_latency = ((sum(arrival_times) / packet_count) - send_timestamp) * 1000  # in ms
-        throughput = (total_data_size * 8) / (total_time * 1000)  # in kbps
+
+        total_data_size = sum(p["size"] for p in packets)
+        t_last_packet = packets[-1]["timestamp"]
+
+        # Calculate total time as the difference between the last packet and the send timestamp
+        total_time = (t_last_packet - send_time).total_seconds()
+
+        # Prevent negative total_time
+        if total_time < 0:
+            print("Error: Total time is negative. Check NTP synchronization.")
+            total_time = 0
+
+        # Calculate average latency per packet as total_time / packet_count
+        avg_latency = total_time / packet_count if packet_count > 0 else 0
+
+        # Calculate throughput
+        throughput = total_data_size / total_time if total_time > 0 else 0
+        throughput_kbps = (throughput * 8) / 1000  # Convert bytes/sec to kbps
+
         return {
-            'packet_count': packet_count,
-            'total_data_size': total_data_size,
-            'total_time': total_time,
-            'average_latency': average_latency,
-            'throughput': throughput
+            "packet_count": packet_count,
+            "total_data_size": total_data_size,
+            "total_time": total_time,
+            "avg_latency_ms": avg_latency * 1000,  # Convert to milliseconds
+            "throughput_kbps": throughput_kbps,
         }
 
-    def classify_connection(self, average_latency, throughput):
-        """
-        Classify the connection quality based on average latency and throughput.
-        """
-        # Classify latency
-        if average_latency < 100:
-            latency_class = 'Excellent'
-        elif average_latency < 300:
-            latency_class = 'Good'
-        else:
-            latency_class = 'Poor'
-        # Classify throughput
-        if throughput > 500:
-            throughput_class = 'Excellent'
-        elif throughput > 200:
-            throughput_class = 'Good'
-        else:
-            throughput_class = 'Poor'
-        # Overall classification
-        if latency_class == 'Poor' or throughput_class == 'Poor':
-            overall_class = 'Poor'
-        elif latency_class == 'Good' or throughput_class == 'Good':
-            overall_class = 'Good'
-        else:
-            overall_class = 'Excellent'
-        return overall_class
 
-    def print_summary(self, device_id, metrics, classification):
+    async def process_bulk_upload(self, websocket):
         """
-        Print the metrics and connection classification.
+        Handle WebSocket messages for bulk uploads and analyze metrics.
         """
-        print(f"Device ID: {device_id}")
-        print(f"Packet Count: {metrics['packet_count']}")
-        print(f"Total Data Size: {metrics['total_data_size']} bytes")
-        print(f"Total Time: {metrics['total_time']} seconds")
-        print(f"Average Latency per Packet: {metrics['average_latency']} ms")
-        print(f"Throughput: {metrics['throughput']} kbps")
-        print(f"Connection Classification: {classification}")
-        print("---------------------------------------------------")
+        try:
+            async for message in websocket:
+                # Extract WebSocket connection details
+                src_ip, src_port = websocket.remote_address
+                print(f"Field Device IP: {src_ip}:{src_port}")
+
+                # Parse the message
+                data = json.loads(message)
+                device_id = data.get("device_id", "Unknown")
+                send_timestamp = float(data.get("send_timestamp"))
+
+                # COnvert Timestamp
+                send_time = datetime.fromtimestamp(send_timestamp)
+
+                # Get packets for this connection
+                key = (src_ip, src_port)
+                packets = self.packet_data.get(key, [])
+
+                # Analyze packets for latency and throughput
+                metrics = self.analyze_packets(send_time, packets)
+
+                # Print results
+                print(f"Device ID: {device_id}")
+                print(f"Packet Count: {metrics['packet_count']}")
+                print(f"Total Data Size: {metrics['total_data_size']} bytes")
+                print(f"Total Time: {metrics['total_time']:.2f} seconds")
+                print(f"Average Latency per Packet: {metrics['avg_latency_ms']:.2f} ms")
+                print(f"Throughput: {metrics['throughput_kbps']:.2f} kbps")
+
+                # Clear packet data for this connection after processing
+                if key in self.packet_data:
+                    del self.packet_data[key]
+
+        except Exception as e:
+            print(f"Error processing bulk upload: {e}")
+
+    async def start_server(self):
+        """
+        Start the WebSocket server.
+        """
+        async with websockets.serve(self.process_bulk_upload, self.host, self.port):
+            print(f"Starting WebSocket server on ws://{self.host}:{self.port}")
+            await asyncio.Future()  # Keep the server running
 
     def run(self):
         """
-        Run the Passive Network Monitoring Module.
+        Start the WebSocket server and packet capture with graceful shutdown.
         """
-        asyncio.run(self.start_server())
+        # Run packet sniffing in a separate thread
+        self.capture_thread = threading.Thread(target=self.start_packet_capture, daemon=True)
+        self.capture_thread.start()
+
+        # Start the WebSocket server using asyncio
+        try:
+            asyncio.run(self.start_server())
+        except Exception as e:
+            print(f"Error while running server: {e}")
+        finally:
+            self.stop()
+
+    def stop(self):
+        """
+        Stop all ongoing operations and close the server gracefully.
+        """
+        print("Shutting down...")
+        self.shutdown_event.set()  # Stop packet sniffing
+        print("Shutdown complete.")
+
+if __name__ == "__main__":
+    monitoring = PassiveMonitoring(interface="Ethernet")  # Replace with your network interface name
+    monitoring.run()
