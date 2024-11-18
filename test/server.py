@@ -2,35 +2,39 @@
 import asyncio
 import websockets
 from datetime import datetime
-import re
 
-SERVER_HOST = "192.168.1.4"
-SERVER_PORT = 3000
+START_PORT = 3000
+END_PORT = 3005
 
-async def handle_client(websocket, path):
-    print("Client connected")
+
+async def handle_client(websocket, path, port):
+    print(f"Client connected on port {port}")
     try:
         async for message in websocket:
-            received_time = datetime.utcnow()
-            print(f"Received from client at {received_time}: {message}")
+            receive_time = datetime.utcnow()
+            print(f"Received from client on port {port} at {receive_time}: {message}")
 
-            # Extract the sequence number from the message
-            seq_match = re.search(r"Seq (\d+)", message)
-            if seq_match:
-                seq_number = seq_match.group(1)
-                print(f"Sequence Number: {seq_number}")
-
-            ack_message = f"Acknowledged: {message} | Received at {received_time}"
+            # Send an acknowledgment message back to the client
+            ack_message = f"ACK from server on port {port} | Received at {receive_time}"
             await websocket.send(ack_message)
+            print(f"Sent to client on port {port}: {ack_message}")
     except websockets.exceptions.ConnectionClosedError:
-        print("Client disconnected")
+        print(f"Client disconnected on port {port}")
     finally:
-        print("Connection closed")
+        print(f"Connection closed on port {port}")
+
+
+async def start_server(port):
+    print(f"Starting server on port {port}")
+    async with websockets.serve(lambda ws, path: handle_client(ws, path, port), "0.0.0.0", port):
+        await asyncio.Future()  # Keep the server running indefinitely
+
 
 async def main():
-    async with websockets.serve(handle_client, SERVER_HOST, SERVER_PORT):
-        print(f"Server running on {SERVER_HOST}:{SERVER_PORT}")
-        await asyncio.Future()
+    # Create and start servers on each port from START_PORT to END_PORT
+    servers = [start_server(port) for port in range(START_PORT, END_PORT + 1)]
+    await asyncio.gather(*servers)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
