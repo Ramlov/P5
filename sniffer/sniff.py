@@ -44,14 +44,14 @@ def print_port(pkt):
                 return
                 
             profile = fd_profiles[device_id]
-            write_to_file(f"\n"+"Network Profile for ID {device_id}: {profile}" )
+            write_to_file(f"\n Network Profile for ID {device_id}: {profile}" )
             profile_type = profile.get("profile")
             if profile_type in NETWORK_PROFILES:
                 packet_loss = {"GOOD": 2, "NORMAL": 5, "SLOW": 10}.get(profile_type, 0)
-                write_to_file(f"\n"+"Packet loss for profile {profile_type}: {packet_loss}%")
+                write_to_file(f"\n Packet loss for profile {profile_type}: {packet_loss}%")
                 delay_range = NETWORK_PROFILES[profile_type]
                 delay = random.randint(delay_range["min"], delay_range["max"])
-                write_to_file(f"\n"+"Chosen delay for profile {profile_type}: {delay} ms")
+                write_to_file(f"\n Chosen delay for profile {profile_type}: {delay} ms")
                 packet_callback(delay, packet_loss)
             else:
                 write_to_file(f"No network profile type found for {profile_type}")
