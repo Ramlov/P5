@@ -1,0 +1,3 @@
+# Source this file to create and activate venv
+make .venv
+source .venv/bin/activate

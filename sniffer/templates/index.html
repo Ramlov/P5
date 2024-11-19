@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Log Viewer</title>
+    <style>
+        #log {
+            width: 100%;
+            height: 80vh;
+            border: 1px solid #ddd;
+            overflow-y: auto; /* Use 'auto' to ensure proper scrolling */
+            background-color: #f9f9f9;
+            padding: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Live Log Viewer</h1>
+    <div id="log"></div>
+
+    <!-- Socket.IO script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+        const logDiv = document.getElementById('log');
+        const socket = io();
+
+        // Ensure this always scrolls to the bottom reliably
+        const scrollToBottom = () => {
+            logDiv.scrollTop = logDiv.scrollHeight;
+        };
+
+        // Listen for 'log_update' events from the server
+        socket.on('log_update', (data) => {
+            // Append new log line to the log div
+            const line = document.createElement('div');
+            line.textContent = data.data;
+            logDiv.appendChild(line);
+
+            // Scroll to the bottom of the log div
+            setTimeout(scrollToBottom, 0); // Allow the DOM to update before scrolling
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <h1>Network Emulator</h1>
+    <hr/>
+    <h6>System Overview</h6>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for name, status in packet_control_summary.items() %}
+            <tr>
+                <td>{{ name }}</td>
+                {% if status %}
+                <td><span class="badge badge-pill badge-primary">Active</span></td>
+                {% else %}
+                <td><span class="badge badge-pill badge-secondary">Inactive</span></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="card" style="max-width: 100%; height: 400px;">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Live Packet Stream</h5>
+        </div>
+        <div class="card-body p-0" style="overflow-y: auto; height: calc(400px - 56px);">
+            <iframe src="http://192.168.1.8:5005" 
+                    width="100%" 
+                    height="100%" 
+                    style="border: none;" 
+                    title="Live Packet Stream">
+            </iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}
