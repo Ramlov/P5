@@ -25,7 +25,7 @@ def write_to_file(log):
 
 def sniff_packets():
     while True:
-        sniff(prn=print_port, count=1)
+        sniff(prn=print_port, count=0)
 
 
 cache_ports = {}
