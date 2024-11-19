@@ -5,27 +5,27 @@
   },
   {
     "id": 1,
-    "profile": "SLOW"
+    "profile": "NORMAL"
   },
   {
     "id": 2,
-    "profile": "SLOW"
+    "profile": "NORMAL"
   },
   {
     "id": 3,
-    "profile": "SLOW"
+    "profile": "NORMAL"
   },
   {
     "id": 4,
-    "profile": "SLOW"
+    "profile": "GOOD"
   },
   {
     "id": 5,
-    "profile": "SLOW"
+    "profile": "GOOD"
   },
   {
     "id": 6,
-    "profile": "SLOW"
+    "profile": "GOOD"
   },
   {
     "id": 7,
@@ -33,7 +33,7 @@
   },
   {
     "id": 8,
-    "profile": "SLOW"
+    "profile": "GOOD"
   },
   {
     "id": 9,
