@@ -70,7 +70,6 @@ def print_port(pkt):
         if port is None:
             write_to_file(
                 f"Could not match a port FOR:           Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
-            return
         write_to_file(
             f"Received ports: Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
         write_to_file(f"Found new source port: {port} for packet.")
