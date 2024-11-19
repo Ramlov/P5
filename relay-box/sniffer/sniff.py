@@ -37,13 +37,14 @@ def getc_port(src_port, dest_port):
     current_time = time.time()
 
     if dest_port in PORT_RANGE:  # Headend -> Field Device
-        print(f"\n Headend -> Field Device: src: {src_port} dest: {dest_port}")
+        write_to_file(
+            f"\n Headend -> Field Device: src: {src_port} dest: {dest_port}")
         cache_ports[src_port] = {
             'dest_port': dest_port, 'timestamp': current_time}
         return dest_port  # Return port from 27000 - 27024
 
     if dest_port in cache_ports:  # Field Device -> Headend
-        print(
+        write_to_file(
             f"\n Field device response back to headend! src: {src_port} dest: {dest_port}")
         tport = cache_ports[dest_port]['dest_port']
         del cache_ports[dest_port]
