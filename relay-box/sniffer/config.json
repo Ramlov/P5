@@ -2,8 +2,8 @@
     "fd_profiles_file": "fd_profiles.json",
     "log_file": "log.txt",
     "api_endpoints": {
-        "packet_loss": "http://192.168.1.8/api/disciplines/packet_loss",
-        "packet_delay": "http://192.168.1.8/api/disciplines/packet_delay"
+        "packet_loss": "http://192.168.1.9/api/disciplines/packet_loss",
+        "packet_delay": "http://192.168.1.9/api/disciplines/packet_delay"
     },
     "network_profiles": {
         "SLOW": {"min": 1000, "max": 2000},
