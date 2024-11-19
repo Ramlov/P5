@@ -12,7 +12,7 @@ NETWORK_PROFILES = {
     "NORMAL": {"min": 300, "max": 500},
     "GOOD": {"min": 50, "max": 300}
 }
-
+port_sub = 21000
 PORT_RANGE = range(20000, 22000)    
 
 def write_to_file(log):
@@ -78,7 +78,7 @@ def packet_callback(delay, packet_loss):
         write_to_file(f"Error in packet_delay request: {e}" + "\n")
 
 def get_id_from_port(port):
-    return port - 3000
+    return port - port_sub
 
 if __name__ == "__main__":
     sniff_packets()
