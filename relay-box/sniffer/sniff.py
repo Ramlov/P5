@@ -30,6 +30,7 @@ def sniff_packets():
         sniff(prn=print_port, count=0)
 
 def print_port(pkt):
+    global LAST_PROFILE
     if IP in pkt and TCP in pkt:
         src_ip = pkt[IP].src
         dst_ip = pkt[IP].dst
