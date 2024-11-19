@@ -13,7 +13,7 @@ NETWORK_PROFILES = {
     "GOOD": {"min": 50, "max": 300}
 }
 
-PORT_RANGE = range(3000, 3029)
+PORT_RANGE = range(20000, 22000)    
 
 def write_to_file(log):
     try:
