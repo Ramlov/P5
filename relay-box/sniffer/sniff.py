@@ -26,41 +26,7 @@ def write_to_file(log):
 def sniff_packets():
     while True:
         sniff(prn=print_port, count=0)
-
-
-cache_ports = {}
-CACHE_TIMEOUT = 5 #seconds
-def getc_port(src_port, dest_port):
-    # Clean up expired entries
-    remove_expired_cache()
-
-    current_time = time.time()
-
-    if dest_port in PORT_RANGE:  # Headend -> Field Device
-        write_to_file(
-            f"\n Headend -> Field Device: src: {src_port} dest: {dest_port}")
-        cache_ports[src_port] = {
-            'dest_port': dest_port, 'timestamp': current_time}
-        return dest_port  # Return port from 27000 - 27024
-
-    if dest_port in cache_ports:  # Field Device -> Headend
-        write_to_file(
-            f"\n Field device response back to headend! src: {src_port} dest: {dest_port}")
-        tport = cache_ports[dest_port]['dest_port']
-        del cache_ports[dest_port]
-        return tport
-
-    return None  # No match
-
-
-def remove_expired_cache():
-    current_time = time.time()
-    expired_keys = [key for key, value in cache_ports.items()
-                    if current_time - value['timestamp'] > CACHE_TIMEOUT]
-    for key in expired_keys:
-        write_to_file(f"Removing cache: {key}")
-        del cache_ports[key]
-
+        
 
 def print_port(pkt):
     if IP in pkt and TCP in pkt:
@@ -68,15 +34,6 @@ def print_port(pkt):
         dst_ip = pkt[IP].dst
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
-
-        # test
-        port = getc_port(tcp_sport, tcp_dport)
-        if port:
-            write_to_file("\n====================")
-            write_to_file(
-                f"\n Found new Source Port: {port} for: Src Port: {tcp_sport}, Dest Port: {tcp_dport}")
-            write_to_file("\n====================")
-
         
         if tcp_dport in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
