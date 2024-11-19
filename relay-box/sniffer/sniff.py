@@ -15,6 +15,7 @@ NETWORK_PROFILES = config['network_profiles']
 PACKET_LOSS = config['packet_loss']
 port_sub = config['port_sub']
 PORT_RANGE = range(config['port_range'][0], config['port_range'][1])
+LAST_PROFILE = None
 
 def write_to_file(log):
     try:
@@ -50,12 +51,16 @@ def print_port(pkt):
             write_to_file(f"\n Network Profile for ID {device_id}: {profile}" )
             profile_type = profile.get("profile")
             if profile_type in NETWORK_PROFILES:
-                packet_loss = PACKET_LOSS.get(profile_type, 0)
-                write_to_file(f"\n Packet loss for profile {profile_type}: {packet_loss}%")
-                delay_range = NETWORK_PROFILES[profile_type]
-                delay = random.randint(delay_range["min"], delay_range["max"])
-                write_to_file(f"\n Chosen delay for profile {profile_type}: {delay} ms")
-                packet_callback(delay, packet_loss)
+                if profile_type == LAST_PROFILE:
+                    write_to_file(f"Profile {profile_type} already set")
+                    return
+                else:
+                    packet_loss = PACKET_LOSS.get(profile_type, 0)
+                    write_to_file(f"\n Packet loss for profile {profile_type}: {packet_loss}%")
+                    delay_range = NETWORK_PROFILES[profile_type]
+                    delay = random.randint(delay_range["min"], delay_range["max"])
+                    write_to_file(f"\n Chosen delay for profile {profile_type}: {delay} ms")
+                    packet_callback(delay, packet_loss)
             else:
                 write_to_file(f"No network profile type found for {profile_type}")
 
