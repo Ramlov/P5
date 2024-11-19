@@ -102,9 +102,11 @@ def packet_callback(delay, packet_loss):
             config['api_endpoints']['packet_loss'],
             json=payload_loss
         )
-        write_to_file(f"Response from packet_loss: {response_loss.text}")
+        pass
+        # write_to_file(f"Response from packet_loss: {response_loss.text}")
     except Exception as e:
-        write_to_file(f"Error in packet_loss request: {e}")
+        pass
+        # write_to_file(f"Error in packet_loss request: {e}")
 
     payload = {'milliseconds': delay}
     try:
@@ -112,9 +114,11 @@ def packet_callback(delay, packet_loss):
             config['api_endpoints']['packet_delay'],
             json=payload
         )
-        write_to_file(f"Response from packet_delay: {response_delay.text}" + "\n")
+        pass
+        # write_to_file(f"Response from packet_delay: {response_delay.text}" + "\n")
     except Exception as e:
-        write_to_file(f"Error in packet_delay request: {e}" + "\n")
+        pass
+        # write_to_file(f"Error in packet_delay request: {e}" + "\n")
 
 def get_id_from_port(port):
     return port - port_sub
