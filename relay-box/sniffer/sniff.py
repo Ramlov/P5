@@ -54,7 +54,7 @@ def remove_expired_cache():
     expired_keys = [key for key, value in cache_ports.items()
                     if current_time - value['timestamp'] > CACHE_TIMEOUT]
     for key in expired_keys:
-        print(f"Removing cache: {key}")
+        write_to_file(f"Removing cache: {key}")
         del cache_ports[key]
 
 
@@ -68,12 +68,12 @@ def print_port(pkt):
         # test
         port = getc_port(tcp_sport, tcp_dport)
         if port is None:
-            print(
+            write_to_file(
                 f"Could not match a port FOR:           Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             return
-        print(
+        write_to_file(
             f"Received ports: Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
-        print(f"Found new source port: {port} for packet.")
+        write_to_file(f"Found new source port: {port} for packet.")
         if tcp_dport in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
 
