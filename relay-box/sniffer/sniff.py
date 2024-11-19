@@ -1,3 +1,4 @@
+import time
 import requests
 import json
 import random
@@ -26,13 +27,53 @@ def sniff_packets():
     while True:
         sniff(prn=print_port, count=1)
 
+
+cache_ports = {}
+CACHE_TIMEOUT = 5 #seconds
+def getc_port(src_port, dest_port):
+    # Clean up expired entries
+    remove_expired_cache()
+
+    current_time = time.time()
+
+    if dest_port in PORT_RANGE:  # Headend -> Field Device
+        cache_ports[src_port] = {
+            'dest_port': dest_port, 'timestamp': current_time}
+        return dest_port  # Return port from 27000 - 27024
+
+    if dest_port in cache_ports:  # Field Device -> Headend
+        tport = cache_ports[dest_port]['dest_port']
+        del cache_ports[dest_port]
+        return tport
+
+    return None  # No match
+
+
+def remove_expired_cache():
+    current_time = time.time()
+    expired_keys = [key for key, value in cache_ports.items()
+                    if current_time - value['timestamp'] > CACHE_TIMEOUT]
+    for key in expired_keys:
+        print(f"Removing cache: {key}")
+        del cache_ports[key]
+
+
 def print_port(pkt):
     if IP in pkt and TCP in pkt:
         src_ip = pkt[IP].src
         dst_ip = pkt[IP].dst
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
-        
+
+        # test
+        port = getc_port(tcp_sport, tcp_dport)
+        if port is None:
+            print(
+                f"Could not match a port FOR:           Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
+            return
+        print(
+            f"Received ports: Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
+        print(f"Found new source port: {port} for packet.")
         if tcp_dport in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
 
