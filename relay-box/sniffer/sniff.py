@@ -12,6 +12,7 @@ with open(config['fd_profiles_file'], 'r') as file:
     fd_profiles = json.load(file)
 
 NETWORK_PROFILES = config['network_profiles']
+PACKET_LOSS = config['packet_loss']
 port_sub = config['port_sub']
 PORT_RANGE = range(config['port_range'][0], config['port_range'][1])
 
@@ -26,7 +27,6 @@ def write_to_file(log):
 def sniff_packets():
     while True:
         sniff(prn=print_port, count=0)
-        
 
 def print_port(pkt):
     if IP in pkt and TCP in pkt:
@@ -35,10 +35,13 @@ def print_port(pkt):
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
         
-        if tcp_dport in PORT_RANGE:
+        # Choose the smaller of sport or dport
+        chosen_port = min(tcp_sport, tcp_dport)
+        
+        if chosen_port in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
-
-            device_id = get_id_from_port(tcp_dport)
+            
+            device_id = get_id_from_port(chosen_port)
             if device_id < 0:
                 write_to_file("No Device ID Found")
                 return
@@ -47,7 +50,7 @@ def print_port(pkt):
             write_to_file(f"\n Network Profile for ID {device_id}: {profile}" )
             profile_type = profile.get("profile")
             if profile_type in NETWORK_PROFILES:
-                packet_loss = {"GOOD": 2, "NORMAL": 5, "SLOW": 10}.get(profile_type, 0)
+                packet_loss = PACKET_LOSS.get(profile_type, 0)
                 write_to_file(f"\n Packet loss for profile {profile_type}: {packet_loss}%")
                 delay_range = NETWORK_PROFILES[profile_type]
                 delay = random.randint(delay_range["min"], delay_range["max"])
@@ -63,11 +66,9 @@ def packet_callback(delay, packet_loss):
             config['api_endpoints']['packet_loss'],
             json=payload_loss
         )
-        pass
-        # write_to_file(f"Response from packet_loss: {response_loss.text}")
+        write_to_file(f"Response from packet_loss: {response_loss.text}")
     except Exception as e:
-        pass
-        # write_to_file(f"Error in packet_loss request: {e}")
+        write_to_file(f"Error in packet_loss request: {e}")
 
     payload = {'milliseconds': delay}
     try:
@@ -75,11 +76,9 @@ def packet_callback(delay, packet_loss):
             config['api_endpoints']['packet_delay'],
             json=payload
         )
-        pass
-        # write_to_file(f"Response from packet_delay: {response_delay.text}" + "\n")
+        write_to_file(f"Response from packet_delay: {response_delay.text}" + "\n")
     except Exception as e:
-        pass
-        # write_to_file(f"Error in packet_delay request: {e}" + "\n")
+        write_to_file(f"Error in packet_delay request: {e}" + "\n")
 
 def get_id_from_port(port):
     return port - port_sub

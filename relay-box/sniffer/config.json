@@ -10,6 +10,11 @@
         "NORMAL": {"min": 300, "max": 500},
         "GOOD": {"min": 50, "max": 300}
     },
+    "packet_loss": {
+        "GOOD": 2,
+        "NORMAL": 5,
+        "SLOW": 10
+    },
     "port_sub": 21000,
     "port_range": [20000, 22000]
 }
