@@ -61,6 +61,7 @@ def print_port(pkt):
                     delay = random.randint(delay_range["min"], delay_range["max"])
                     write_to_file(f"\n Chosen delay for profile {profile_type}: {delay} ms")
                     packet_callback(delay, packet_loss)
+                    LAST_PROFILE = profile_type
             else:
                 write_to_file(f"No network profile type found for {profile_type}")
 
