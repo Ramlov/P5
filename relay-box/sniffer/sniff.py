@@ -69,10 +69,11 @@ def print_port(pkt):
         port = getc_port(tcp_sport, tcp_dport)
         if port is None:
             write_to_file(
-                f"Could not match a port FOR:           Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
-        write_to_file(
-            f"Received ports: Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
-        write_to_file(f"Found new source port: {port} for packet.")
+                f"\nCould not match a port FOR:           Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
+        else:
+            write_to_file(
+                f"\n Received ports: Src Port: {tcp_sport}, Dest Port: {tcp_dport}")
+            write_to_file(f"\n Found new source port: {port}")
         if tcp_dport in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
 
