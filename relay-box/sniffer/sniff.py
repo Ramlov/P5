@@ -37,11 +37,14 @@ def getc_port(src_port, dest_port):
     current_time = time.time()
 
     if dest_port in PORT_RANGE:  # Headend -> Field Device
+        print(f"\n Headend -> Field Device: src: {src_port} dest: {dest_port}")
         cache_ports[src_port] = {
             'dest_port': dest_port, 'timestamp': current_time}
         return dest_port  # Return port from 27000 - 27024
 
     if dest_port in cache_ports:  # Field Device -> Headend
+        print(
+            f"\n Field device response back to headend! src: {src_port} dest: {dest_port}")
         tport = cache_ports[dest_port]['dest_port']
         del cache_ports[dest_port]
         return tport
@@ -67,13 +70,13 @@ def print_port(pkt):
 
         # test
         port = getc_port(tcp_sport, tcp_dport)
-        if port is None:
+        if port:
+            write_to_file("\n====================")
             write_to_file(
-                f"\nCould not match a port FOR:           Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
-        else:
-            write_to_file(
-                f"\n Received ports: Src Port: {tcp_sport}, Dest Port: {tcp_dport}")
-            write_to_file(f"\n Found new source port: {port}")
+                f"\n Found new Source Port: {port} for: Src Port: {tcp_sport}, Dest Port: {tcp_dport}")
+            write_to_file("\n====================")
+
+        
         if tcp_dport in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
 
