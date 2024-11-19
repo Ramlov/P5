@@ -1,0 +1,6 @@
+websockets
+ping3
+scapy 
+sqlite3
+asyncio
+ntplib
