@@ -4,22 +4,21 @@ import random
 from scapy.all import sniff, TCP, IP
 from time import sleep
 
-with open('fd_profiles.json', 'r') as file:
+with open('config.json', 'r') as config_file:
+    config = json.load(config_file)
+
+with open(config['fd_profiles_file'], 'r') as file:
     fd_profiles = json.load(file)
 
-NETWORK_PROFILES = {
-    "SLOW": {"min": 1000, "max": 2000},
-    "NORMAL": {"min": 300, "max": 500},
-    "GOOD": {"min": 50, "max": 300}
-}
-
-PORT_RANGE = range(3000, 3029)
+NETWORK_PROFILES = config['network_profiles']
+port_sub = config['port_sub']
+PORT_RANGE = range(config['port_range'][0], config['port_range'][1])
 
 def write_to_file(log):
     try:
-        with open("log.txt", "a") as file:
+        with open(config['log_file'], "a") as file:
             file.write(log)
-        print(f"Logged: {log}")  # Debugging print statement
+        # print(f"Logged: {log}") 
     except Exception as e:
         print(f"Error writing to file: {e}")
 
@@ -34,7 +33,6 @@ def print_port(pkt):
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
         
-        # Only process packets with destination ports within the range 3000-3029
         if tcp_dport in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
 
@@ -60,7 +58,7 @@ def packet_callback(delay, packet_loss):
     payload_loss = {"percent": packet_loss}
     try:
         response_loss = requests.post(
-            'http://192.168.1.8/api/disciplines/packet_loss',
+            config['api_endpoints']['packet_loss'],
             json=payload_loss
         )
         write_to_file(f"Response from packet_loss: {response_loss.text}")
@@ -70,7 +68,7 @@ def packet_callback(delay, packet_loss):
     payload = {'milliseconds': delay}
     try:
         response_delay = requests.post(
-            'http://192.168.1.8/api/disciplines/packet_delay',
+            config['api_endpoints']['packet_delay'],
             json=payload
         )
         write_to_file(f"Response from packet_delay: {response_delay.text}" + "\n")
@@ -78,7 +76,7 @@ def packet_callback(delay, packet_loss):
         write_to_file(f"Error in packet_delay request: {e}" + "\n")
 
 def get_id_from_port(port):
-    return port - 3000
+    return port - port_sub
 
 if __name__ == "__main__":
     sniff_packets()
