@@ -33,7 +33,6 @@ def load_field_devices():
             'last_data_received': last_data_received,  # This can be None
             'active_metrics': manager.dict(),
             'passive_metrics': manager.dict(),  # Placeholder for now
-            # Additional fields as needed
         })
         fd_locks[fd_id] = threading.Lock()
 
@@ -41,7 +40,7 @@ def load_field_devices():
 
     return field_devices, fd_locks
 
-def backend_listener(adaptive_data_access):
+def backend_listener(adaptive_data_access, server_ip, backend_listen_port):
     async def handler(websocket):
         async for message in websocket:
             message = message.strip()
@@ -57,7 +56,7 @@ def backend_listener(adaptive_data_access):
                 adaptive_data_access.focus_on_fds(requested_fd_ids)
 
     async def server():
-        async with websockets.serve(handler, '192.168.1.14', 8765):
+        async with websockets.serve(handler, server_ip, backend_listen_port):
             await asyncio.Future()  # Run forever
 
     loop = asyncio.new_event_loop()
@@ -66,14 +65,15 @@ def backend_listener(adaptive_data_access):
 
 def main():
     # Server Information
-    server_ip = '192.168.1.14'
-    passive_server_port = '8000'
+    server_ip = '192.168.1.3'
+    passive_server_port = '8765'
+    backend_listen_port = '8000'
 
     # Load field devices from SQLite database
     field_devices, fd_locks = load_field_devices()
 
     # Initialize the Passive Monitoring module (placeholder)
-    passive_monitor = PassiveMonitoring(field_devices=field_devices, fd_locks=fd_locks, target_ip=server_ip, target_port=passive_server_port)
+    passive_monitor = PassiveMonitoring(field_devices=field_devices, fd_locks=fd_locks, host=server_ip, port=passive_server_port, interface="Wi-Fi")
     passive_monitor.start()
 
     # Initialize the Adaptive Data Access module
@@ -82,7 +82,7 @@ def main():
     adaptive_data_access_thread.start()
 
     # Start the backend listener in a separate thread
-    backend_listener_thread = threading.Thread(target=backend_listener, args=(adaptive_data_access,), daemon=True)
+    backend_listener_thread = threading.Thread(target=backend_listener, args=(adaptive_data_access, server_ip, backend_listen_port,), daemon=True)
     backend_listener_thread.start()
 
     # Initialize and start Active Monitoring
