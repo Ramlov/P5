@@ -13,10 +13,10 @@ class FieldDevice:
         self.device_id = device_id
         self.port = port
         self.data_storage = []
-        self.headend_url = "ws://192.168.1.3:8765"
+        self.headend_url = "ws://192.168.1.7:8765"
         self.last_collected_data = time.time()
         self.datapoint_time = 5  # Interval between data generation (seconds)
-        self.bulkupload_time = 10  # Interval between bulk uploads (seconds)
+        self.bulkupload_time = 500  # Interval between bulk uploads (seconds)
         self.ntp_client = ntplib.NTPClient()  # Initialize the NTP client
         self.ntp_server = "pool.ntp.org"  # Public NTP server
         self.ntp_offset = self.get_ntp_offset()
@@ -38,9 +38,13 @@ class FieldDevice:
         print(f"Device on port {self.port} connected")
         try:
             async for message in websocket:
-                print(f"Received from {self.port}: {message}")
-                if message == "all_data":
-                    response_data = json.dumps(self.data_storage)
+                # print(f"Received from {self.port}: {message}")
+                if message == "FETCH_DATA":
+                    if self.data_storage:
+                        response_data = json.dumps(self.data_storage)
+                    else:
+                        response_data = "No data available"
+
                     await websocket.send(response_data)
                     print(f"Data sent to server from device {self.device_id}")
                     self.data_storage.clear()  # Clear data after sending
@@ -49,7 +53,7 @@ class FieldDevice:
 
     async def start_server(self):
         print(f"Starting WebSocket server on port {self.port}")
-        async with websockets.serve(self.websocket_handler, "192.168.1.4", self.port):
+        async with websockets.serve(self.websocket_handler, "192.168.1.2", self.port):
             await asyncio.Future()  # Run forever
 
     def run(self):
@@ -110,10 +114,10 @@ class FieldDevice:
 
 
 if __name__ == "__main__":
-    FD_AMOUNT = 50  # Number of field devices to simulate
+    FD_AMOUNT = 10  # Number of field devices to simulate
     threads = []
     for id in range(FD_AMOUNT):
-        port = 3000 + id
+        port = 21000 + id
         device = FieldDevice(id, port)
         thread = threading.Thread(target=device.run)
         threads.append(thread)
