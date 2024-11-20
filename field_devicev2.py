@@ -21,6 +21,9 @@ class FieldDevice:
         self.ntp_server = "pool.ntp.org"  # Public NTP server
         self.ntp_offset = self.get_ntp_offset()
 
+        self.local_addr = ("192.168.1.4", port)
+
+
     def get_ntp_offset(self):
         """Get the offset between the local clock and NTP time."""
         try:
@@ -98,7 +101,7 @@ class FieldDevice:
             }
 
             try:
-                async with websockets.connect(self.headend_url) as websocket:
+                async with websockets.connect(self.headend_url, local_addr=self.local_addr) as websocket:
                     print(f"Device {self.device_id}: Connected to server at {self.headend_url}")
                     
                     # Send the bulk data as JSON
