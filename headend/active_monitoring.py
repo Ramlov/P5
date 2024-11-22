@@ -3,10 +3,11 @@
 import threading
 import time
 import asyncio
-from datetime import datetime
+from datetime import datetime, timedelta
 from ping3 import ping
 import websockets
 import json
+import ntplib
 
 class ActiveMonitoring:
     """Maintains a set number of threads that perform active monitoring on assigned FDs."""
@@ -19,6 +20,25 @@ class ActiveMonitoring:
         self.stop_event = threading.Event()
         self.field_device_ids = list(self.field_devices.keys())
         self.time_monitoring_cycle = 10 #Time in seconds between cycles
+        self.ntp_offset = self.get_ntp_offset()
+
+    def get_ntp_offset(self):
+        """
+        Fetch NTP time offset to synchronize timing.
+        """
+        try:
+            client = ntplib.NTPClient()
+            response = client.request("pool.ntp.org")
+            return response.offset
+        except Exception as e:
+            print(f"Failed to fetch NTP time: {e}")
+            return 0
+        
+    def get_ntp_time(self):
+        """
+        Get current time synchronized with NTP (as a datetime object).
+        """
+        return datetime.now() + timedelta(seconds=self.ntp_offset)
 
     def start(self):
         # Calculate the number of field devices per thread
@@ -109,31 +129,35 @@ class ActiveMonitoring:
 
 
     async def throughput_test(self, ip_address, port=80, data_size=1024 * 10, iterations=10):
-        """Estimate throughput by sending and receiving data over WebSocket."""
+        """Estimate throughput by sending and receiving data over WebSocket using NTP timestamps."""
         try:
             uri = f"ws://{ip_address}:{port}"
             total_data_sent = 0
-            total_elapsed_time = 0
+            total_forward_delay = 0
 
             async with websockets.connect(uri, timeout=5) as websocket:
                 for seq_num in range(iterations):
                     data_to_send = 'a' * data_size  # Sending 10 KB of data
-                    start_time = time.perf_counter()
+                    client_start_time = self.get_ntp_time() # NTP-synchronized time
                     await websocket.send(data_to_send)
-                    # Wait for acknowledgment
+                    # Receive acknowledgment with device timestamp
                     ack_message = await websocket.recv()
-                    end_time = time.perf_counter()
-                    elapsed_time = end_time - start_time
-                    total_data_sent += len(data_to_send.encode('utf-8'))
-                    total_elapsed_time += elapsed_time
 
-                    # Optional: Process acknowledgment message
+                    # Process acknowledgment message
                     ack_data = json.loads(ack_message)
-                    # You can use ack_data['timestamp'] for additional latency calculations
+                    device_recv_time = float(ack_data['device_recv_time'])
+
+                    # Calculate forward delay
+                    forward_delay = device_recv_time - client_start_time
+                    total_forward_delay += forward_delay
+                    total_data_sent += len(data_to_send.encode('utf-8'))
+
+            # Average forward delay
+            average_forward_delay = total_forward_delay / iterations
 
             # Calculate throughput in kbps
-            if total_elapsed_time > 0:
-                throughput = (total_data_sent * 8) / (total_elapsed_time * 1000)  # kbps
+            if average_forward_delay > 0:
+                throughput = (total_data_sent * 8) / (average_forward_delay * 1000)  # kbps
             else:
                 throughput = None
             return throughput
