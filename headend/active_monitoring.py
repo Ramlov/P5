@@ -66,7 +66,7 @@ class ActiveMonitoring:
             return
 
         ip_address = fd_info['ip_address']
-        port = fd_info.get('port', 80)
+        port = fd_info.get('port')
 
         # Step 1: Ping & ICMP Testing
         latency, packet_loss = self.ping_icmp_test(ip_address)
@@ -142,17 +142,15 @@ class ActiveMonitoring:
 
     def classify_connection(self, latency, packet_loss, throughput):
         """Classify the connection based on latency, packet loss, and throughput."""
-        if latency is None or packet_loss == 100.0:
+        if latency is None or packet_loss == 100.0 or throughput == 0:
             return 'Unavailable'
 
-        if latency < 200 and packet_loss < 1 and throughput >= 500:
+        if latency < 200 and packet_loss == 0 and throughput >= 500:
             return 'Good'
-        elif 200 <= latency <= 500 and 1 <= packet_loss <= 5 and throughput >= 100:
+        elif latency <= 350 and packet_loss <= 20 and throughput >= 100:
             return 'Acceptable'
-        elif (latency > 500 or packet_loss > 5) and throughput > 0:
-            return 'Poor'
         else:
-            return 'Unavailable'  # Default to 'Poor' if none of the above conditions match
+            return 'Poor'  # Default to 'Poor' if none of the above conditions match
 
     def analyze_and_store_results(self, fd_info, fd_id, latency, packet_loss, throughput, status):
         """Store results in the fd_info."""

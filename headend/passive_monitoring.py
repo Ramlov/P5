@@ -8,7 +8,7 @@ import ntplib
 
 
 class PassiveMonitoring:
-    def __init__(self, field_devices=None, fd_locks=None, host="192.168.1.3", port=8765, interface="Wi-Fi"):
+    def __init__(self, field_devices, fd_locks, host="192.168.1.3", port=8765):
         """
         Initialize Passive Network Monitoring.
         :param field_devices: Dictionary to store field device data.
@@ -17,11 +17,10 @@ class PassiveMonitoring:
         :param port: Port for the WebSocket server.
         :param interface: Network interface for packet sniffing.
         """
-        self.field_devices = field_devices if field_devices is not None else {}
-        self.fd_locks = fd_locks if fd_locks is not None else {}
+        self.field_devices = field_devices
+        self.fd_locks = fd_locks
         self.host = host
         self.port = port
-        self.interface = interface
         self.packet_data = {}  # Store packet data per connection (keyed by (src_ip, src_port))
         self.capture_thread = None  # Will be the sniffer later. Can be used to restart etc
         self.server_thread = None  # Will be the server later. Can be used to restart etc
@@ -52,7 +51,6 @@ class PassiveMonitoring:
         """
         try:
             sniff(
-                iface=self.interface,
                 filter=f"tcp port {self.port}",
                 prn=self.process_packet,
                 store=False,
@@ -69,7 +67,12 @@ class PassiveMonitoring:
         """
         if packet.haslayer("IP") and packet.haslayer("TCP"):
             src_ip = packet["IP"].src
+            dst_ip = packet["IP"].dst
             src_port = packet["TCP"].sport
+            dst_port = packet["TCP"].dport
+
+            print(f"Destination: {dst_ip}:{dst_port}")
+
             timestamp = self.get_ntp_time()  # Use NTP-synced time as datetime
 
             # Unique key for the field device connection
@@ -120,7 +123,7 @@ class PassiveMonitoring:
         throughput = total_data_size / total_time if total_time > 0 else 0
         throughput_kbps = (throughput * 8) / 1000  # Convert bytes/sec to kbps
 
-        timestamp = self.get_ntp_time
+        timestamp = self.get_ntp_time()
 
         return {
             "packet_count": packet_count,
@@ -147,7 +150,7 @@ class PassiveMonitoring:
 
                 # Parse the message
                 data = json.loads(message)
-                fd_id = data.get("device_id", "Unknown")
+                fd_id = str(data.get("device_id", "Unknown"))
                 send_timestamp = float(data.get("send_timestamp"))
 
                 # Convert Timestamp
@@ -191,7 +194,7 @@ class PassiveMonitoring:
             print(f"Error processing bulk upload: {e}")
             print(f"Classifying as Unavailable\n")
 
-            status = self.classify_connection(self, 0)
+            status = self.classify_connection(metrics=0)
 
             # Update the field device storage
             with self.fd_locks[fd_id]:
@@ -200,7 +203,7 @@ class PassiveMonitoring:
 
                 # Update the fields
                 passive_metrics['status'] = status
-                passive_metrics['last_active'] = self.get_ntp_time
+                passive_metrics['last_active'] = self.get_ntp_time()
                 fd_info['passive_metrics'] = passive_metrics
 
     def classify_connection(self, metrics):

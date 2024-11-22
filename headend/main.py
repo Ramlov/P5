@@ -2,7 +2,6 @@
 
 import threading
 import time
-from datetime import datetime
 import sqlite3
 import asyncio
 import websockets
@@ -65,7 +64,7 @@ def backend_listener(adaptive_data_access, server_ip, backend_listen_port):
 
 def main():
     # Server Information
-    server_ip = '192.168.1.3'
+    server_ip = '192.168.1.7'
     passive_server_port = '8765'
     backend_listen_port = '8000'
 
@@ -73,7 +72,7 @@ def main():
     field_devices, fd_locks = load_field_devices()
 
     # Initialize the Passive Monitoring module (placeholder)
-    passive_monitor = PassiveMonitoring(field_devices=field_devices, fd_locks=fd_locks, host=server_ip, port=passive_server_port, interface="Wi-Fi")
+    passive_monitor = PassiveMonitoring(field_devices=field_devices, fd_locks=fd_locks, host=server_ip, port=passive_server_port)
     passive_monitor.start()
 
     # Initialize the Adaptive Data Access module
@@ -86,7 +85,7 @@ def main():
     backend_listener_thread.start()
 
     # Initialize and start Active Monitoring
-    num_active_threads = 5  # Adjust as needed
+    num_active_threads = 3  # Adjust as needed
     active_monitor = ActiveMonitoring(field_devices, fd_locks, num_active_threads)
     active_monitor.start()
 
