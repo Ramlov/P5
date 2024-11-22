@@ -4,7 +4,6 @@ import json
 import asyncio
 import websockets
 import random
-from datetime import datetime
 import ntplib  # Added for NTP synchronization
 
 
@@ -39,9 +38,9 @@ class FieldDevice:
 
     async def websocket_handler(self, websocket):
         print(f"Device on port {self.port} connected")
+        sequence_number = 0
         try:
             async for message in websocket:
-                # print(f"Received from {self.port}: {message}")
                 if message == "FETCH_DATA":
                     if self.data_storage:
                         response_data = json.dumps(self.data_storage)
@@ -51,6 +50,15 @@ class FieldDevice:
                     await websocket.send(response_data)
                     print(f"Data sent to server from device {self.device_id}")
                     self.data_storage.clear()  # Clear data after sending
+                else:
+                    # This is the case for throughput testing.
+                    ack_message = json.dumps({
+                        "type": "ack",
+                        "sequence_number": sequence_number,
+                    })
+                    await websocket.send(ack_message)
+                    sequence_number += 1
+
         except websockets.exceptions.ConnectionClosedError:
             print(f"Device on port {self.port} disconnected")
 
