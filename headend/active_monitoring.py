@@ -134,10 +134,10 @@ class ActiveMonitoring:
             uri = f"ws://{ip_address}:{port}"
             total_data_sent = 0
             total_forward_delay = 0
+            data_to_send = 'a' * data_size  # Sending 10 KB of data
 
             async with websockets.connect(uri, timeout=5) as websocket:
                 for seq_num in range(iterations):
-                    data_to_send = 'a' * data_size  # Sending 10 KB of data
                     client_start_time = self.get_ntp_time() # NTP-synchronized time
                     await websocket.send(data_to_send)
                     # Receive acknowledgment with device timestamp
@@ -145,7 +145,7 @@ class ActiveMonitoring:
 
                     # Process acknowledgment message
                     ack_data = json.loads(ack_message)
-                    device_recv_time = float(ack_data['device_recv_time'])
+                    device_recv_time = float(ack_data['timestamp'])
 
                     # Calculate forward delay
                     forward_delay = device_recv_time - client_start_time
@@ -157,7 +157,7 @@ class ActiveMonitoring:
 
             # Calculate throughput in kbps
             if average_forward_delay > 0:
-                throughput = (total_data_sent * 8) / (average_forward_delay * 1000)  # kbps
+                throughput = (data_to_send * 8) / (average_forward_delay * 1000)  # kbps
             else:
                 throughput = None
             return throughput
