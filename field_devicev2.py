@@ -55,6 +55,7 @@ class FieldDevice:
                     ack_message = json.dumps({
                         "type": "ack",
                         "sequence_number": sequence_number,
+                        "timestamp": self.get_ntp_timestamp()
                     })
                     await websocket.send(ack_message)
                     sequence_number += 1
