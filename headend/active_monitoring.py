@@ -6,6 +6,7 @@ import asyncio
 from datetime import datetime
 from ping3 import ping
 import websockets
+import json
 
 class ActiveMonitoring:
     """Maintains a set number of threads that perform active monitoring on assigned FDs."""
@@ -107,32 +108,36 @@ class ActiveMonitoring:
         return avg_latency, packet_loss
 
 
-    async def throughput_test(self, ip_address, port=80, data_size=1024 * 100):
+    async def throughput_test(self, ip_address, port=80, data_size=1024 * 10, iterations=10):
         """Estimate throughput by sending and receiving data over WebSocket."""
         try:
             uri = f"ws://{ip_address}:{port}"
-            start_time = time.time()
+            total_data_sent = 0
+            total_elapsed_time = 0
+
             async with websockets.connect(uri, timeout=5) as websocket:
-                # Send data to the FD
-                data_to_send = 'a' * data_size  # Sending 100 KB of data
-                await websocket.send(data_to_send)
-                # Optionally receive data back
-                try:
-                    received_data = await websocket.recv()
-                except websockets.exceptions.ConnectionClosedError:
-                    received_data = ''
-                end_time = time.time()
+                for seq_num in range(iterations):
+                    data_to_send = 'a' * data_size  # Sending 10 KB of data
+                    start_time = time.perf_counter()
+                    await websocket.send(data_to_send)
+                    # Wait for acknowledgment
+                    ack_message = await websocket.recv()
+                    end_time = time.perf_counter()
+                    elapsed_time = end_time - start_time
+                    total_data_sent += len(data_to_send.encode('utf-8'))
+                    total_elapsed_time += elapsed_time
+
+                    # Optional: Process acknowledgment message
+                    ack_data = json.loads(ack_message)
+                    # You can use ack_data['timestamp'] for additional latency calculations
 
             # Calculate throughput in kbps
-            elapsed_time = end_time - start_time
-            total_data = len(data_to_send.encode('utf-8')) + len(received_data.encode('utf-8'))
-            if elapsed_time > 0:
-                throughput = (total_data * 8) / (elapsed_time * 1000)  # kbps
+            if total_elapsed_time > 0:
+                throughput = (total_data_sent * 8) / (total_elapsed_time * 1000)  # kbps
             else:
                 throughput = None
             return throughput
         except Exception as e:
-            #print(f"Throughput test failed for FD {ip_address}:{port} - {e}")
             return None
 
     def classify_connection(self, latency, packet_loss, throughput):

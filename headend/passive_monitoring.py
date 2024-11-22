@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 import threading
 import json
 import ntplib
-import time  # Added to keep the main thread alive if needed
 
 
 class PassiveMonitoring:
