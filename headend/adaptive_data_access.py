@@ -40,8 +40,8 @@ class AdaptiveDataAccess:
                 else:
                     # No FDs need fetching at this time
                     print(f"No Current Field Devices that fit ADA Criteria\n")
-                    time.sleep(10)  # Wait before checking again
-            time.sleep(1)  # Adjust as needed
+
+            time.sleep(20)  # Adjust as needed
 
     def get_fds_to_fetch(self):
         """Identify FDs that are 'available' and need data fetching."""
@@ -127,7 +127,7 @@ class AdaptiveDataAccess:
         uri = f"ws://{ip_address}:{port}"
 
         try:
-            async with websockets.connect(uri, timeout=5) as websocket:
+            async with websockets.connect(uri) as websocket:
                 # Send a request to fetch data
                 request_message = 'FETCH_DATA'
                 await websocket.send(request_message)

@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS field_devices (
 # Function to insert devices into the database
 def insert_devices(start_id, end_id, region, ip_address):
     for fd_id in range(start_id, end_id + 1):
-        port = 3000 + fd_id  # Port is 3000 + FD_ID
+        port = 21000 + fd_id  # Port is 3000 + FD_ID
         cursor.execute('''
             INSERT INTO field_devices (FD_ID, IP, Region, Port)
             VALUES (?, ?, ?, ?)
@@ -27,7 +27,7 @@ def insert_devices(start_id, end_id, region, ip_address):
 
 # Step 3: Insert FD 0-9 for Region A1
 ip_a1 = '192.168.1.2'  # Common IP for Region A1
-insert_devices(0, 99, 'A1', ip_a1)
+insert_devices(0, 9, 'A1', ip_a1)
 
 # Step 4: Insert FD 10-19 for Region A2
 #ip_a2 = '192.168.1.101'  # Common IP for Region A2

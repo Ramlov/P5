@@ -65,7 +65,7 @@ class ActiveMonitoring:
             return
 
         ip_address = fd_info['ip_address']
-        port = fd_info.get('port', 80)
+        port = fd_info.get('port')
 
         # Step 1: Ping & ICMP Testing
         latency, packet_loss = self.ping_icmp_test(ip_address)
@@ -107,47 +107,40 @@ class ActiveMonitoring:
         return avg_latency, packet_loss
 
 
-    async def throughput_test(self, ip_address, port=80, data_size=1024 * 100):
+    async def throughput_test(self, ip_address, port, data_size=1024 * 100):
         """Estimate throughput by sending and receiving data over WebSocket."""
         try:
             uri = f"ws://{ip_address}:{port}"
             start_time = time.time()
-            async with websockets.connect(uri, timeout=5) as websocket:
+            async with websockets.connect(uri) as websocket:
                 # Send data to the FD
                 data_to_send = 'a' * data_size  # Sending 100 KB of data
                 await websocket.send(data_to_send)
-                # Optionally receive data back
-                try:
-                    received_data = await websocket.recv()
-                except websockets.exceptions.ConnectionClosedError:
-                    received_data = ''
                 end_time = time.time()
 
             # Calculate throughput in kbps
             elapsed_time = end_time - start_time
-            total_data = len(data_to_send.encode('utf-8')) + len(received_data.encode('utf-8'))
+            total_data = len(data_to_send.encode('utf-8'))
             if elapsed_time > 0:
                 throughput = (total_data * 8) / (elapsed_time * 1000)  # kbps
             else:
                 throughput = None
             return throughput
         except Exception as e:
-            #print(f"Throughput test failed for FD {ip_address}:{port} - {e}")
+            print(f"Throughput test failed for FD {ip_address}:{port} - {e}")
             return None
 
     def classify_connection(self, latency, packet_loss, throughput):
         """Classify the connection based on latency, packet loss, and throughput."""
-        if latency is None or packet_loss == 100.0:
+        if latency is None or packet_loss == 100.0 or throughput == 0:
             return 'Unavailable'
 
-        if latency < 200 and packet_loss < 1 and throughput >= 500:
+        if latency < 200 and packet_loss == 0 and throughput >= 500:
             return 'Good'
-        elif 200 <= latency <= 500 and 1 <= packet_loss <= 5 and throughput >= 100:
+        elif latency <= 350 and packet_loss <= 20 and throughput >= 100:
             return 'Acceptable'
-        elif (latency > 500 or packet_loss > 5) and throughput > 0:
-            return 'Poor'
         else:
-            return 'Unavailable'  # Default to 'Poor' if none of the above conditions match
+            return 'Poor'  # Default to 'Poor' if none of the above conditions match
 
     def analyze_and_store_results(self, fd_info, fd_id, latency, packet_loss, throughput, status):
         """Store results in the fd_info."""
