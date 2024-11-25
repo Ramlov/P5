@@ -73,8 +73,6 @@ class ActiveMonitoring:
         while not self.stop_event.is_set():
             for fd_id in fd_ids_subset:
                 self.active_monitoring_cycle(fd_id)
-                # Optionally sleep between FDs
-                time.sleep(1)
             # Sleep before starting the next monitoring cycle
             time.sleep(self.time_monitoring_cycle)
 
