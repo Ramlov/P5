@@ -21,7 +21,7 @@ def write_to_file(log):
     try:
         with open(config['log_file'], "a") as file:
             file.write(log)
-        # print(f"Logged: {log}") 
+        print(f"Logged: {log}") 
     except Exception as e:
         print(f"Error writing to file: {e}")
 

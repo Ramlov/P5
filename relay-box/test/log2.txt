@@ -1,0 +1,321 @@
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1595 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 374 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}Profile NORMAL already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}Profile NORMAL already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}Profile NORMAL already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1052 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 498 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1827 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 460 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}Profile NORMAL already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1081 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 479 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1380 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 399 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}Profile NORMAL already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}Profile NORMAL already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1643 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 478 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1584 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 422 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1612 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 461 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1602 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 398 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1556 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 345 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1019 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 420 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1995 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 346 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}Profile NORMAL already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1582 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 373 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1291 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}Profile SLOW already setSource IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 357 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1467 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 402 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1359 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 331 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1266 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 320 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1792 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 468 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1632 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 307 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.3, Destination IP: 192.168.1.10, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1981 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 359 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1749 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21001, Destination Port: 21001
+ Network Profile for ID 1: {'id': 1, 'profile': 'NORMAL'}
+ Packet loss for profile NORMAL: 5%
+ Chosen delay for profile NORMAL: 465 msResponse from packet_loss: {"message": "ok"}
+Response from packet_delay: {"message": "ok"}
+
+Source IP: 192.168.1.10, Destination IP: 192.168.1.3, Source Port: 21000, Destination Port: 21000
+ Network Profile for ID 0: {'id': 0, 'profile': 'SLOW'}
+ Packet loss for profile SLOW: 10%
+ Chosen delay for profile SLOW: 1350 msResponse from packet_loss: {"message": "ok"}
