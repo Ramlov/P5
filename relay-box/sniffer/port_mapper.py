@@ -22,16 +22,23 @@ class PortMatcher:
 
     def port_mapping(self, src_port, dst_port):
         """
-        Adds or updates a mapping from dst_port to src_port if dst_port is within the allowed range.
+        Adds or updates a mapping from src_port to dst_port if src_port is within the allowed range.
         Removes outdated mappings before proceeding.
         """
         self._cleanup()
-        if dst_port in self.port_range:
-            # print(f"Mapping {dst_port} to {src_port}")
+        if src_port in self.port_range:
+            # If src_port is valid, create or update the mapping.
             self.port_map[src_port] = (dst_port, time.time())
             return dst_port
         else:
-            return self.get_mapping(src_port)
+            # If src_port is not in the allowed range, check for an existing mapping.
+            existing_mapping = self.get_mapping(src_port)
+            if existing_mapping is not None:
+                return existing_mapping
+            # If no existing mapping, create a new one to the provided dst_port.
+            self.port_map[src_port] = (dst_port, time.time())
+            return dst_port
+
         
     def get_mapping(self, src_port):
         """

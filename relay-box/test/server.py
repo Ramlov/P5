@@ -3,8 +3,8 @@ import asyncio
 import websockets
 from datetime import datetime
 
-START_PORT = 21001
-END_PORT = 21010
+START_PORT = 8555
+END_PORT = 8555
 
 
 async def handle_client(websocket, path, port):
