@@ -33,7 +33,7 @@ class PortMatcher:
             return src_port
         else:
             return self.get_mapping(dst_port)
-
+            
     def get_mapping(self, dst_port):
         """
         Retrieves the src_port for a given dst_port.
@@ -42,5 +42,8 @@ class PortMatcher:
         """
         self._cleanup()
         mapping = self.port_map.get(dst_port)
-        print(f"Retrieved mapping for {dst_port}: {mapping}")
-        return mapping[0] if mapping else None
+        if mapping:
+            print(f"Retrieved mapping for {dst_port}: {mapping[0]}")
+            return mapping[0]
+        return None
+
