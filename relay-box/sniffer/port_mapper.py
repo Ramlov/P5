@@ -20,7 +20,7 @@ class PortMatcher:
         }
         print(f"Cleaned up mappings: {self.port_map}")
 
-    def add_mapping(self, dst_port, src_port):
+    def port_mapping(self, dst_port, src_port):
         """
         Adds or updates a mapping from src_port to dst_port if src_port is within the allowed range.
         Removes outdated mappings before proceeding.
