@@ -18,7 +18,7 @@ class PortMatcher:
             for dst_port, (src_port, timestamp) in self.port_map.items()
             if current_time - timestamp <= 5
         }
-        print(f"Cleaned up mappings: {self.port_map}")
+        #print(f"Cleaned up mappings: {self.port_map}")
 
     def port_mapping(self, dst_port, src_port):
         """
