@@ -40,7 +40,9 @@ class PortMatcher:
         Removes outdated mappings before proceeding.
         Returns None if no valid mapping exists.
         """
+        print("\n")
         print(f"Current mapping: {self.port_map}")
+        print("\n")
         self._cleanup()
         mapping = self.port_map.get(dst_port)
         if mapping:
