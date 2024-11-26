@@ -64,8 +64,8 @@ def backend_listener(adaptive_data_access, server_ip, backend_listen_port):
 
 def main():
     # Server Information
-    server_ip = '192.168.1.7'
-    passive_server_port = '8765'
+    server_ip = '192.168.1.10'
+    passive_server_port = '31000'
     backend_listen_port = '8000'
 
     # Load field devices from SQLite database
@@ -76,13 +76,13 @@ def main():
     passive_monitor.start()
 
     # Initialize the Adaptive Data Access module
-    adaptive_data_access = AdaptiveDataAccess(field_devices, fd_locks)
-    adaptive_data_access_thread = threading.Thread(target=adaptive_data_access.run, daemon=True)
-    adaptive_data_access_thread.start()
+    #adaptive_data_access = AdaptiveDataAccess(field_devices, fd_locks)
+    #adaptive_data_access_thread = threading.Thread(target=adaptive_data_access.run, daemon=True)
+    #adaptive_data_access_thread.start()
 
     # Start the backend listener in a separate thread
-    backend_listener_thread = threading.Thread(target=backend_listener, args=(adaptive_data_access, server_ip, backend_listen_port,), daemon=True)
-    backend_listener_thread.start()
+    #backend_listener_thread = threading.Thread(target=backend_listener, args=(adaptive_data_access, server_ip, backend_listen_port,), daemon=True)
+    #backend_listener_thread.start()
 
     # Initialize and start Active Monitoring
     num_active_threads = 3  # Adjust as needed

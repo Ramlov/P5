@@ -26,7 +26,7 @@ def insert_devices(start_id, end_id, region, ip_address):
         ''', (fd_id, ip_address, region, port))
 
 # Step 3: Insert FD 0-9 for Region A1
-ip_a1 = '192.168.1.2'  # Common IP for Region A1
+ip_a1 = '192.168.1.11'  # Common IP for Region A1
 insert_devices(0, 9, 'A1', ip_a1)
 
 # Step 4: Insert FD 10-19 for Region A2

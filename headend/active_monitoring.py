@@ -94,6 +94,7 @@ class ActiveMonitoring:
         if throughput is None:
             # Set throughput to 0 if testing failed
             throughput = 0.0
+            print(f"Throughput is None\n")
 
         # Step 3: Classify connection
         status = self.classify_connection(latency, packet_loss, throughput)
@@ -134,16 +135,15 @@ class ActiveMonitoring:
             total_forward_delay = 0
             data_to_send = 'a' * data_size  # Sending 10 KB of data
 
-            async with websockets.connect(uri, timeout=5) as websocket:
+            async with websockets.connect(uri) as websocket:
                 for seq_num in range(iterations):
-                    client_start_time = self.get_ntp_time() # NTP-synchronized time
+                    client_start_time = self.get_ntp_time().timestamp()  # Ensure it's a float
                     await websocket.send(data_to_send)
-                    # Receive acknowledgment with device timestamp
                     ack_message = await websocket.recv()
 
                     # Process acknowledgment message
                     ack_data = json.loads(ack_message)
-                    device_recv_time = float(ack_data['timestamp'])
+                    device_recv_time = float(ack_data['timestamp'])  # Ensure this is also a float
 
                     # Calculate forward delay
                     forward_delay = device_recv_time - client_start_time
@@ -155,12 +155,14 @@ class ActiveMonitoring:
 
             # Calculate throughput in kbps
             if average_forward_delay > 0:
-                throughput = (data_to_send * 8) / (average_forward_delay * 1000)  # kbps
+                throughput = (total_data_sent * 8) / (average_forward_delay * 1000)  # kbps
             else:
                 throughput = None
             return throughput
         except Exception as e:
+            print(f"Error doing throughput test: {e}\n")
             return None
+
 
     def classify_connection(self, latency, packet_loss, throughput):
         """Classify the connection based on latency, packet loss, and throughput."""
