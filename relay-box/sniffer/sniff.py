@@ -43,8 +43,8 @@ def print_port(pkt):
         if tcp_sport != 443 and tcp_dport != 443:
             print(f"Source IP (before chosen port): {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
         #chosen_port =  MATCHER.port_mapping(tcp_dport, tcp_sport)
-        chosen_port = min(tcp_dport, tcp_sport)
-        print(f"Chosen Port: {chosen_port}")
+            chosen_port = min(tcp_dport, tcp_sport)
+            print(f"Chosen Port: {chosen_port}")
         if chosen_port in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             
