@@ -4,6 +4,7 @@ import json
 import random
 from scapy.all import sniff, TCP, IP
 from time import sleep
+from port_mapper import PortMatcher
 
 with open('config.json', 'r') as config_file:
     config = json.load(config_file)
@@ -16,6 +17,8 @@ PACKET_LOSS = config['packet_loss']
 port_sub = config['port_sub']
 PORT_RANGE = range(config['port_range'][0], config['port_range'][1])
 LAST_PROFILE = None
+MATCHER = PortMatcher(PORT_RANGE)
+
 
 def write_to_file(log):
     try:
@@ -37,9 +40,7 @@ def print_port(pkt):
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
         
-        # Choose the smaller of sport or dport
-        chosen_port = min(tcp_sport, tcp_dport)
-        
+        chosen_port =  MATCHER.port_mapping(tcp_dport, tcp_sport)
         if chosen_port in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             
