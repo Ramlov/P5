@@ -33,7 +33,7 @@ class PortMatcher:
         print(f"Current mapping: {self.port_map}")
         print("\n")
         if src_port in self.port_range:
-            print(f"Mapping {src_port} to {dst_port}")
+            #print(f"Mapping {src_port} to {dst_port}")
             self.port_map[dst_port] = (src_port, time.time())
             return src_port
         else:
@@ -51,7 +51,7 @@ class PortMatcher:
         self._cleanup()
         mapping = self.port_map.get(dst_port)
         if mapping:
-            print(f"Retrieved mapping for {dst_port}: {mapping[0]}")
+            #print(f"Retrieved mapping for {dst_port}: {mapping[0]}")
             return mapping[0]
         return None
 
