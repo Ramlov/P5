@@ -30,7 +30,7 @@ def write_to_file(log):
 
 def sniff_packets():
     while True:
-        sniff(prn=print_port, iface=config['br0'])
+        sniff(prn=print_port, iface=config["br0"])
 
 def print_port(pkt):
     global LAST_PROFILE
