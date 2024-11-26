@@ -33,7 +33,7 @@ class PortMatcher:
             return src_port
         else:
             return self.get_mapping(dst_port)
-            
+        
     def get_mapping(self, dst_port):
         """
         Retrieves the src_port for a given dst_port.
