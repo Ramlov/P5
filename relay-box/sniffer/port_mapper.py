@@ -13,9 +13,6 @@ class PortMatcher:
         Removes mappings that are older than 5 seconds.
         """
         current_time = time.time()
-        print("\n")
-        print(f"Current mapping: {self.port_map}")
-        print("\n")
         self.port_map = {
             dst_port: (src_port, timestamp)
             for dst_port, (src_port, timestamp) in self.port_map.items()
@@ -29,9 +26,6 @@ class PortMatcher:
         Removes outdated mappings before proceeding.
         """
         self._cleanup()
-        print("\n")
-        print(f"Current mapping: {self.port_map}")
-        print("\n")
         if src_port in self.port_range:
             #print(f"Mapping {src_port} to {dst_port}")
             self.port_map[dst_port] = (src_port, time.time())
@@ -45,9 +39,6 @@ class PortMatcher:
         Removes outdated mappings before proceeding.
         Returns None if no valid mapping exists.
         """
-        print("\n")
-        print(f"Current mapping: {self.port_map}")
-        print("\n")
         self._cleanup()
         mapping = self.port_map.get(dst_port)
         if mapping:
