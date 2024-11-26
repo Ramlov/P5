@@ -40,6 +40,7 @@ def print_port(pkt):
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
         
+        print(f"Source IP (before chosen port): {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
         chosen_port =  MATCHER.port_mapping(tcp_dport, tcp_sport)
         if chosen_port in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
