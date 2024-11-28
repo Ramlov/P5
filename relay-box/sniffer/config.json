@@ -3,7 +3,8 @@
     "log_file": "log.txt",
     "api_endpoints": {
         "packet_loss": "http://192.168.1.9/api/disciplines/packet_loss",
-        "packet_delay": "http://192.168.1.9/api/disciplines/packet_delay"
+        "packet_delay": "http://192.168.1.9/api/disciplines/packet_delay",
+        "packet_rate_control": "http://192.168.1.9/api/disciplines/packet_rate_control"
     },
     "network_profiles": {
         "SLOW": {"min": 1000, "max": 2000},
@@ -15,6 +16,12 @@
         "NORMAL": 5,
         "SLOW": 10
     },
+    "throughput": {
+        "GOOD": {"min": 100, "max": 500},
+        "NORMAL": {"min": 50, "max": 100},
+        "SLOW": {"min": 10, "max": 50}
+    },
+    "burst_bytes": 1024,
     "port_sub": 21000,
     "port_range": [20000, 22000]
 }
