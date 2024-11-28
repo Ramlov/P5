@@ -24,13 +24,13 @@ def write_to_file(log):
     try:
         with open(config['log_file'], "a") as file:
             file.write(log)
-        print(f"Logged: {log}") 
+        #print(f"Logged: {log}") 
     except Exception as e:
         print(f"Error writing to file: {e}")
 
 def sniff_packets():
     while True:
-        sniff(prn=print_port, count=0)
+        sniff(prn=print_port, iface="br0")
 
 def print_port(pkt):
     global LAST_PROFILE
@@ -39,8 +39,12 @@ def print_port(pkt):
         dst_ip = pkt[IP].dst
         tcp_sport = pkt[TCP].sport
         tcp_dport = pkt[TCP].dport
-        
-        chosen_port =  MATCHER.port_mapping(tcp_dport, tcp_sport)
+
+        chosen_port = min(tcp_dport, tcp_sport)
+        if chosen_port != 443:
+            print(f"Source IP (before chosen port): {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
+        #chosen_port =  MATCHER.port_mapping(tcp_dport, tcp_sport)
+            print(f"Chosen Port: {chosen_port}")
         if chosen_port in PORT_RANGE:
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             
