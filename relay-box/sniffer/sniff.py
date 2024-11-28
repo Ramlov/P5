@@ -101,8 +101,7 @@ def packet_callback(delay, packet_loss, throughput):
         write_to_file(f"Response from packet_delay: {response_delay.text}" + "\n")
     except Exception as e:
         write_to_file(f"Error in packet_delay request: {e}" + "\n")
-
-    # New rate control configuration
+        
     payload_rate_control = {
         "kbit": throughput * 1000,  # Converting Mbps to kbps
         "latency_milliseconds": delay,
