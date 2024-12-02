@@ -12,15 +12,15 @@ class FieldDevice:
         self.device_id = device_id
         self.port = port
         self.data_storage = []
-        self.headend_url = "ws://192.168.1.7:8765"
+        self.headend_url = "ws://192.168.1.10:31000"
         self.last_collected_data = time.time()
         self.datapoint_time = 5  # Interval between data generation (seconds)
-        self.bulkupload_time = 500  # Interval between bulk uploads (seconds)
+        self.bulkupload_time = 15  # Interval between bulk uploads (seconds)
         self.ntp_client = ntplib.NTPClient()  # Initialize the NTP client
         self.ntp_server = "pool.ntp.org"  # Public NTP server
         self.ntp_offset = self.get_ntp_offset()
 
-        self.local_addr = ("192.168.1.4", port)
+        self.local_addr = ("192.168.1.11", port)
 
 
     def get_ntp_offset(self):
@@ -51,6 +51,7 @@ class FieldDevice:
                     print(f"Data sent to server from device {self.device_id}")
                     self.data_storage.clear()  # Clear data after sending
                 else:
+                    print(f"Supporting throughput test")
                     # This is the case for throughput testing.
                     ack_message = json.dumps({
                         "type": "ack",
@@ -65,7 +66,7 @@ class FieldDevice:
 
     async def start_server(self):
         print(f"Starting WebSocket server on port {self.port}")
-        async with websockets.serve(self.websocket_handler, "192.168.1.2", self.port):
+        async with websockets.serve(self.websocket_handler, "0.0.0.0", self.port):
             await asyncio.Future()  # Run forever
 
     def run(self):
