@@ -116,6 +116,7 @@ def packet_callback(delay, packet_loss, throughput):
             json=payload_rate_control
         )
         write_to_file(f"Response from packet_rate_control: {response_rate_control.text}" + "\n")
+        write_to_file(f"\n ********** Packet Emulation By Frække drenge 123 ********** \n")
     except Exception as e:
         write_to_file(f"Error in packet_rate_control request: {e}" + "\n")
 
