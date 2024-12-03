@@ -120,7 +120,12 @@ def packet_callback(delay, packet_loss, throughput):
 
 # Helper to map port to device ID
 def get_id_from_port(port):
-    return port - port_sub_bulk if port >= port_sub_bulk else port - port_sub
+    if port >= port_sub_bulk:
+        print(port, port_sub_bulk), "BULK"
+        return port - port_sub_bulk
+    else:
+        print(port, port_sub, "NOT BULK")
+        return port - port_sub
 
 # Main execution
 if __name__ == "__main__":
