@@ -51,10 +51,10 @@ def print_port(pkt):
             print(f"Source IP (before chosen port): {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             print(f"Chosen Port: {chosen_port}")
             if chosen_port in PORT_RANGE:
-                write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
+                write_to_file(f"\n Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
                 
                 device_id = get_id_from_port(chosen_port)
-                print(f"Device ID: {device_id}")
+                # print(f"Device ID: {device_id}")
                 if device_id < 0:
                     write_to_file("No Device ID Found")
                     return
@@ -68,7 +68,7 @@ def print_port(pkt):
                         return
                     else:
                         packet_loss = PACKET_LOSS.get(profile_type, 0)
-                        write_to_file(f"\n Packet loss for profile {profile_type}: {packet_loss}%")
+                        write_to_file(f"\n Chosen packet loss for profile {profile_type}: {packet_loss}%")
                         delay_range = NETWORK_PROFILES[profile_type]
                         delay = random.randint(delay_range["min"], delay_range["max"])
                         write_to_file(f"\n Chosen delay for profile {profile_type}: {delay} ms")
@@ -91,9 +91,9 @@ def packet_callback(delay, packet_loss, throughput):
             config['api_endpoints']['packet_loss'],
             json=payload_loss
         )
-        write_to_file(f"Response from packet_loss: {response_loss.text}")
+        write_to_file(f"Response from packet_loss: {response_loss.text}" + "\n")
     except Exception as e:
-        write_to_file(f"Error in packet_loss request: {e}")
+        write_to_file(f"Error in packet_loss request: {e}"+ "\n")
 
     payload_delay = {'milliseconds': delay}
     try:
@@ -101,9 +101,9 @@ def packet_callback(delay, packet_loss, throughput):
             config['api_endpoints']['packet_delay'],
             json=payload_delay
         )
-        write_to_file(f"Response from packet_delay: {response_delay.text}" + "\n")
+        write_to_file(f"Response from packet_delay: {response_delay.text}")
     except Exception as e:
-        write_to_file(f"Error in packet_delay request: {e}" + "\n")
+        write_to_file(f"Error in packet_delay request: {e}")
         
     payload_rate_control = {
         "kbit": throughput * 1000,  # Converting Mbps to kbps
@@ -115,7 +115,7 @@ def packet_callback(delay, packet_loss, throughput):
             config['api_endpoints']['packet_rate_control'],
             json=payload_rate_control
         )
-        write_to_file(f"Response from packet_rate_control: {response_rate_control.text}" + "\n")
+        write_to_file(f"Response from packet_rate_control: {response_rate_control.text}")
         write_to_file(f"\n ********** Packet Emulation By Frække drenge 123 ********** \n")
     except Exception as e:
         write_to_file(f"Error in packet_rate_control request: {e}" + "\n")
