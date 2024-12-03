@@ -94,7 +94,7 @@ class ActiveMonitoring:
         if throughput is None:
             # Set throughput to 0 if testing failed
             throughput = 0.0
-            print(f"Throughput is None\n")
+            #print(f"Throughput is None\n")
 
         # Step 3: Classify connection
         status = self.classify_connection(latency, packet_loss, throughput)

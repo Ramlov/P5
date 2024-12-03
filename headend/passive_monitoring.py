@@ -1,6 +1,6 @@
 import asyncio
 import websockets
-from scapy.all import sniff
+from scapy.all import sniff, get_if_list
 from datetime import datetime, timedelta
 import threading
 import json
@@ -49,13 +49,17 @@ class PassiveMonitoring:
         """
         Start packet sniffing to capture Layer 3 packets (IP/TCP).
         """
+
+        #print(get_if_list())
+
         try:
             sniff(
-                filter=f"tcp port {self.port}",
-                prn=self.process_packet,
-                store=False,
-                stop_filter=lambda _: self.shutdown_event.is_set(),
-            )
+            iface="\\Device\\NPF_{1FFB8732-7C42-45C4-B130-4F71495A4CBD}",  # Replace with the correct Ethernet interface name
+            filter=f"tcp port {self.port}",
+            prn=self.process_packet,
+            store=False,
+            stop_filter=lambda _: self.shutdown_event.is_set(),
+        )   
         except Exception as e:
             print(f"Error in packet sniffing: {e}")
         finally:
@@ -67,11 +71,9 @@ class PassiveMonitoring:
         """
         if packet.haslayer("IP") and packet.haslayer("TCP"):
             src_ip = packet["IP"].src
-            dst_ip = packet["IP"].dst
+            #dst_ip = packet["IP"].dst
             src_port = packet["TCP"].sport
-            dst_port = packet["TCP"].dport
-
-            print(f"Destination: {dst_ip}:{dst_port}")
+            #dst_port = packet["TCP"].dport
 
             timestamp = self.get_ntp_time()  # Use NTP-synced time as datetime
 
@@ -159,6 +161,8 @@ class PassiveMonitoring:
                 # Get packets for this connection
                 key = (src_ip, src_port)
                 packets = self.packet_data.get(key, [])
+
+                #print(f"Packets: {self.packet_data}")
 
                 # Analyze packets for latency and throughput
                 metrics = self.analyze_packets(send_time, packets)

@@ -41,7 +41,7 @@ class AdaptiveDataAccess:
                     # No FDs need fetching at this time
                     print(f"No Current Field Devices that fit ADA Criteria\n")
 
-            time.sleep(20)  #Adjust as needed
+            time.sleep(20)  #
 
     def get_fds_to_fetch(self):
         """Identify FDs that are 'available' and need data fetching."""
