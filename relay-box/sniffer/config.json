@@ -23,5 +23,6 @@
     },
     "burst_bytes": 1024,
     "port_sub": 21000,
-    "port_range": [20000, 22000]
+    "port_sub_bulk" : 22000,
+    "port_range": [20000, 23000]
 }

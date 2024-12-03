@@ -17,6 +17,7 @@ NETWORK_PROFILES = config['network_profiles']
 PACKET_LOSS = config['packet_loss']
 THROUGHPUT = config.get('throughput', {})  # Load throughput if available
 port_sub = config['port_sub']
+port_sub_bulk = config['port_sub_bulk']
 burst_bytes = config.get('burst_bytes', 1024)
 PORT_RANGE = range(config['port_range'][0], config['port_range'][1])
 LAST_PROFILE = None
@@ -119,7 +120,7 @@ def packet_callback(delay, packet_loss, throughput):
 
 # Helper to map port to device ID
 def get_id_from_port(port):
-    return port - port_sub
+    return port - port_sub_bulk if port >= port_sub_bulk else port - port_sub
 
 # Main execution
 if __name__ == "__main__":
