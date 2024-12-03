@@ -23,7 +23,7 @@ ignore_ports = [80, 443, 22, 5005]  # Common ports to ignore
 # Port-specific configurations
 port_sub = config['port_sub']
 port_sub_bulk = config['port_sub_bulk']
-burst_bytes = config.get('burst_bytes', 1024)
+burst_bytes = config('burst_bytes', 1024)
 delay_rate_control = config['delay_rate_control']
 
 # Variables
