@@ -49,38 +49,38 @@ def print_port(pkt):
         if chosen_port != 443 or chosen_port != 80 or chosen_port != 22:
             print(f"Source IP (before chosen port): {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             print(f"Chosen Port: {chosen_port}")
-        if chosen_port in PORT_RANGE:
-            write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
-            
-            device_id = get_id_from_port(chosen_port)
-            print(f"Device ID: {device_id}")
-            if device_id < 0:
-                write_to_file("No Device ID Found")
-                return
+            if chosen_port in PORT_RANGE:
+                write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
                 
-            profile = fd_profiles[device_id]
-            write_to_file(f"\n Network Profile for ID {device_id}: {profile}" )
-            profile_type = profile.get("profile")
-            if profile_type in NETWORK_PROFILES:
-                if profile_type == LAST_PROFILE:
-                    write_to_file(f"Profile {profile_type} already set")
+                device_id = get_id_from_port(chosen_port)
+                print(f"Device ID: {device_id}")
+                if device_id < 0:
+                    write_to_file("No Device ID Found")
                     return
+                    
+                profile = fd_profiles[device_id]
+                write_to_file(f"\n Network Profile for ID {device_id}: {profile}" )
+                profile_type = profile.get("profile")
+                if profile_type in NETWORK_PROFILES:
+                    if profile_type == LAST_PROFILE:
+                        write_to_file(f"Profile {profile_type} already set")
+                        return
+                    else:
+                        packet_loss = PACKET_LOSS.get(profile_type, 0)
+                        write_to_file(f"\n Packet loss for profile {profile_type}: {packet_loss}%")
+                        delay_range = NETWORK_PROFILES[profile_type]
+                        delay = random.randint(delay_range["min"], delay_range["max"])
+                        write_to_file(f"\n Chosen delay for profile {profile_type}: {delay} ms")
+                        
+                        # Adding throughput handling
+                        throughput_range = THROUGHPUT.get(profile_type, {"min": 0, "max": 0})
+                        throughput = random.randint(throughput_range["min"], throughput_range["max"])
+                        write_to_file(f"\n Chosen throughput for profile {profile_type}: {throughput} Mbps")
+                        
+                        packet_callback(delay, packet_loss, throughput)
+                        LAST_PROFILE = profile_type
                 else:
-                    packet_loss = PACKET_LOSS.get(profile_type, 0)
-                    write_to_file(f"\n Packet loss for profile {profile_type}: {packet_loss}%")
-                    delay_range = NETWORK_PROFILES[profile_type]
-                    delay = random.randint(delay_range["min"], delay_range["max"])
-                    write_to_file(f"\n Chosen delay for profile {profile_type}: {delay} ms")
-                    
-                    # Adding throughput handling
-                    throughput_range = THROUGHPUT.get(profile_type, {"min": 0, "max": 0})
-                    throughput = random.randint(throughput_range["min"], throughput_range["max"])
-                    write_to_file(f"\n Chosen throughput for profile {profile_type}: {throughput} Mbps")
-                    
-                    packet_callback(delay, packet_loss, throughput)
-                    LAST_PROFILE = profile_type
-            else:
-                write_to_file(f"No network profile type found for {profile_type}")
+                    write_to_file(f"No network profile type found for {profile_type}")
 
 # Callback for packet simulation
 def packet_callback(delay, packet_loss, throughput):
