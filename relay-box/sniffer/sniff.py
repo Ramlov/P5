@@ -53,6 +53,7 @@ def print_port(pkt):
             write_to_file(f"Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             
             device_id = get_id_from_port(chosen_port)
+            print(f"Device ID: {device_id}")
             if device_id < 0:
                 write_to_file("No Device ID Found")
                 return
