@@ -22,7 +22,7 @@ burst_bytes = config.get('burst_bytes', 1024)
 PORT_RANGE = range(config['port_range'][0], config['port_range'][1])
 LAST_PROFILE = None
 MATCHER = PortMatcher(PORT_RANGE)
-ignore_ports = [80, 443, 22]
+ignore_ports = [80, 443, 22, 5005]
 
 # Utility to write logs to file
 def write_to_file(log):
