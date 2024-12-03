@@ -65,6 +65,7 @@ def print_port(pkt):
                 if profile_type in NETWORK_PROFILES:
                     if profile_type == LAST_PROFILE:
                         write_to_file(f"\n Profile {profile_type} already set")
+                        write_to_file(f"\n ******************** Packet Emulation ******************** \n")
                         return
                     else:
                         packet_loss = PACKET_LOSS.get(profile_type, 0)
@@ -116,7 +117,7 @@ def packet_callback(delay, packet_loss, throughput):
             json=payload_rate_control
         )
         write_to_file(f"Response from packet_rate_control: {response_rate_control.text}")
-        write_to_file(f"\n ********** Packet Emulation By Frække drenge 123 ********** \n")
+        write_to_file(f"\n ******************** Packet Emulation ******************** \n")
     except Exception as e:
         write_to_file(f"Error in packet_rate_control request: {e}" + "\n")
 
