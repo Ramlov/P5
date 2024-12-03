@@ -12,15 +12,15 @@ class FieldDevice:
         self.device_id = device_id
         self.port = port
         self.data_storage = []
-        self.headend_url = "ws://192.168.1.10:31000"
+        self.headend_url = "ws://192.168.1.14:31000"
         self.last_collected_data = time.time()
         self.datapoint_time = 5  # Interval between data generation (seconds)
-        self.bulkupload_time = 15  # Interval between bulk uploads (seconds)
+        self.bulkupload_time = 500  # Interval between bulk uploads (seconds)
         self.ntp_client = ntplib.NTPClient()  # Initialize the NTP client
         self.ntp_server = "pool.ntp.org"  # Public NTP server
         self.ntp_offset = self.get_ntp_offset()
 
-        self.local_addr = ("192.168.1.11", port)
+        self.local_addr = ("192.168.1.7", (port+1000))  # Local address for the device
 
 
     def get_ntp_offset(self):
