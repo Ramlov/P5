@@ -22,6 +22,7 @@ burst_bytes = config.get('burst_bytes', 1024)
 PORT_RANGE = range(config['port_range'][0], config['port_range'][1])
 LAST_PROFILE = None
 MATCHER = PortMatcher(PORT_RANGE)
+ignore_ports = [80, 443, 22]
 
 # Utility to write logs to file
 def write_to_file(log):
@@ -46,7 +47,7 @@ def print_port(pkt):
         tcp_dport = pkt[TCP].dport
 
         chosen_port = min(tcp_dport, tcp_sport)
-        if chosen_port != 443 or chosen_port != 80 or chosen_port != 22:
+        if chosen_port not in ignore_ports:
             print(f"Source IP (before chosen port): {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             print(f"Chosen Port: {chosen_port}")
             if chosen_port in PORT_RANGE:
