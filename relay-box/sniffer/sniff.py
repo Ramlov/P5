@@ -92,7 +92,7 @@ def packet_callback(delay, packet_loss, throughput):
             config['api_endpoints']['packet_loss'],
             json=payload_loss
         )
-        write_to_file(f"Response from packet_loss: {response_loss.text}" + "\n")
+        write_to_file(f"\n"+"Response from packet_loss: {response_loss.text}")
     except Exception as e:
         write_to_file(f"Error in packet_loss request: {e}"+ "\n")
 
