@@ -1,0 +1,1908 @@
+Starting WebSocket server on port 21000
+Starting WebSocket server on port 21001
+Starting WebSocket server on port 21002
+Starting WebSocket server on port 21003
+Starting WebSocket server on port 21004
+Starting WebSocket server on port 21005
+Starting WebSocket server on port 21006
+Starting WebSocket server on port 21007
+Starting WebSocket server on port 21008
+Number of Field Devices: 10
+Starting WebSocket server on port 21009
+Data added to field device 0: {'power_consumption': 104.91316597827759, 'voltage': 220.38285404173385}
+Data added to field device 1: {'power_consumption': 120.37075534257126, 'voltage': 232.7910437044271}
+Data added to field device 2: {'power_consumption': 54.433381426418016, 'voltage': 233.59383588347467}
+Data added to field device 3: {'power_consumption': 51.40619535451203, 'voltage': 231.18339658971638}
+Data added to field device 4: {'power_consumption': 136.2505250574641, 'voltage': 225.7735820032022}
+Data added to field device 5: {'power_consumption': 126.78507266692141, 'voltage': 228.64784751682248}
+Data added to field device 6: {'power_consumption': 115.7383701856832, 'voltage': 231.91753521678345}
+Data added to field device 7: {'power_consumption': 68.9861888173983, 'voltage': 221.87652368743815}
+Data added to field device 8: {'power_consumption': 67.76181887272477, 'voltage': 239.64993253185963}
+Data added to field device 9: {'power_consumption': 95.87521732693216, 'voltage': 232.65087732007254}
+Starting WebSocket server on port 21000
+Starting WebSocket server on port 21001
+Starting WebSocket server on port 21002
+Starting WebSocket server on port 21003
+Starting WebSocket server on port 21004
+Starting WebSocket server on port 21005
+Starting WebSocket server on port 21006
+Starting WebSocket server on port 21007
+Starting WebSocket server on port 21008
+Number of Field Devices: 10
+Starting WebSocket server on port 21009
+Data added to field device 0: {'power_consumption': 52.50320697480264, 'voltage': 223.65109137448795}
+Data added to field device 1: {'power_consumption': 100.7721895854251, 'voltage': 220.98074776678303}
+Data added to field device 2: {'power_consumption': 137.5187730078412, 'voltage': 231.47777352956848}
+Data added to field device 3: {'power_consumption': 130.04341764966193, 'voltage': 234.09430750944594}
+Data added to field device 4: {'power_consumption': 105.78663887377884, 'voltage': 229.31449692235265}
+Data added to field device 5: {'power_consumption': 128.7847097746332, 'voltage': 235.71820211117776}
+Data added to field device 6: {'power_consumption': 61.89789422757431, 'voltage': 222.7800768114365}
+Data added to field device 7: {'power_consumption': 133.93299446650892, 'voltage': 223.1399551800131}
+Data added to field device 8: {'power_consumption': 104.74396625429759, 'voltage': 238.2137608510365}
+Data added to field device 9: {'power_consumption': 61.49462302784981, 'voltage': 238.12075596551932}
+Device on port 21009 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21003 connected
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+Data sent to server from device 0
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21003 connected
+Data sent to server from device 3
+Device on port 21005 connected
+Device on port 21009 connected
+Data sent to server from device 9
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 3: {'power_consumption': 137.3960162572198, 'voltage': 236.63061245841314}
+Data added to field device 2: {'power_consumption': 88.84863631430754, 'voltage': 223.58778690317135}
+Data added to field device 0: {'power_consumption': 53.246090021998505, 'voltage': 231.90781166353497}
+Data added to field device 5: {'power_consumption': 93.34932078776774, 'voltage': 237.78971077912564}
+Data added to field device 1: {'power_consumption': 102.49656368012909, 'voltage': 230.51460769008688}
+Data added to field device 4: {'power_consumption': 143.9858828608376, 'voltage': 226.8332536633637}
+Data added to field device 7: {'power_consumption': 84.80252930463462, 'voltage': 235.60069524398696}
+Data added to field device 8: {'power_consumption': 114.78439565130762, 'voltage': 232.63493724625678}
+Data added to field device 6: {'power_consumption': 143.23724204086392, 'voltage': 231.66590391404475}
+Data added to field device 9: {'power_consumption': 80.60252404087669, 'voltage': 220.90784439995954}
+Data added to field device 7: {'power_consumption': 102.55093428122103, 'voltage': 220.57679077498764}
+Data added to field device 8: {'power_consumption': 60.16092045420699, 'voltage': 224.05247548464223}
+Data added to field device 3: {'power_consumption': 78.78367697849318, 'voltage': 236.66107827237744}
+Data added to field device 2: {'power_consumption': 69.06108647972609, 'voltage': 233.77988193804498}
+Data added to field device 0: {'power_consumption': 58.51102068344621, 'voltage': 221.4982695332433}
+Data added to field device 5: {'power_consumption': 84.00014925716425, 'voltage': 234.02743858370073}
+Data added to field device 4: {'power_consumption': 107.6808944165574, 'voltage': 221.46445170484782}
+Data added to field device 1: {'power_consumption': 143.12976528239236, 'voltage': 231.19064375601008}
+Data added to field device 6: {'power_consumption': 143.68621353383682, 'voltage': 231.69455180236582}
+Data added to field device 9: {'power_consumption': 75.51894031217519, 'voltage': 220.4341465619217}
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 8: {'power_consumption': 77.38668435449367, 'voltage': 236.09948021761886}
+Data added to field device 2: {'power_consumption': 89.49782711806341, 'voltage': 228.83142091440757}
+Data added to field device 3: {'power_consumption': 65.06674658525658, 'voltage': 226.6950808130312}
+Data added to field device 7: {'power_consumption': 147.1511981072435, 'voltage': 231.9907141657373}
+Data added to field device 0: {'power_consumption': 76.82887460141347, 'voltage': 231.25116138016256}
+Data added to field device 1: {'power_consumption': 60.21305450573439, 'voltage': 221.64159313917722}
+Data added to field device 5: {'power_consumption': 129.4622567180976, 'voltage': 228.6956514243706}
+Data added to field device 4: {'power_consumption': 108.33717546528108, 'voltage': 225.26411841112196}
+Data added to field device 9: {'power_consumption': 141.7204010624443, 'voltage': 228.12271062450833}
+Data added to field device 6: {'power_consumption': 108.82425053846946, 'voltage': 232.6923614941234}
+Data added to field device 8: {'power_consumption': 57.17852989802461, 'voltage': 234.91551069756488}
+Data added to field device 2: {'power_consumption': 54.7884772298796, 'voltage': 226.7883764391247}
+Data added to field device 0: {'power_consumption': 143.71053279315407, 'voltage': 221.79093306294197}
+Data added to field device 3: {'power_consumption': 146.317222269947, 'voltage': 234.16676589536675}
+Data added to field device 7: {'power_consumption': 112.85807648545972, 'voltage': 239.1483658944985}
+Data added to field device 1: {'power_consumption': 109.81057299193688, 'voltage': 222.94594838070768}
+Data added to field device 5: {'power_consumption': 67.95359479134493, 'voltage': 220.22485214651647}
+Data added to field device 4: {'power_consumption': 138.8512157631754, 'voltage': 223.5851021461458}
+Data added to field device 9: {'power_consumption': 115.6472100395764, 'voltage': 228.8102548165239}
+Data added to field device 6: {'power_consumption': 81.89581633979995, 'voltage': 230.98939883586252}
+Device on port 21001 connected
+Data sent to server from device 1
+Device on port 21002 connected
+Data sent to server from device 2
+Device on port 21004 connected
+Data sent to server from device 4
+Device on port 21005 connected
+Data sent to server from device 5
+Device on port 21006 connected
+Data sent to server from device 6
+Device on port 21007 connected
+Data sent to server from device 7
+Device on port 21008 connected
+Data sent to server from device 8
+Device on port 21000 connected
+Data sent to server from device 0
+Device on port 21003 connected
+Data sent to server from device 3
+Device on port 21009 connected
+Data sent to server from device 9
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 2: {'power_consumption': 79.98707102210973, 'voltage': 231.68967043038046}
+Data added to field device 8: {'power_consumption': 119.2811482832163, 'voltage': 234.27576121677677}
+Data added to field device 3: {'power_consumption': 53.42111503946788, 'voltage': 228.81265698053537}
+Data added to field device 5: {'power_consumption': 137.17102577231165, 'voltage': 232.29251948459986}
+Data added to field device 1: {'power_consumption': 125.66313798876614, 'voltage': 224.12105152483412}
+Data added to field device 0: {'power_consumption': 112.22249647847687, 'voltage': 233.66492246450585}
+Data added to field device 7: {'power_consumption': 135.18682524834756, 'voltage': 235.50895338942377}
+Data added to field device 4: {'power_consumption': 104.60956681190873, 'voltage': 227.70866907840497}
+Data added to field device 9: {'power_consumption': 84.06180167457754, 'voltage': 229.20065529545585}
+Data added to field device 6: {'power_consumption': 75.47557696537149, 'voltage': 224.09390570998713}
+Data added to field device 7: {'power_consumption': 106.08441155954608, 'voltage': 225.55457335758246}
+Data added to field device 5: {'power_consumption': 116.88643276580872, 'voltage': 230.01804075159578}
+Data added to field device 0: {'power_consumption': 91.05395701256643, 'voltage': 232.96939334064592}
+Data added to field device 2: {'power_consumption': 112.02677922536282, 'voltage': 236.79015103608845}
+Data added to field device 8: {'power_consumption': 89.40999050980818, 'voltage': 236.5152619781203}
+Data added to field device 1: {'power_consumption': 85.2560132612879, 'voltage': 229.44773038415383}
+Data added to field device 3: {'power_consumption': 107.2416143581554, 'voltage': 232.16874960100108}
+Data added to field device 4: {'power_consumption': 58.878016140595605, 'voltage': 238.58787451183045}
+Data added to field device 9: {'power_consumption': 72.60409958563123, 'voltage': 234.08122826651118}
+Data added to field device 6: {'power_consumption': 139.33468032259967, 'voltage': 233.28297512744987}
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 2: {'power_consumption': 114.67721200758524, 'voltage': 220.082068063471}
+Data added to field device 5: {'power_consumption': 53.947982977760866, 'voltage': 227.49824957607015}
+Data added to field device 0: {'power_consumption': 50.88752274666607, 'voltage': 232.19681810500214}
+Data added to field device 7: {'power_consumption': 63.70041577547798, 'voltage': 236.01417299963163}
+Data added to field device 8: {'power_consumption': 138.56940174707847, 'voltage': 235.19101945557156}
+Data added to field device 1: {'power_consumption': 72.60454822981202, 'voltage': 230.37223139592078}
+Data added to field device 3: {'power_consumption': 61.40847504788684, 'voltage': 239.23008012226202}
+Data added to field device 4: {'power_consumption': 146.58096247644593, 'voltage': 228.75841670198702}
+Data added to field device 6: {'power_consumption': 147.8192864525949, 'voltage': 229.92528377601738}
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 9: {'power_consumption': 79.94957333101527, 'voltage': 229.02933412801818}
+Data added to field device 2: {'power_consumption': 145.12555259355682, 'voltage': 231.73146196445254}
+Data added to field device 5: {'power_consumption': 137.25858518654363, 'voltage': 237.21917638224258}
+Data added to field device 8: {'power_consumption': 96.515448793697, 'voltage': 239.96072158578247}
+Data added to field device 4: {'power_consumption': 108.89518769980344, 'voltage': 235.02682961099686}
+Data added to field device 0: {'power_consumption': 110.53366185829617, 'voltage': 228.70820198872386}
+Data added to field device 7: {'power_consumption': 138.10932750314876, 'voltage': 225.37455290365526}
+Data added to field device 1: {'power_consumption': 92.36231438408943, 'voltage': 227.75383144312312}
+Data added to field device 3: {'power_consumption': 128.67072893734257, 'voltage': 235.2752987012462}
+Data added to field device 6: {'power_consumption': 127.10175506599023, 'voltage': 236.17825273926974}
+Data added to field device 9: {'power_consumption': 67.71881863746556, 'voltage': 224.60502837339757}
+Device on port 21001 connected
+Data sent to server from device 1
+Device on port 21002 connected
+Data sent to server from device 2
+Device on port 21004 connected
+Data sent to server from device 4
+Device on port 21005 connected
+Data sent to server from device 5
+Device on port 21006 connected
+Data sent to server from device 6
+Device on port 21007 connected
+Data sent to server from device 7
+Device on port 21008 connected
+Data sent to server from device 8
+Device on port 21000 connected
+Data sent to server from device 0
+Device on port 21003 connected
+Data sent to server from device 3
+Device on port 21009 connected
+Data sent to server from device 9
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 3: {'power_consumption': 82.02636902937056, 'voltage': 225.26011834686815}
+Data added to field device 5: {'power_consumption': 90.16632695585895, 'voltage': 223.50307509400196}
+Data added to field device 1: {'power_consumption': 105.1433559598643, 'voltage': 232.50990593759232}
+Data added to field device 2: {'power_consumption': 125.04101057195665, 'voltage': 220.91368121010441}
+Data added to field device 8: {'power_consumption': 105.7660642275944, 'voltage': 223.16344477969963}
+Data added to field device 4: {'power_consumption': 61.29125061873667, 'voltage': 225.05632414803068}
+Data added to field device 7: {'power_consumption': 127.66853608820678, 'voltage': 239.986702851249}
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 0: {'power_consumption': 58.403178331526185, 'voltage': 228.33587390537124}
+Data added to field device 6: {'power_consumption': 140.73758667715674, 'voltage': 238.81529764689654}
+Data added to field device 9: {'power_consumption': 131.7314405823626, 'voltage': 235.85412370034533}
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 1: {'power_consumption': 125.94691648473652, 'voltage': 222.4797004619427}
+Data added to field device 3: {'power_consumption': 131.07102158172876, 'voltage': 236.92649866687302}
+Data added to field device 2: {'power_consumption': 77.85819529304486, 'voltage': 222.45907672201463}
+Data added to field device 4: {'power_consumption': 66.59059946700415, 'voltage': 226.88751522220036}
+Data added to field device 7: {'power_consumption': 144.1388079519108, 'voltage': 238.40527326212143}
+Data added to field device 8: {'power_consumption': 137.47737303724165, 'voltage': 222.74720480348685}
+Data added to field device 5: {'power_consumption': 83.250347809863, 'voltage': 224.8306686585694}
+Data added to field device 0: {'power_consumption': 110.22475635605922, 'voltage': 229.73934078046545}
+Data added to field device 6: {'power_consumption': 136.0353882138631, 'voltage': 229.27698262084328}
+Data added to field device 9: {'power_consumption': 88.03450349825417, 'voltage': 229.24913965968176}
+Data added to field device 5: {'power_consumption': 123.3351565144131, 'voltage': 226.08613714536295}
+Data added to field device 2: {'power_consumption': 95.98360092771978, 'voltage': 238.48230327850226}
+Data added to field device 1: {'power_consumption': 145.8670224352013, 'voltage': 227.77880384557565}
+Data added to field device 3: {'power_consumption': 93.17539037358398, 'voltage': 233.34425548612614}
+Data added to field device 4: {'power_consumption': 64.74753078283645, 'voltage': 236.5744385733778}
+Data added to field device 7: {'power_consumption': 61.44186360065961, 'voltage': 233.96679512823533}
+Data added to field device 8: {'power_consumption': 97.94303885932705, 'voltage': 229.37598710968467}
+Data added to field device 0: {'power_consumption': 58.08879010734994, 'voltage': 224.40460843763267}
+Data added to field device 6: {'power_consumption': 50.48826242274106, 'voltage': 233.71030377702223}
+Data added to field device 9: {'power_consumption': 53.601321504940394, 'voltage': 231.77199992616445}
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 5: {'power_consumption': 138.2521485016429, 'voltage': 232.50315508283296}
+Data added to field device 2: {'power_consumption': 126.05276195745745, 'voltage': 223.32505068960296}
+Data added to field device 8: {'power_consumption': 95.15078724879965, 'voltage': 228.76137944368045}
+Data added to field device 1: {'power_consumption': 87.04042397747222, 'voltage': 233.17495427808365}
+Data added to field device 7: {'power_consumption': 102.83167557354197, 'voltage': 233.2754102945839}
+Data added to field device 4: {'power_consumption': 68.13423717991517, 'voltage': 237.1658345327404}
+Data added to field device 0: {'power_consumption': 84.57239832739674, 'voltage': 228.11575047132635}
+Data added to field device 6: {'power_consumption': 131.30561793579733, 'voltage': 222.28900883547564}
+Data added to field device 9: {'power_consumption': 109.08361769308948, 'voltage': 224.53330196177484}
+Device on port 21001 connected
+Data sent to server from device 1
+Device on port 21002 connected
+Data sent to server from device 2
+Device on port 21004 connected
+Data sent to server from device 4
+Device on port 21005 connected
+Data sent to server from device 5
+Device on port 21006 connected
+Data sent to server from device 6
+Device on port 21007 connected
+Data sent to server from device 7
+Device on port 21008 connected
+Data sent to server from device 8
+Device on port 21000 connected
+Data sent to server from device 0
+Device on port 21003 connected
+Data sent to server from device 3
+Device on port 21009 connected
+Data sent to server from device 9
+Data added to field device 5: {'power_consumption': 61.206534869026456, 'voltage': 238.23621825619355}
+Data added to field device 2: {'power_consumption': 54.08339567349982, 'voltage': 238.1109113741605}
+Data added to field device 1: {'power_consumption': 66.57763748008006, 'voltage': 235.4481986889415}
+Data added to field device 8: {'power_consumption': 111.51227684383115, 'voltage': 230.39418699356673}
+Data added to field device 3: {'power_consumption': 139.89635884120685, 'voltage': 225.4819671151679}
+Data added to field device 7: {'power_consumption': 118.50728184649111, 'voltage': 226.63139463193}
+Data added to field device 4: {'power_consumption': 116.26869904096137, 'voltage': 239.24058421319708}
+Data added to field device 0: {'power_consumption': 52.05083213771611, 'voltage': 231.10158384849416}
+Data added to field device 6: {'power_consumption': 60.069032707137005, 'voltage': 235.5285194204992}
+Data added to field device 9: {'power_consumption': 115.64120223222557, 'voltage': 239.6964594296886}
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaSystem time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 5: {'power_consumption': 78.23410660789251, 'voltage': 226.84909233907132}
+Data added to field device 2: {'power_consumption': 126.10698097505816, 'voltage': 221.25556098824396}
+Data added to field device 8: {'power_consumption': 72.06715202707132, 'voltage': 237.15467917223182}
+Data added to field device 1: {'power_consumption': 104.18594644339427, 'voltage': 232.12000007923376}
+Data added to field device 4: {'power_consumption': 99.43324918577275, 'voltage': 226.85081593064848}
+Data added to field device 7: {'power_consumption': 66.66754675595995, 'voltage': 230.68641798764185}
+Data added to field device 3: {'power_consumption': 84.31330243324228, 'voltage': 224.72594175202678}
+Data added to field device 0: {'power_consumption': 81.10254514515049, 'voltage': 231.8601791921169}
+Data added to field device 6: {'power_consumption': 63.090705671227056, 'voltage': 226.74340508222892}
+Data added to field device 9: {'power_consumption': 91.9176970317046, 'voltage': 226.60651538884406}
+Data added to field device 5: {'power_consumption': 145.55891383293553, 'voltage': 226.12058157952163}
+Data added to field device 2: {'power_consumption': 94.77080002059355, 'voltage': 234.94469180344484}
+Data added to field device 8: {'power_consumption': 136.5279672915641, 'voltage': 231.89211291509915}
+Data added to field device 7: {'power_consumption': 67.79516468140937, 'voltage': 234.71012205716062}
+Data added to field device 4: {'power_consumption': 78.76924686859206, 'voltage': 224.93759258129828}
+Data added to field device 1: {'power_consumption': 139.49584716574856, 'voltage': 221.96904592062214}
+Data added to field device 3: {'power_consumption': 124.70101870841543, 'voltage': 220.50928605078568}
+Data added to field device 0: {'power_consumption': 127.10517651421515, 'voltage': 224.65719492579632}
+Data added to field device 6: {'power_consumption': 141.29094892746213, 'voltage': 225.73447830010477}
+Data added to field device 9: {'power_consumption': 131.29475205519753, 'voltage': 224.5489091102093}
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+Data added to field device 5: {'power_consumption': 73.56410853386149, 'voltage': 222.52724850756346}
+Data added to field device 2: {'power_consumption': 65.13925667964318, 'voltage': 237.81814027863106}
+Data added to field device 8: {'power_consumption': 54.79641692839658, 'voltage': 233.80243938544294}
+Data added to field device 7: {'power_consumption': 98.7961541813229, 'voltage': 238.30841565777652}
+Data added to field device 1: {'power_consumption': 119.38948195568109, 'voltage': 228.538799493907}
+Data added to field device 4: {'power_consumption': 103.01059417116463, 'voltage': 223.86015890095}
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 3: {'power_consumption': 72.67019956261367, 'voltage': 230.5597262293928}
+Data added to field device 0: {'power_consumption': 102.17311529461205, 'voltage': 224.6732462183759}
+Data added to field device 6: {'power_consumption': 149.45832698318634, 'voltage': 232.40583146031}
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 9: {'power_consumption': 124.73082372277317, 'voltage': 226.7388381360189}
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+Data sent to server from device 1
+Device on port 21002 connected
+Data sent to server from device 2
+Device on port 21004 connected
+Data sent to server from device 4
+Device on port 21005 connected
+Data sent to server from device 5
+Device on port 21006 connected
+Data sent to server from device 6
+Device on port 21007 connected
+Data sent to server from device 7
+Device on port 21008 connected
+Data sent to server from device 8
+Device on port 21000 connected
+Data sent to server from device 0
+Device on port 21003 connected
+Data sent to server from device 3
+Device on port 21009 connected
+Data sent to server from device 9
+Data added to field device 5: {'power_consumption': 102.58180331798161, 'voltage': 225.35173561182404}
+Data added to field device 8: {'power_consumption': 61.46216469648779, 'voltage': 225.64918372823044}
+Data added to field device 2: {'power_consumption': 73.27442469059271, 'voltage': 235.27557918608298}
+Data added to field device 7: {'power_consumption': 120.7731314504542, 'voltage': 228.90719332946463}
+Data added to field device 1: {'power_consumption': 73.95934444110279, 'voltage': 235.4061250353496}
+Data added to field device 4: {'power_consumption': 108.49495473640943, 'voltage': 236.46159177895277}
+Data added to field device 3: {'power_consumption': 73.12424714443304, 'voltage': 220.805443828845}
+Data added to field device 0: {'power_consumption': 77.20108450922896, 'voltage': 239.57014472278485}
+Data added to field device 6: {'power_consumption': 116.24553993458566, 'voltage': 225.94737028484477}
+Data added to field device 9: {'power_consumption': 139.26844592230884, 'voltage': 232.63563302042414}
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 5: {'power_consumption': 114.63972718511243, 'voltage': 236.5546755805768}
+Data added to field device 2: {'power_consumption': 79.02510022254991, 'voltage': 234.19953128231668}
+Data added to field device 1: {'power_consumption': 82.34386840965493, 'voltage': 226.56312995977544}
+Data added to field device 8: {'power_consumption': 70.70833426078556, 'voltage': 235.08283839418263}
+Data added to field device 4: {'power_consumption': 72.25779435849238, 'voltage': 238.42255306951088}
+Data added to field device 7: {'power_consumption': 91.69888711581478, 'voltage': 225.76519442019384}
+Data added to field device 3: {'power_consumption': 56.780253771117984, 'voltage': 237.85853856505395}
+Data added to field device 0: {'power_consumption': 119.65306667107176, 'voltage': 230.38873887849712}
+Data added to field device 6: {'power_consumption': 58.5254053366891, 'voltage': 236.3575520123275}
+Data added to field device 9: {'power_consumption': 64.81210174463175, 'voltage': 223.24733877235}
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 5: {'power_consumption': 89.95338505887435, 'voltage': 224.95473217832162}
+Data added to field device 2: {'power_consumption': 73.78356022365692, 'voltage': 237.2285683646356}
+Data added to field device 1: {'power_consumption': 133.66483726794274, 'voltage': 226.03676993258216}
+Data added to field device 7: {'power_consumption': 119.82503241959184, 'voltage': 232.23410194831402}
+Data added to field device 8: {'power_consumption': 131.65349010051315, 'voltage': 222.35481435466843}
+Data added to field device 4: {'power_consumption': 133.9021366996345, 'voltage': 232.44737013456245}
+Data added to field device 3: {'power_consumption': 109.91447258861784, 'voltage': 222.6831019785679}
+Data added to field device 0: {'power_consumption': 86.05963695161515, 'voltage': 225.85647348832268}
+Data added to field device 6: {'power_consumption': 112.82221839018868, 'voltage': 233.02051174212178}
+Data added to field device 9: {'power_consumption': 78.49833747495754, 'voltage': 225.89251066060456}
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 5: {'power_consumption': 113.10059066999392, 'voltage': 229.53385527397054}
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 1: {'power_consumption': 56.7560028854356, 'voltage': 237.61753747929578}
+Data added to field device 4: {'power_consumption': 86.01454614045645, 'voltage': 237.72574371570144}
+Data added to field device 2: {'power_consumption': 122.36216639894577, 'voltage': 231.81433229517972}
+Data added to field device 7: {'power_consumption': 68.86036839410258, 'voltage': 235.36062673479987}
+Data added to field device 3: {'power_consumption': 146.08413838721896, 'voltage': 229.92157327463198}
+Data added to field device 8: {'power_consumption': 148.10644017023674, 'voltage': 228.07531114982595}
+Data added to field device 0: {'power_consumption': 115.65127499285232, 'voltage': 228.30342790334117}
+Data added to field device 6: {'power_consumption': 137.7954756577483, 'voltage': 234.43473327216196}
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 9: {'power_consumption': 72.09802512057033, 'voltage': 237.10064456560838}
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+Data sent to server from device 1
+Device on port 21002 connected
+Data sent to server from device 2
+Device on port 21004 connected
+Data sent to server from device 4
+Device on port 21005 connected
+Data sent to server from device 5
+Device on port 21006 connected
+Data sent to server from device 6
+Device on port 21007 connected
+Data sent to server from device 7
+Device on port 21008 connected
+Data sent to server from device 8
+Device on port 21000 connected
+Data sent to server from device 0
+Device on port 21003 connected
+Data sent to server from device 3
+Device on port 21009 connected
+Data sent to server from device 9
+Data added to field device 5: {'power_consumption': 119.76160986751671, 'voltage': 233.77943828505386}
+Data added to field device 2: {'power_consumption': 54.72990791981991, 'voltage': 224.3823613770663}
+Data added to field device 1: {'power_consumption': 72.0263656698659, 'voltage': 221.0880358187899}
+Data added to field device 4: {'power_consumption': 100.05083532470223, 'voltage': 237.92450731511425}
+Data added to field device 7: {'power_consumption': 118.5306573870648, 'voltage': 229.31513345014156}
+Data added to field device 8: {'power_consumption': 103.88404029133812, 'voltage': 230.26659233866351}
+Data added to field device 3: {'power_consumption': 106.170463814197, 'voltage': 229.0354482975769}
+Data added to field device 0: {'power_consumption': 111.0044495202452, 'voltage': 229.72971968513696}
+Data added to field device 6: {'power_consumption': 73.24833273764197, 'voltage': 236.11890836290033}
+Data added to field device 9: {'power_consumption': 97.95225978293834, 'voltage': 234.44387900330435}
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 5: {'power_consumption': 121.82354540041233, 'voltage': 228.1789288570301}
+Data added to field device 2: {'power_consumption': 56.881963260878734, 'voltage': 237.95256213486326}
+Data added to field device 4: {'power_consumption': 120.5780201607586, 'voltage': 224.07194583654478}
+Data added to field device 1: {'power_consumption': 82.6242803375813, 'voltage': 231.54341627154494}
+Data added to field device 7: {'power_consumption': 50.54806408390222, 'voltage': 226.58132591155146}
+Data added to field device 8: {'power_consumption': 130.74482494286266, 'voltage': 235.5310952530269}
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 3: {'power_consumption': 108.10658600323805, 'voltage': 220.38161359105965}
+Data added to field device 0: {'power_consumption': 52.37102702216454, 'voltage': 221.63199468008386}
+Data added to field device 6: {'power_consumption': 112.30425516795538, 'voltage': 229.58392247007035}
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 9: {'power_consumption': 64.70708188523614, 'voltage': 235.2916389049621}
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 5: {'power_consumption': 149.53314407622182, 'voltage': 236.3695343541655}
+Data added to field device 2: {'power_consumption': 92.87150112275712, 'voltage': 227.32003094162272}
+Data added to field device 1: {'power_consumption': 106.77751570348997, 'voltage': 228.26270300034895}
+Data added to field device 4: {'power_consumption': 79.95926346764566, 'voltage': 235.226849880967}
+Data added to field device 8: {'power_consumption': 113.74083227375522, 'voltage': 235.38061364106878}
+Data added to field device 3: {'power_consumption': 149.5648924546125, 'voltage': 237.81930260460055}
+Data added to field device 7: {'power_consumption': 130.20831340047198, 'voltage': 232.2528994198856}
+Data added to field device 0: {'power_consumption': 81.46806570415373, 'voltage': 231.1303274788593}
+Data added to field device 6: {'power_consumption': 98.39908024070192, 'voltage': 229.97385245983133}
+Data added to field device 9: {'power_consumption': 66.16781560320803, 'voltage': 239.66589313034441}
+Data added to field device 5: {'power_consumption': 65.28624207578768, 'voltage': 220.3237106868995}
+Data added to field device 2: {'power_consumption': 120.63004141458055, 'voltage': 226.17868806543106}
+Data added to field device 4: {'power_consumption': 110.17657661679058, 'voltage': 235.86833567784774}
+Data added to field device 8: {'power_consumption': 125.13646855045005, 'voltage': 234.59558624719992}
+Data added to field device 1: {'power_consumption': 147.49171953786808, 'voltage': 237.18162667340414}
+Data added to field device 3: {'power_consumption': 135.98910931218762, 'voltage': 222.97778578776035}
+Data added to field device 7: {'power_consumption': 139.56154264174884, 'voltage': 227.62666330197462}
+Data added to field device 0: {'power_consumption': 115.93737382485766, 'voltage': 230.87707808977422}
+Data added to field device 6: {'power_consumption': 81.13175234677558, 'voltage': 223.53560735840165}
+Data added to field device 9: {'power_consumption': 120.53494908993925, 'voltage': 229.40760369264348}
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+Data sent to server from device 1
+Device on port 21002 connected
+Data sent to server from device 2
+Device on port 21004 connected
+Data sent to server from device 4
+Device on port 21005 connected
+Data sent to server from device 5
+Device on port 21006 connected
+Data sent to server from device 6
+Device on port 21007 connected
+Data sent to server from device 7
+Device on port 21008 connected
+Data sent to server from device 8
+Device on port 21000 connected
+Data sent to server from device 0
+Device on port 21003 connected
+Data sent to server from device 3
+Device on port 21009 connected
+Data sent to server from device 9
+Device on port 21006 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21008 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21009 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 5: {'power_consumption': 110.71439774804143, 'voltage': 234.70373351824387}
+Data added to field device 2: {'power_consumption': 104.78982590675352, 'voltage': 234.8338618199232}
+Data added to field device 8: {'power_consumption': 118.09766241707784, 'voltage': 230.73564628646835}
+Data added to field device 4: {'power_consumption': 101.11714463200583, 'voltage': 223.70881035484194}
+Data added to field device 1: {'power_consumption': 54.20101342760943, 'voltage': 237.42568102136815}
+Data added to field device 3: {'power_consumption': 99.42563938365255, 'voltage': 237.94682501342092}
+Data added to field device 7: {'power_consumption': 141.16307119111076, 'voltage': 228.31536003287374}
+Data added to field device 0: {'power_consumption': 129.1711842318615, 'voltage': 230.5539132802773}
+Data added to field device 6: {'power_consumption': 89.38694855166617, 'voltage': 239.0434950902726}
+Data added to field device 9: {'power_consumption': 73.38570085361296, 'voltage': 231.9492092617322}
+Data added to field device 5: {'power_consumption': 90.31643113227308, 'voltage': 231.65388166348083}
+Data added to field device 2: {'power_consumption': 56.43978808927408, 'voltage': 226.61538213368345}
+Data added to field device 8: {'power_consumption': 127.77483856624217, 'voltage': 233.29292369913725}
+Data added to field device 3: {'power_consumption': 122.94485757735119, 'voltage': 223.83167465438083}
+Data added to field device 7: {'power_consumption': 98.60637958209858, 'voltage': 237.42737777867595}
+Data added to field device 4: {'power_consumption': 74.85017642994856, 'voltage': 226.2002254485259}
+Data added to field device 1: {'power_consumption': 113.34280389705617, 'voltage': 233.38529158975837}
+Data added to field device 0: {'power_consumption': 98.09291974596412, 'voltage': 224.60538741777222}
+Data added to field device 6: {'power_consumption': 143.90628683876815, 'voltage': 224.78367800881847}
+Data added to field device 9: {'power_consumption': 56.063542387303926, 'voltage': 230.96887187391548}
+Device on port 21003 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21000 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21001 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21002 connected
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 5: {'power_consumption': 66.580028649345, 'voltage': 223.33010969362311}
+Data added to field device 3: {'power_consumption': 145.9136110870511, 'voltage': 226.479646953612}
+Data added to field device 8: {'power_consumption': 118.41225267526372, 'voltage': 222.43334075464128}
+Data added to field device 1: {'power_consumption': 91.83528689200898, 'voltage': 229.73013124194486}
+Data added to field device 4: {'power_consumption': 120.2836547788358, 'voltage': 220.7639528923083}
+Data added to field device 7: {'power_consumption': 64.93631542585567, 'voltage': 223.2157180900349}
+Data added to field device 0: {'power_consumption': 70.89030641080438, 'voltage': 223.0336179452215}
+Data added to field device 6: {'power_consumption': 119.15790716958988, 'voltage': 234.95702480121346}
+Data added to field device 9: {'power_consumption': 56.58636505668113, 'voltage': 222.47421334133728}
+ntp time An error occurred: No response received from pool.ntp.org.
+Data added to field device 2: {'power_consumption': 110.74555686817507, 'voltage': 237.24646329737703}
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 5: {'power_consumption': 126.65247092757559, 'voltage': 234.59413101236748}
+Data added to field device 1: {'power_consumption': 50.238280457054785, 'voltage': 222.7072304787639}
+Data added to field device 3: {'power_consumption': 115.0978179677733, 'voltage': 233.0867637429912}
+Data added to field device 8: {'power_consumption': 51.860254604105236, 'voltage': 224.89602675200015}
+Data added to field device 4: {'power_consumption': 65.1930996138156, 'voltage': 221.73066086425086}
+Data added to field device 7: {'power_consumption': 87.39208269221008, 'voltage': 233.65923438906768}
+Data added to field device 0: {'power_consumption': 95.1953087605201, 'voltage': 224.9106736107821}
+Data added to field device 6: {'power_consumption': 117.26640306029962, 'voltage': 222.59644479900436}
+Data added to field device 9: {'power_consumption': 60.70443365494694, 'voltage': 228.1723472217981}
+Data added to field device 2: {'power_consumption': 134.8012570487491, 'voltage': 237.54823240034403}
+Data added to field device 5: {'power_consumption': 130.71463902108263, 'voltage': 235.0202121008988}
+Data added to field device 1: {'power_consumption': 65.69411133472074, 'voltage': 226.50189390414437}
+Data added to field device 3: {'power_consumption': 118.12485267659488, 'voltage': 233.49252621110082}
+Data added to field device 8: {'power_consumption': 126.03369902618164, 'voltage': 225.91564238380226}
+Data added to field device 4: {'power_consumption': 139.87394056613655, 'voltage': 237.73526896870268}
+Data added to field device 7: {'power_consumption': 59.6243460192548, 'voltage': 222.5788803357776}
+Data added to field device 0: {'power_consumption': 148.23901201704638, 'voltage': 234.1401186220751}
+Data added to field device 6: {'power_consumption': 119.950864564014, 'voltage': 238.8059063093544}
+Data added to field device 9: {'power_consumption': 105.93210247542228, 'voltage': 227.0582742991753}
+Data added to field device 2: {'power_consumption': 100.15903607187771, 'voltage': 239.31423624054443}
+Data added to field device 5: {'power_consumption': 101.2705543019951, 'voltage': 230.9625911758744}
+Data added to field device 1: {'power_consumption': 94.54149606835718, 'voltage': 236.98562380185535}
+Data added to field device 8: {'power_consumption': 78.28675524898972, 'voltage': 229.46785651868484}
+Data added to field device 3: {'power_consumption': 141.8312348461797, 'voltage': 235.3620992155073}
+Data added to field device 7: {'power_consumption': 90.32705934951304, 'voltage': 237.26056544797078}
+Data added to field device 4: {'power_consumption': 54.12302237008531, 'voltage': 220.2897035598916}
+Data added to field device 0: {'power_consumption': 71.29616595556374, 'voltage': 234.58556187578998}
+Data added to field device 6: {'power_consumption': 145.00886084435723, 'voltage': 238.35783516789135}
+Data added to field device 9: {'power_consumption': 142.27464657743695, 'voltage': 234.2573505972412}
+Data added to field device 2: {'power_consumption': 128.65483572792274, 'voltage': 225.16067237427924}
+Data added to field device 5: {'power_consumption': 146.85421331703924, 'voltage': 230.89582510777075}
+Data added to field device 1: {'power_consumption': 59.35641562614574, 'voltage': 222.06175309021856}
+Data added to field device 8: {'power_consumption': 138.85225185773493, 'voltage': 238.34688327575404}
+Data added to field device 4: {'power_consumption': 128.97580104318456, 'voltage': 239.62257956563002}
+Data added to field device 3: {'power_consumption': 66.94374506042672, 'voltage': 224.8686341446907}
+Data added to field device 7: {'power_consumption': 105.61894654569818, 'voltage': 231.5768657440605}
+Data added to field device 0: {'power_consumption': 57.019630270862365, 'voltage': 224.13250917140408}
+Data added to field device 6: {'power_consumption': 135.86145973229645, 'voltage': 236.1681812821853}
+Data added to field device 9: {'power_consumption': 53.31901701597231, 'voltage': 232.3560069586969}
+Data added to field device 2: {'power_consumption': 140.358714641261, 'voltage': 221.96483927921693}
+Device on port 21000 connected
+Device on port 21003 connected
+Data added to field device 5: {'power_consumption': 68.62918353090477, 'voltage': 231.3709978465065}
+Data added to field device 3: {'power_consumption': 146.15836107171697, 'voltage': 233.15310250380955}
+Data added to field device 8: {'power_consumption': 79.4187467122197, 'voltage': 228.8721844504238}
+Data added to field device 1: {'power_consumption': 139.51480851496729, 'voltage': 224.5826126916992}
+Data added to field device 4: {'power_consumption': 93.33716198540613, 'voltage': 237.10317171785974}
+Data added to field device 7: {'power_consumption': 82.01109132961675, 'voltage': 231.40505997684988}
+Data added to field device 0: {'power_consumption': 127.71785291633603, 'voltage': 234.33438830684617}
+Data added to field device 6: {'power_consumption': 116.49339332762601, 'voltage': 229.49910988439686}
+Data added to field device 9: {'power_consumption': 131.96509664333058, 'voltage': 236.74337721305685}
+Device on port 21002 connected
+Data sent to server from device 2
+ntp time System time is within the acceptable range. No update needed.
+Device on port 21007 connected
+Device on port 21004 connected
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 2: {'power_consumption': 50.66671476047914, 'voltage': 225.55967095553876}
+Data added to field device 5: {'power_consumption': 80.11580847374438, 'voltage': 236.6469920298577}
+Data added to field device 8: {'power_consumption': 126.94756320117048, 'voltage': 222.87016407459564}
+Data added to field device 1: {'power_consumption': 81.81015667981603, 'voltage': 236.78558589360432}
+Data added to field device 4: {'power_consumption': 79.42408500853645, 'voltage': 237.69391421352657}
+Data added to field device 0: {'power_consumption': 104.53275709621794, 'voltage': 230.95503958717285}
+Data added to field device 6: {'power_consumption': 135.11167797618967, 'voltage': 231.43645122463204}
+Data added to field device 9: {'power_consumption': 106.42797139154528, 'voltage': 232.0583708253832}
+ntp time An error occurred: No response received from pool.ntp.org.
+Data added to field device 3: {'power_consumption': 77.62654392623469, 'voltage': 226.721438974415}
+Data added to field device 2: {'power_consumption': 118.97912164469763, 'voltage': 229.02960795243894}
+Data added to field device 5: {'power_consumption': 118.59508391054845, 'voltage': 221.4702796782436}
+Data added to field device 8: {'power_consumption': 135.0837688900848, 'voltage': 229.93489468012325}
+Data added to field device 1: {'power_consumption': 94.58018431376905, 'voltage': 227.0759666260187}
+Data added to field device 4: {'power_consumption': 91.5595674146418, 'voltage': 224.04232522373286}
+Data added to field device 0: {'power_consumption': 99.00538071283694, 'voltage': 224.2005755932357}
+Data added to field device 6: {'power_consumption': 58.3623309673308, 'voltage': 222.42889716174565}
+Data added to field device 9: {'power_consumption': 69.20856532145721, 'voltage': 226.6688987127158}
+Device on port 21004 disconnected
+Data added to field device 2: {'power_consumption': 52.86839086001651, 'voltage': 229.74299178938352}
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 3: {'power_consumption': 67.65701559214564, 'voltage': 223.8486783491641}
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 7: {'power_consumption': 144.1907183729857, 'voltage': 235.97806046611868}
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 8: {'power_consumption': 113.55642204065073, 'voltage': 226.2567316040365}
+Data added to field device 5: {'power_consumption': 112.06945903561041, 'voltage': 239.46960937769148}
+Data added to field device 1: {'power_consumption': 103.88111781944332, 'voltage': 235.09721930588609}
+Data added to field device 4: {'power_consumption': 99.7335251847492, 'voltage': 239.52311233099826}
+Data added to field device 6: {'power_consumption': 86.4533906365138, 'voltage': 223.6631557129433}
+Data added to field device 9: {'power_consumption': 121.65334727116426, 'voltage': 222.27156493510944}
+Device on port 21005 connected
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 0: {'power_consumption': 88.06973698797347, 'voltage': 233.7547827333382}
+Data sent to server from device 5
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 2: {'power_consumption': 100.86213850437268, 'voltage': 231.16428911104356}
+ntp time System time is within the acceptable range. No update needed.
+ntp time System time is within the acceptable range. No update needed.
+Data added to field device 3: {'power_consumption': 126.2982582511451, 'voltage': 230.63963850804177}
+Data added to field device 7: {'power_consumption': 51.397878385442795, 'voltage': 233.9091159984318}
+Device on port 21007 connected
+Data added to field device 8: {'power_consumption': 71.29039785583696, 'voltage': 237.09997331725734}
+Data added to field device 5: {'power_consumption': 69.25484758371904, 'voltage': 228.51983952637423}
+Data added to field device 1: {'power_consumption': 81.46437842610462, 'voltage': 231.49479958242006}
+Data added to field device 4: {'power_consumption': 72.5315175260989, 'voltage': 225.8962189607087}
+Data added to field device 6: {'power_consumption': 104.1829358925215, 'voltage': 236.91803075174235}
+Data added to field device 9: {'power_consumption': 89.0107861663555, 'voltage': 230.62585493067093}
+ntp time An error occurred: No response received from pool.ntp.org.
+Data added to field device 0: {'power_consumption': 76.8170854911892, 'voltage': 228.3358951877937}
+Data added to field device 2: {'power_consumption': 130.18409338672635, 'voltage': 237.96692599003177}
+Data added to field device 8: {'power_consumption': 79.96969505331654, 'voltage': 226.02913625944853}
+Data added to field device 5: {'power_consumption': 138.55144395892785, 'voltage': 232.60698142174462}
+Data added to field device 1: {'power_consumption': 127.06321158348844, 'voltage': 237.57168544456613}
+Data added to field device 4: {'power_consumption': 62.388659543423145, 'voltage': 222.32071970743849}
+Data added to field device 6: {'power_consumption': 51.10509833749958, 'voltage': 221.23295171211387}
+Data added to field device 9: {'power_consumption': 54.298126981270364, 'voltage': 222.50667318480544}

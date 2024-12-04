@@ -5,36 +5,37 @@ import asyncio
 import websockets
 import random
 import ntplib  # Added for NTP synchronization
-
+from ntptime import check_and_update_time
 
 class FieldDevice:
     def __init__(self, device_id, port):
         self.device_id = device_id
         self.port = port
         self.data_storage = []
-        self.headend_url = "ws://192.168.1.14:31000"
+        self.headend_url = "ws://192.168.1.10:31000"
         self.last_collected_data = time.time()
         self.datapoint_time = 5  # Interval between data generation (seconds)
         self.bulkupload_time = 500  # Interval between bulk uploads (seconds)
-        self.ntp_client = ntplib.NTPClient()  # Initialize the NTP client
-        self.ntp_server = "pool.ntp.org"  # Public NTP server
-        self.ntp_offset = self.get_ntp_offset()
+        # self.ntp_client = ntplib.NTPClient()  # Initialize the NTP client
+        # self.ntp_server = "pool.ntp.org"  # Public NTP server
+        # self.ntp_offset = self.get_ntp_offset()
+        self.local_addr = ("192.168.1.11", (port+1000))  # Local address for the device
 
-        self.local_addr = ("192.168.1.7", (port+1000))  # Local address for the device
 
-
-    def get_ntp_offset(self):
-        """Get the offset between the local clock and NTP time."""
-        try:
-            response = self.ntp_client.request(self.ntp_server)
-            return response.offset  # Offset in seconds
-        except Exception as e:
-            print(f"Failed to get NTP offset: {e}")
-            return 0  # Fallback to no offset if NTP fails
+    # def get_ntp_offset(self):
+    #     """Get the offset between the local clock and NTP time."""
+    #     try:
+    #         response = self.ntp_client.request(self.ntp_server)
+    #         return 
+    #         # return response.offset  # Offset in seconds
+    #     except Exception as e:
+    #         print(f"Failed to get NTP offset: {e}")
+    #         return 0  # Fallback to no offset if NTP fails
 
     def get_ntp_timestamp(self):
         """Get the current synchronized timestamp as a UNIX timestamp."""
-        return time.time() + self.ntp_offset
+        print("ntp time", check_and_update_time(ntp_server="pool.ntp.org", max_difference_seconds=3600))
+        return time.time() 
 
     async def websocket_handler(self, websocket):
         print(f"Device on port {self.port} connected")
@@ -51,7 +52,7 @@ class FieldDevice:
                     print(f"Data sent to server from device {self.device_id}")
                     self.data_storage.clear()  # Clear data after sending
                 else:
-                    print(f"Supporting throughput test")
+                    # print(f"Supporting throughput test")
                     # This is the case for throughput testing.
                     ack_message = json.dumps({
                         "type": "ack",
