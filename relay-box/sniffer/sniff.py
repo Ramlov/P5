@@ -3,7 +3,6 @@ import requests
 import json
 import random
 from scapy.all import sniff, TCP, IP
-from time import sleep
 from port_mapper import PortMatcher
 
 # Load configurations
@@ -41,6 +40,7 @@ def sniff_packets():
 def print_port(pkt):
     global LAST_PROFILE
     if IP in pkt and TCP in pkt:
+        start_time = time.time()  # Start timing
         src_ip = pkt[IP].src
         dst_ip = pkt[IP].dst
         tcp_sport = pkt[TCP].sport
@@ -54,11 +54,10 @@ def print_port(pkt):
                 write_to_file(f"\n Source IP: {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
                 
                 device_id = get_id_from_port(chosen_port)
-                # print(f"Device ID: {device_id}")
                 if device_id < 0:
                     write_to_file("No Device ID Found")
                     return
-                    
+                
                 profile = fd_profiles[device_id]
                 write_to_file(f"\n Network Profile for ID {device_id}: {profile}" )
                 profile_type = profile.get("profile")
@@ -74,15 +73,21 @@ def print_port(pkt):
                         delay = random.randint(delay_range["min"], delay_range["max"])
                         write_to_file(f"\n Chosen delay for profile {profile_type}: {delay} ms")
                         
-                        # Adding throughput handling
                         throughput_range = THROUGHPUT.get(profile_type, {"min": 0, "max": 0})
                         throughput = random.randint(throughput_range["min"], throughput_range["max"])
                         write_to_file(f"\n Chosen throughput for profile {profile_type}: {throughput} Mbps")
                         
+                        # Adding throughput handling
                         packet_callback(delay, packet_loss, throughput)
                         LAST_PROFILE = profile_type
                 else:
                     write_to_file(f"\n No network profile type found for {profile_type}")
+        
+        end_time = time.time()  # End timing
+        duration = end_time - start_time
+        write_to_file(f"\n Time taken from packet to last API call: {duration:.6f} seconds\n")
+        write_to_file(f"\n ******************** Packet Emulation ******************** \n")
+        print(f"Time taken from packet to last API call: {duration:.6f} seconds")
 
 # Callback for packet simulation
 def packet_callback(delay, packet_loss, throughput):
@@ -117,18 +122,14 @@ def packet_callback(delay, packet_loss, throughput):
             json=payload_rate_control
         )
         write_to_file(f"Response from packet_rate_control: {response_rate_control.text}")
-        write_to_file(f"\n ******************** Packet Emulation ******************** \n")
     except Exception as e:
         write_to_file(f"Error in packet_rate_control request: {e}" + "\n")
-
 
 # Helper to map port to device ID
 def get_id_from_port(port):
     if port >= port_sub_bulk:
-        print(port, port_sub_bulk), "BULK"
         return port - port_sub_bulk
     else:
-        print(port, port_sub, "NOT BULK")
         return port - port_sub
 
 # Main execution
