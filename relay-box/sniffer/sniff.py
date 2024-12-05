@@ -87,7 +87,7 @@ def print_port(pkt):
             write_to_file(f"\n Time taken from packet to last API call: {duration:.6f} seconds\n")
             print(f"Time taken from packet to last API call: {duration:.6f} seconds")
         
-        write_to_file(f"\n ******************** Packet Emulation ******************** \n")
+            write_to_file(f"\n ******************** Packet Emulation ******************** \n")
         
 
 # Callback for packet simulation
