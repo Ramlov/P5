@@ -17,9 +17,9 @@
         "SLOW": 10
     },
     "throughput": {
-        "GOOD": {"min": 100, "max": 500},
-        "NORMAL": {"min": 50, "max": 100},
-        "SLOW": {"min": 10, "max": 50}
+        "GOOD": {"min": 0.3, "max": 0.5},
+        "NORMAL": {"min": 0.075, "max": 0.3},
+        "SLOW": {"min": 0.030, "max": 0.075}
     },
     "burst_bytes": 1024,
     "delay_rate_control": 1000,
