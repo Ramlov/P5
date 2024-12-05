@@ -9,7 +9,7 @@
             width: 100%;
             height: 80vh;
             border: 1px solid #ddd;
-            overflow-y: auto; /* Use 'auto' to ensure proper scrolling */
+            overflow-y: auto; /* Enables vertical scrolling */
             background-color: #f9f9f9;
             padding: 10px;
             font-family: monospace;
@@ -26,20 +26,19 @@
         const logDiv = document.getElementById('log');
         const socket = io();
 
-        // Ensure this always scrolls to the bottom reliably
+        // Scroll to the bottom of the log div
         const scrollToBottom = () => {
             logDiv.scrollTop = logDiv.scrollHeight;
         };
 
         // Listen for 'log_update' events from the server
         socket.on('log_update', (data) => {
-            // Append new log line to the log div
             const line = document.createElement('div');
-            line.textContent = data.data;
-            logDiv.appendChild(line);
+            line.textContent = data.data; // Add the incoming log data
+            logDiv.appendChild(line); // Append new line to the log div
 
-            // Scroll to the bottom of the log div
-            setTimeout(scrollToBottom, 0); // Allow the DOM to update before scrolling
+            // Smoothly scroll to the bottom
+            scrollToBottom();
         });
     </script>
 </body>
