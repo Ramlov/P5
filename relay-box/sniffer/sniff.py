@@ -40,7 +40,6 @@ def sniff_packets():
 def print_port(pkt):
     global LAST_PROFILE
     if IP in pkt and TCP in pkt:
-        start_time = time.time()  # Start timing
         src_ip = pkt[IP].src
         dst_ip = pkt[IP].dst
         tcp_sport = pkt[TCP].sport
@@ -48,6 +47,7 @@ def print_port(pkt):
 
         chosen_port = min(tcp_dport, tcp_sport)
         if chosen_port not in ignore_ports:
+            start_time = time.time()  # Start timing
             print(f"Source IP (before chosen port): {src_ip}, Destination IP: {dst_ip}, Source Port: {tcp_sport}, Destination Port: {tcp_dport}")
             print(f"Chosen Port: {chosen_port}")
             if chosen_port in PORT_RANGE:
@@ -82,12 +82,13 @@ def print_port(pkt):
                         LAST_PROFILE = profile_type
                 else:
                     write_to_file(f"\n No network profile type found for {profile_type}")
+            end_time = time.time()  # End timing
+            duration = end_time - start_time
+            write_to_file(f"\n Time taken from packet to last API call: {duration:.6f} seconds\n")
+            print(f"Time taken from packet to last API call: {duration:.6f} seconds")
         
-        end_time = time.time()  # End timing
-        duration = end_time - start_time
-        write_to_file(f"\n Time taken from packet to last API call: {duration:.6f} seconds\n")
         write_to_file(f"\n ******************** Packet Emulation ******************** \n")
-        print(f"Time taken from packet to last API call: {duration:.6f} seconds")
+        
 
 # Callback for packet simulation
 def packet_callback(delay, packet_loss, throughput):
