@@ -112,19 +112,19 @@ def packet_callback(delay, packet_loss, throughput):
     except Exception as e:
         write_to_file(f"Error in packet_delay request: {e}")
         
-    payload_rate_control = {
-        "kbit": throughput * 1000,  # Converting Mbps to kbps
-        "latency_milliseconds": 1000,
-        "burst_bytes": burst_bytes
-    }
-    try:
-        response_rate_control = requests.post(
-            config['api_endpoints']['packet_rate_control'],
-            json=payload_rate_control
-        )
-        write_to_file(f"Response from packet_rate_control: {response_rate_control.text}")
-    except Exception as e:
-        write_to_file(f"Error in packet_rate_control request: {e}" + "\n")
+    # payload_rate_control = {
+    #     "kbit": throughput * 1000,  # Converting Mbps to kbps
+    #     "latency_milliseconds": 1000,
+    #     "burst_bytes": burst_bytes
+    # }
+    # try:
+    #     response_rate_control = requests.post(
+    #         config['api_endpoints']['packet_rate_control'],
+    #         json=payload_rate_control
+    #     )
+    #     write_to_file(f"Response from packet_rate_control: {response_rate_control.text}")
+    # except Exception as e:
+    #     write_to_file(f"Error in packet_rate_control request: {e}" + "\n")
 
 # Helper to map port to device ID
 def get_id_from_port(port):
