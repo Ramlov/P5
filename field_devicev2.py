@@ -6,7 +6,7 @@ import websockets
 import random
 import ntplib  # Added for NTP synchronization
 from ntptime import check_and_update_time
-
+from datetime import datetime 
 class FieldDevice:
     def __init__(self, device_id, port):
         self.device_id = device_id
@@ -34,11 +34,11 @@ class FieldDevice:
 
     def get_ntp_timestamp(self):
         """Get the current synchronized timestamp as a UNIX timestamp."""
-        print("ntp time", check_and_update_time(ntp_server="pool.ntp.org", max_difference_seconds=3600))
+        # print("ntp time", check_and_update_time(ntp_server="pool.ntp.org", max_difference_seconds=3600))
         return time.time() 
 
     async def websocket_handler(self, websocket):
-        print(f"Device on port {self.port} connected")
+        print(f"{datetime.now()}: Device on port {self.port} connected")
         sequence_number = 0
         try:
             async for message in websocket:
@@ -49,7 +49,7 @@ class FieldDevice:
                         response_data = "No data available"
 
                     await websocket.send(response_data)
-                    print(f"Data sent to server from device {self.device_id}")
+                    print(f"{datetime.now()}: Data sent to server from device {self.device_id}")
                     self.data_storage.clear()  # Clear data after sending
                 else:
                     # print(f"Supporting throughput test")
@@ -63,10 +63,10 @@ class FieldDevice:
                     sequence_number += 1
 
         except websockets.exceptions.ConnectionClosedError:
-            print(f"Device on port {self.port} disconnected")
+            print(f"{datetime.now()}: Device on port {self.port} disconnected")
 
     async def start_server(self):
-        print(f"Starting WebSocket server on port {self.port}")
+        print(f"{datetime.now()}: Starting WebSocket server on port {self.port}")
         async with websockets.serve(self.websocket_handler, "0.0.0.0", self.port):
             await asyncio.Future()  # Run forever
 
@@ -90,7 +90,7 @@ class FieldDevice:
 
             # Add the data point to the list
             self.data_storage.append(new_data)
-            print(f"Data added to field device {self.device_id}: {new_data}")
+            print(f"{datetime.now()}: Data added to field device {self.device_id}: {new_data}")
 
             # Perform a bulk upload if the interval is reached
             if time.time() - self.last_collected_data >= self.bulkupload_time:
@@ -113,22 +113,22 @@ class FieldDevice:
 
             try:
                 async with websockets.connect(self.headend_url, local_addr=self.local_addr) as websocket:
-                    print(f"Device {self.device_id}: Connected to server at {self.headend_url}")
+                    print(f"{datetime.now()}: Device {self.device_id}: Connected to server at {self.headend_url}")
                     
                     # Send the bulk data as JSON
                     await websocket.send(json.dumps(bulk_data))
-                    print(f"Device {self.device_id}: Successfully sent bulk data at {send_timestamp}")
+                    print(f"{datetime.now()}: Device {self.device_id}: Successfully sent bulk data at {send_timestamp}")
 
                     # Clear the data points after successful upload
                     self.data_storage.clear()
             except websockets.exceptions.ConnectionClosedError:
-                print(f"Device {self.device_id}: Connection closed unexpectedly.")
+                print(f"{datetime.now()}: Device {self.device_id}: Connection closed unexpectedly.")
             except Exception as e:
-                print(f"Device {self.device_id}: An error occurred during bulk upload: {e}")
+                print(f"{datetime.now()}: Device {self.device_id}: An error occurred during bulk upload: {e}")
 
 
 if __name__ == "__main__":
-    FD_AMOUNT = 10  # Number of field devices to simulate
+    FD_AMOUNT = 30  # Number of field devices to simulate
     threads = []
     for id in range(FD_AMOUNT):
         port = 21000 + id
@@ -137,7 +137,7 @@ if __name__ == "__main__":
         threads.append(thread)
         thread.start()
 
-    print(f"Number of Field Devices: {len(threads)}")
+    print(f"{datetime.now()}: Number of Field Devices: {len(threads)}")
 
     for thread in threads:
         thread.join()
