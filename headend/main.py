@@ -85,7 +85,7 @@ def main():
     backend_listener_thread.start()
 
     # Initialize and start Active Monitoring
-    num_active_threads = 2  # Adjust as needed
+    num_active_threads = 4  # Adjust as needed
     active_monitor = ActiveMonitoring(field_devices, fd_locks, num_active_threads)
     active_monitor.start()
 
