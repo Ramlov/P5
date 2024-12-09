@@ -54,7 +54,7 @@ class PassiveMonitoring:
 
         try:
             sniff(
-            iface="\\Device\\NPF_{1FFB8732-7C42-45C4-B130-4F71495A4CBD}",  # Replace with the correct Ethernet interface name
+            iface="\\Device\\NPF_{8EDA4A20-3596-459C-9897-806E64C5B450}",  # Replace with the correct Ethernet interface name
             filter=f"tcp port {self.port}",
             prn=self.process_packet,
             store=False,

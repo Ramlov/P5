@@ -92,6 +92,8 @@ class ActiveMonitoring:
         # Step 1: Ping & ICMP Testing
         latency, packet_loss = self.ping_icmp_test(ip_address)
 
+        throughput = None
+
         # Step 2: Throughput Testing using WebSockets
         if self.enable_throughput_test:
             throughput = asyncio.run(self.throughput_test(ip_address, port))

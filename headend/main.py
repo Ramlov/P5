@@ -64,7 +64,7 @@ def backend_listener(adaptive_data_access, server_ip, backend_listen_port):
 
 def main():
     # Server Information
-    server_ip = '192.168.1.10'
+    server_ip = '192.168.1.14'
     passive_server_port = '31000'
     backend_listen_port = '8000'
 
@@ -85,7 +85,7 @@ def main():
     backend_listener_thread.start()
 
     # Initialize and start Active Monitoring
-    num_active_threads = 1  # Adjust as needed
+    num_active_threads = 2  # Adjust as needed
     active_monitor = ActiveMonitoring(field_devices, fd_locks, num_active_threads)
     active_monitor.start()
 
