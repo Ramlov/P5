@@ -19,8 +19,9 @@ class ActiveMonitoring:
         self.active_threads = []
         self.stop_event = threading.Event()
         self.field_device_ids = list(self.field_devices.keys())
-        self.time_monitoring_cycle = 10 #Time in seconds between cycles
+        self.time_monitoring_cycle = 10 # Time in seconds between cycles
         self.ntp_offset = self.get_ntp_offset()
+        self.enable_throughput_test = False
 
     def get_ntp_offset(self):
         """
@@ -90,11 +91,12 @@ class ActiveMonitoring:
         latency, packet_loss = self.ping_icmp_test(ip_address)
 
         # Step 2: Throughput Testing using WebSockets
-        throughput = asyncio.run(self.throughput_test(ip_address, port))
-        if throughput is None:
-            # Set throughput to 0 if testing failed
-            throughput = 0.0
-            #print(f"Throughput is None\n")
+        if self.enable_throughput_test:
+            throughput = asyncio.run(self.throughput_test(ip_address, port))
+            if throughput is None:
+                # Set throughput to 0 if testing failed
+                throughput = 0.0
+                #print(f"Throughput is None\n")
 
         # Step 3: Classify connection
         status = self.classify_connection(latency, packet_loss, throughput)
@@ -166,15 +168,26 @@ class ActiveMonitoring:
 
     def classify_connection(self, latency, packet_loss, throughput):
         """Classify the connection based on latency, packet loss, and throughput."""
-        if latency is None or packet_loss == 100.0 or throughput == 0:
-            return 'Unavailable'
+        if self.enable_throughput_test:
+            if latency is None or packet_loss == 100.0 or throughput == 0:
+                return 'Unavailable'
 
-        if latency < 200 and packet_loss == 0 and throughput >= 500:
-            return 'Good'
-        elif latency <= 350 and packet_loss <= 20 and throughput >= 100:
-            return 'Acceptable'
+            if latency < 200 and packet_loss == 0 and throughput >= 500:
+                return 'Good'
+            elif latency <= 350 and packet_loss <= 20 and throughput >= 100:
+                return 'Acceptable'
+            else:
+                return 'Poor'  # Default to 'Poor' if none of the above conditions match
         else:
-            return 'Poor'  # Default to 'Poor' if none of the above conditions match
+            if latency is None or packet_loss == 100.0:
+                return 'Unavailable'
+            if latency < 200 and packet_loss == 0:
+                return 'Good'
+            elif latency <= 350 and packet_loss <= 20:
+                return 'Acceptable'
+            else:
+                return 'Poor'  # Default to 'Poor' if none of the above conditions match
+        
 
     def analyze_and_store_results(self, fd_info, fd_id, latency, packet_loss, throughput, status):
         """Store results in the fd_info."""
@@ -184,7 +197,10 @@ class ActiveMonitoring:
         active_metrics = fd_info.get('active_metrics', {})
         active_metrics['latency'] = latency
         active_metrics['packet_loss'] = packet_loss
-        active_metrics['throughput'] = throughput
+
+        if self.enable_throughput_test: # Check if throughput testing is enabled.
+            active_metrics['throughput'] = throughput
+
         active_metrics['status'] = status
         active_metrics['last_active'] = timestamp
         fd_info['active_metrics'] = active_metrics
