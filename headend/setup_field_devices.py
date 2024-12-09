@@ -27,15 +27,15 @@ def insert_devices(start_id, end_id, region, ip_address):
 
 # Step 3: Insert FD 0-9 for Region A1
 ip_a1 = '192.168.1.11'  # Common IP for Region A1
-insert_devices(0, 29, 'A1', ip_a1)
+insert_devices(0, 14, 'A1', ip_a1)
 
 # Step 4: Insert FD 10-19 for Region A2
-ip_a2 = '192.168.1.101'  # Common IP for Region A2
-insert_devices(16, 28, 'A2', ip_a2)
+ip_a2 = '192.168.1.10'  # Common IP for Region A2
+insert_devices(20, 34, 'A2', ip_a2)
 
 # Step 5: Insert FD 20-29 for Region A3
-ip_a3 = '192.168.1.102'  # Common IP for Region A3
-insert_devices(29, 32, 'A3', ip_a3)
+ip_a3 = '192.168.1.12'  # Common IP for Region A3
+insert_devices(40, 54, 'A3', ip_a3)
 
 # Commit the changes and close the connection
 conn.commit()
