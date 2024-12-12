@@ -16,8 +16,10 @@ class AdaptiveDataAccess:
         self.stop_event = threading.Event()
         self.lock = threading.Lock()  # Lock to protect access to focused_fd_ids
         self.ada_wait_time = 15000 #Time to wait in seconds until a fd has generated a new data point
+        self.start_time = time.time()
 
     def run(self):
+
         while not self.stop_event.is_set():
             with self.lock:
                 current_focus = self.focused_fd_ids.copy() if self.focused_fd_ids else None
@@ -39,9 +41,10 @@ class AdaptiveDataAccess:
                         self.process_fd(fd_id)
                 else:
                     # No FDs need fetching at this time
+                    print(f"Runtime: {self.start_time - time.time()}\n")
                     print(f"No Current Field Devices that fit ADA Criteria\n")
-
-            time.sleep(5)  #
+                    
+            #time.sleep(5)  #
 
     def get_fds_to_fetch(self):
         """Identify FDs that are 'available' and need data fetching."""

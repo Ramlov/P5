@@ -31,6 +31,7 @@ class PassiveMonitoring:
         """
         Fetch NTP time offset to synchronize timing.
         """
+        print(f"Getting NTP Time\n")
         try:
             client = ntplib.NTPClient()
             response = client.request("pool.ntp.org")
@@ -156,7 +157,8 @@ class PassiveMonitoring:
                 send_timestamp = float(data.get("send_timestamp"))
 
                 # Convert Timestamp
-                send_time = datetime.fromtimestamp(send_timestamp)
+                send_time = datetime.fromtimestamp(send_timestamp) + timedelta(seconds=self.ntp_offset)
+
 
                 # Get packets for this connection
                 key = (src_ip, src_port)

@@ -76,18 +76,18 @@ def main():
     passive_monitor.start()
 
     # Initialize the Adaptive Data Access module
-    adaptive_data_access = AdaptiveDataAccess(field_devices, fd_locks)
-    adaptive_data_access_thread = threading.Thread(target=adaptive_data_access.run, daemon=True)
-    adaptive_data_access_thread.start()
+    #adaptive_data_access = AdaptiveDataAccess(field_devices, fd_locks)
+    #adaptive_data_access_thread = threading.Thread(target=adaptive_data_access.run, daemon=True)
+    #adaptive_data_access_thread.start()
 
     # Start the backend listener in a separate thread
-    backend_listener_thread = threading.Thread(target=backend_listener, args=(adaptive_data_access, server_ip, backend_listen_port,), daemon=True)
-    backend_listener_thread.start()
+    #backend_listener_thread = threading.Thread(target=backend_listener, args=(adaptive_data_access, server_ip, backend_listen_port,), daemon=True)
+    #backend_listener_thread.start()
 
     # Initialize and start Active Monitoring
-    num_active_threads = 4  # Adjust as needed
-    active_monitor = ActiveMonitoring(field_devices, fd_locks, num_active_threads)
-    active_monitor.start()
+    #num_active_threads = 100  # Adjust as needed
+    #active_monitor = ActiveMonitoring(field_devices, fd_locks, num_active_threads)
+    #active_monitor.start()
 
     # Keep the main thread alive
     try:

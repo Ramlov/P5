@@ -9,7 +9,7 @@ import websockets
 import json
 import ntplib
 from csv_logger import CSVLogger
-logger = CSVLogger()
+#logger = CSVLogger()
 
 class ActiveMonitoring:
     """Maintains a set number of threads that perform active monitoring on assigned FDs."""
@@ -21,7 +21,7 @@ class ActiveMonitoring:
         self.active_threads = []
         self.stop_event = threading.Event()
         self.field_device_ids = list(self.field_devices.keys())
-        self.time_monitoring_cycle = 10 # Time in seconds between cycles
+        self.time_monitoring_cycle = 5000 # Time in seconds between cycles
         self.ntp_offset = self.get_ntp_offset()
         self.enable_throughput_test = False
 
@@ -211,7 +211,7 @@ class ActiveMonitoring:
 
         # Logging for verification
         ip_address = fd_info['ip_address']
-        logger.log(fd_id, ip_address, latency, packet_loss, throughput, status)
+        #logger.log(fd_id, ip_address, latency, packet_loss, throughput, status)
         print(f"[{timestamp}] FD: {fd_id} (IP: {ip_address}) | Latency: {latency if latency is not None else 'N/A'} ms | Packet Loss: {packet_loss}% | Throughput: {throughput if throughput is not None else 'N/A'} kbps | Status: {status}\n")
 
     def stop(self):
