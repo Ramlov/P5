@@ -7,6 +7,7 @@ import random
 import ntplib  # Added for NTP synchronization
 from ntptime import check_and_update_time
 from datetime import datetime 
+
 class FieldDevice:
     def __init__(self, device_id, port):
         self.device_id = device_id
@@ -21,21 +22,19 @@ class FieldDevice:
         self.ntp_offset = self.get_ntp_offset()
         self.local_addr = ("192.168.1.11", (port+1000))  # Local address for the device
 
-
     def get_ntp_offset(self):
         """Get the offset between the local clock and NTP time."""
         try:
             response = self.ntp_client.request(self.ntp_server)
-            return 
-            # return response.offset  # Offset in seconds
+            return response.offset  # Offset in seconds
         except Exception as e:
             print(f"Failed to get NTP offset: {e}")
             return 0  # Fallback to no offset if NTP fails
 
     def get_ntp_timestamp(self):
-        """Get the current synchronized timestamp as a UNIX timestamp."""
-        print("ntp time", check_and_update_time(ntp_server="pool.ntp.org", max_difference_seconds=3600))
-        return time.time() 
+        """Get the current synchronized timestamp as a UNIX timestamp, applying NTP offset."""
+        # Add the NTP offset to the system time
+        return time.time() + self.ntp_offset
 
     async def websocket_handler(self, websocket):
         print(f"{datetime.now()}: Device on port {self.port} connected")
@@ -52,8 +51,7 @@ class FieldDevice:
                     print(f"{datetime.now()}: Data sent to server from device {self.device_id}")
                     self.data_storage.clear()  # Clear data after sending
                 else:
-                    # print(f"Supporting throughput test")
-                    # This is the case for throughput testing.
+                    # Supporting throughput test
                     ack_message = json.dumps({
                         "type": "ack",
                         "sequence_number": sequence_number,
@@ -103,10 +101,10 @@ class FieldDevice:
     async def bulk_upload(self):
         """Uploads all stored data points to the headend server."""
         if self.data_storage:
-            send_timestamp = self.get_ntp_timestamp()  # Use synchronized UNIX timestamp
+            send_timestamp = self.get_ntp_timestamp()  # Use NTP-synchronized UNIX timestamp
 
             bulk_data = {
-                "send_timestamp": send_timestamp,  # Send the UNIX timestamp
+                "send_timestamp": send_timestamp,  # Send the NTP-adjusted UNIX timestamp
                 "device_id": self.device_id,
                 "data": self.data_storage,
             }
