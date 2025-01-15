@@ -76,7 +76,9 @@ class AdaptiveDataAccess:
         # Sub-classification priority: 'Good' > 'Acceptable' > 'Poor'
         classification_priority = {'Good': 1, 'Acceptable': 2, 'Poor': 3, None: 4}
 
-        available_fds.sort(key=lambda x: (x[3], classification_priority.get(x[2], 4)))
+        #available_fds.sort(key=lambda x: (x[3], classification_priority.get(x[2], 4)))
+
+        available_fds.sort(key=lambda x: (classification_priority.get(x[2], 4), x[3]))
 
         # Return the list of FD IDs in order
         return [fd_id for fd_id, _, _, _ in available_fds]

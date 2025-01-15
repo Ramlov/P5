@@ -26,6 +26,7 @@ class PassiveMonitoring:
         self.server_thread = None  # Will be the server later. Can be used to restart etc
         self.shutdown_event = threading.Event()  # Event to signal shutdown
         self.ntp_offset = self.get_ntp_offset()
+        self.enable_throughput_calculation = False
 
     def get_ntp_offset(self):
         """
@@ -123,19 +124,30 @@ class PassiveMonitoring:
         avg_latency = total_time / packet_count if packet_count > 0 else 0
 
         # Calculate throughput
-        throughput = total_data_size / total_time if total_time > 0 else 0
-        throughput_kbps = (throughput * 8) / 1000  # Convert bytes/sec to kbps
+        if self.enable_throughput_calculation:
+            throughput = total_data_size / total_time if total_time > 0 else 0
+            throughput_kbps = (throughput * 8) / 1000  # Convert bytes/sec to kbps
 
         timestamp = self.get_ntp_time()
 
+        if self.enable_throughput_calculation:
+            return {
+                "packet_count": packet_count,
+                "total_data_size": total_data_size,
+                "total_time": total_time,
+                "avg_latency_ms": avg_latency * 1000,  # Convert to milliseconds
+                "throughput_kbps": throughput_kbps,
+                "last_active": timestamp
+            }
+        
         return {
-            "packet_count": packet_count,
-            "total_data_size": total_data_size,
-            "total_time": total_time,
-            "avg_latency_ms": avg_latency * 1000,  # Convert to milliseconds
-            "throughput_kbps": throughput_kbps,
-            "last_active": timestamp
-        }
+                "packet_count": packet_count,
+                "total_data_size": total_data_size,
+                "total_time": total_time,
+                "avg_latency_ms": avg_latency * 1000,  # Convert to milliseconds
+                "last_active": timestamp
+            }
+        
 
     async def process_bulk_upload(self, websocket):
         """
@@ -177,7 +189,8 @@ class PassiveMonitoring:
                 print(f"Total Data Size: {metrics['total_data_size']} bytes")
                 print(f"Total Time: {metrics['total_time']:.2f} seconds")
                 print(f"Average Latency per Packet: {metrics['avg_latency_ms']:.2f} ms")
-                print(f"Throughput: {metrics['throughput_kbps']:.2f} kbps")
+                if self.enable_throughput_calculation:
+                    print(f"Throughput: {metrics['throughput_kbps']:.2f} kbps")
                 print(f"Status: {status}\n")
 
                 # Clear packet data for this connection after processing
@@ -191,7 +204,10 @@ class PassiveMonitoring:
 
                     # Update the fields
                     passive_metrics['latency'] = metrics['avg_latency_ms']
-                    passive_metrics['throughput'] = metrics['throughput_kbps']
+
+                    if self.enable_throughput_calculation:
+                        passive_metrics['throughput'] = metrics['throughput_kbps']
+                   
                     passive_metrics['status'] = status
                     passive_metrics['last_active'] = metrics['last_active']
                     fd_info['passive_metrics'] = passive_metrics 
